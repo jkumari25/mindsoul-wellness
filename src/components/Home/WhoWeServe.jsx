@@ -205,11 +205,12 @@ export default function WhoWeServe() {
           WHO WE SERVE
         </p>
         <h2 className="text-5xl  font-semibold text-textDark mt-2 font-heading">
-          For every family—and every family member
+          For Everyone — Individuals, Families & Organizations
         </h2>
-        <p className="text-lg text-gray-800 mt-4 max-w-3xl font-body">
-          Whole-family mental health care tailored to your needs. No matter what
-          your family looks like.
+        <p className="text-lg text-gray-800 mt-4 max-w-5xl font-body">
+          At MindSoul, we help people strengthen their emotional wellbeing—at
+          every stage of life and work. Choose the support that best fits your
+          journey.
         </p>
 
         {/* Slider Navigation */}
@@ -252,7 +253,7 @@ export default function WhoWeServe() {
         >
           {familyData.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-[#FAF5EF] rounded-xl overflow-hidden shadow hover:shadow-md transition">
+              <div className="bg-[#e5e0f1] rounded-xl overflow-hidden shadow hover:shadow-md transition">
                 <img
                   src={item.img}
                   alt={item.title}

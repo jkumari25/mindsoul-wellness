@@ -10,26 +10,41 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="bg-[#FAF8F2] w-full h-auto mt-28">
+    <section className="bg-[#FAF8F2] w-full h-auto mt-22">
       <div className="max-w-[90%] mx-auto flex flex-col md:flex-row items-center justify-between pt-24 pb-14 gap-10">
         {/* Left Content */}
         <div className="w-full md:w-1/2 text-center md:text-left">
-          <h1 className="text-6xl  font-semibold  leading-snug font-heading text-[#0B2B38] ">
-            Mental health care <br />
-            for your <span className="italic font-serif">whole family</span>
+          <h1 className="text-6xl  font-semibold  leading-snug  text-[#0B2B38] italic font-serif ">
+            Emotional Wellness for{" "}
+            <span className="italic font-serif">People & Workplaces</span>
           </h1>
 
           <p className="text-[#06283D]/75 mt-4 text-lg font-body">
-            Families feel better when they work together — so should their
-            health care.
+            Helping individuals, families, and corporate teams build emotional
+            intelligence, meaningful connections, and inner resilience.
           </p>
+
+          <ul className="mt-6 space-y-3 text-gray-700 font-body text-lg">
+            <li className="flex gap-2 items-start">
+              <span className="text-accent text-xl">✔</span>
+              Feel supported with expert-led counselling
+            </li>
+            <li className="flex gap-2 items-start">
+              <span className="text-accent text-xl">✔</span>
+              Transform team wellbeing with emotional intelligence training
+            </li>
+            <li className="flex gap-2 items-start">
+              <span className="text-accent text-xl">✔</span>
+              Experience healing through expressive arts therapy
+            </li>
+          </ul>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
             <button
               onClick={scrollToCounsellor}
               className="bg-[#06283D] text-white px-6 py-3 rounded-md hover:bg-[#021c2a] transition font-body"
             >
-              Book an appointment
+              Book a Session
             </button>
 
             <button className="border border-[#06283D] text-[#06283D] px-6 py-3 rounded-md hover:bg-[#06283D] hover:text-white transition font-body">
@@ -53,7 +68,7 @@ export default function HeroSection() {
             src={heroImg}
             effect="blur"
             alt="Family care"
-            className="w-full max-w-[850px] object-cover rounded-md shadow-[0_0_40px_rgba(8,60,100,0.4)]"
+            className="w-full max-w-[850px] h-[450px] object-cover rounded-md shadow-[0_0_40px_rgba(8,60,100,0.4)]"
           />
 
           {/* Decorative Leaf (Optional) */}

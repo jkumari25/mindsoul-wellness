@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Registration from "./components/Registration.jsx";
@@ -9,21 +9,37 @@ import CounsellorSlider from "./components/Home/CounsellorSlider.jsx";
 import AppointmentForm from "./components/Appointments/AppointmentForm.jsx";
 import Breadcrumb from "./components/About/Breadcrumb.jsx";
 import Contacts from "./pages/Contacts.jsx";
+import CounsellorProfileUpdate from "./components/Profile/CounsellorProfileUpdate.jsx";
+import Counsellors from "./components/Counsellor/Counsellors.jsx";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+import BookingPage from "./components/Booking/BookingPage.jsx";
+import OtpPage from "./components/Counsellor/OtpPage.jsx";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* <Route path="/login" element={<Login />} />
+    // <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      {/* <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} /> */}
-        <Route path="/counsellor/:id" element={<CounselorProfile />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/appointment" element={<AppointmentForm />} />
-        <Route path="/about" element={<Breadcrumb />} />
-        <Route path="/contacts" element={<Contacts />} />
-      </Routes>
-    </Router>
+      <Route path="/counsellor/:id" element={<CounselorProfile />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/appointment" element={<AppointmentForm />} />
+      <Route path="/about" element={<Breadcrumb />} />
+      <Route path="/contacts" element={<Contacts />} />
+      <Route path="/counsellor/profile" element={<CounsellorProfileUpdate />} />
+      <Route path="/otp" element={<OtpPage />} />
+      <Route
+        path="/counsellors"
+        element={
+          <ProtectedRoute>
+            <Counsellors />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/booking" element={<BookingPage />} />
+    </Routes>
+    // </BrowserRouter>
   );
 }
 

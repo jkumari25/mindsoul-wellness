@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 export default function CounsellorProfileUpdate() {
   const [formData, setFormData] = useState({
@@ -65,12 +66,76 @@ export default function CounsellorProfileUpdate() {
     }));
   };
 
+  // --------------------------------------------------
+  //  FINAL SUBMIT HANDLER (FIXED FOR 404 ISSUE)
+  // --------------------------------------------------
+  const handleSubmit = async () => {
+    try {
+      const apiBody = new FormData();
+
+      // SIMPLE FIELDS
+      apiBody.append("email", formData.email);
+      apiBody.append("firstName", formData.firstName);
+      apiBody.append("lastName", formData.lastName);
+      apiBody.append("phoneNumber", formData.phoneNumber);
+      apiBody.append("description", formData.description);
+      apiBody.append("experience", formData.experience);
+      apiBody.append("sessionPrice", formData.sessionPrice);
+      apiBody.append("slotDuration", formData.slotDuration);
+
+      // ARRAY FIELDS
+      formData.expertise.forEach((item) => apiBody.append("expertise[]", item));
+      formData.languages.forEach((item) => apiBody.append("languages[]", item));
+      formData.focusAreas.forEach((item) =>
+        apiBody.append("focusAreas[]", item)
+      );
+      formData.workingDays.forEach((item) =>
+        apiBody.append("workingDays[]", item)
+      );
+
+      // WORKING HOURS AS JSON STRING
+      apiBody.append("workingHours", JSON.stringify(formData.workingHours));
+
+      // IMAGE (optional)
+      if (formData.profileImage) {
+        apiBody.append("profileImage", formData.profileImage);
+      }
+
+      // AUTH TOKEN
+      const token = localStorage.getItem("token");
+
+      // DEBUG LOG
+      console.log("------ FINAL FORMDATA SENT -------");
+      for (let p of apiBody.entries()) {
+        console.log(p[0], p[1]);
+      }
+
+      // API CALL
+      const response = await axios.post(
+        "https://mindsoul-backend-772700176760.asia-south1.run.app/api/counsellor/update-profile",
+        apiBody,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("UPDATE RESPONSE:", response.data);
+      alert("Profile updated successfully!");
+    } catch (err) {
+      console.error("UPDATE ERROR:", err);
+      alert("Something went wrong while updating!");
+    }
+  };
+
   return (
     <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8 mt-32">
       <h2 className="text-3xl font-bold text-gray-800 mb-6">
         Update Counsellor Profile
       </h2>
 
+      {/* FORM UI STARTS */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Email */}
         <div>
@@ -138,7 +203,7 @@ export default function CounsellorProfileUpdate() {
           />
         </div>
 
-        {/* Session Price */}
+        {/* Price */}
         <div>
           <label className="font-medium">Session Price (₹)</label>
           <input
@@ -228,7 +293,9 @@ export default function CounsellorProfileUpdate() {
       {/* Working Hours */}
       <div className="mt-8">
         <label className="font-medium text-lg">Working Hours</label>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-3">
+          {/* Morning */}
           <div>
             <p className="font-semibold mb-2">Morning</p>
             <div className="flex gap-3">
@@ -267,6 +334,7 @@ export default function CounsellorProfileUpdate() {
             </div>
           </div>
 
+          {/* Afternoon */}
           <div>
             <p className="font-semibold mb-2">Afternoon</p>
             <div className="flex gap-3">
@@ -353,7 +421,10 @@ export default function CounsellorProfileUpdate() {
       </div>
 
       {/* Submit Button */}
-      <button className="mt-8 bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold">
+      <button
+        onClick={handleSubmit}
+        className="mt-8 bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold"
+      >
         Save Changes
       </button>
     </div>

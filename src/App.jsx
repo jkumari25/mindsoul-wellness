@@ -17,7 +17,6 @@ import OtpPage from "./components/Counsellor/OtpPage.jsx";
 
 function App() {
   return (
-    // <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
       {/* <Route path="/login" element={<Login />} />
@@ -39,7 +38,6 @@ function App() {
       />
       <Route path="/booking" element={<BookingPage />} />
     </Routes>
-    // </BrowserRouter>
   );
 }
 

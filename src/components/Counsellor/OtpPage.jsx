@@ -236,6 +236,44 @@ export default function OtpPage({ onClose, phone }) {
   };
 
   // VERIFY OTP FUNCTION
+  // async function handleVerifyOtp() {
+  //   const otp = inputsRef.current.map((input) => input.value).join("");
+
+  //   if (otp.length !== 6) {
+  //     setError("Please enter a valid 6-digit OTP.");
+  //     return;
+  //   }
+
+  //   if (!email) {
+  //     setError("Email missing. Please resend OTP.");
+  //     return;
+  //   }
+
+  //   setError("");
+
+  //   try {
+  //     const res = await api.post("/api/counsellor/verify-otp", {
+  //       email,
+  //       otp,
+  //     });
+
+  //     if (res.data?.counsellorId) {
+  //       localStorage.setItem("counsellorId", res.data.counsellorId);
+  //     }
+
+  //     // ⭐ Close modal first
+  //     onClose();
+
+  //     // ⭐ Navigate after a small visual delay
+  //     setTimeout(() => {
+  //       navigate("/counsellor/profile");
+  //     }, 300);
+  //   } catch (err) {
+  //     setError("Invalid OTP");
+  //   }
+  // }
+
+  // VERIFY OTP FUNCTION
   async function handleVerifyOtp() {
     const otp = inputsRef.current.map((input) => input.value).join("");
 
@@ -257,16 +295,25 @@ export default function OtpPage({ onClose, phone }) {
         otp,
       });
 
+      // ⭐ Save counsellorId if backend sends it (optional)
       if (res.data?.counsellorId) {
         localStorage.setItem("counsellorId", res.data.counsellorId);
       }
 
-      // ⭐ Close modal first
+      // ⭐ Save auth token (THIS WAS THE MAIN ISSUE)
+      if (res.data?.token) {
+        localStorage.setItem("authToken", res.data.token);
+        console.log("TOKEN SAVED:", res.data.token);
+      } else {
+        console.warn("No token from backend");
+      }
+
+      // Close OTP modal
       onClose();
 
-      // ⭐ Navigate after a small visual delay
+      // Navigate after small delay
       setTimeout(() => {
-        navigate("/counsellor-profile");
+        navigate("/counsellor/profile");
       }, 300);
     } catch (err) {
       setError("Invalid OTP");

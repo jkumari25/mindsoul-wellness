@@ -203,6 +203,37 @@ export default function LoginPage({
   // ---------------------------------------
   // EMAIL + PASSWORD LOGIN (Using API)
   // ---------------------------------------
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   setError("");
+  //   setLoading(true);
+
+  //   try {
+  //     const res = await fetch(API_LOGIN, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ email, password }),
+  //     });
+
+  //     const data = await res.json();
+
+  //     if (!res.ok) {
+  //       setError(data.message || "Wrong credentials.");
+  //       setLoading(false);
+  //       return;
+  //     }
+
+  //     // expect backend returns: { user, token }
+  //     login(data.user, data.token);
+  //     onClose();
+  //   } catch (err) {
+  //     console.error(err);
+  //     setError("Something went wrong. Try again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -215,19 +246,33 @@ export default function LoginPage({
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
+      const response = await res.json();
+      console.log("LOGIN RESPONSE =>", response);
 
       if (!res.ok) {
-        setError(data.message || "Wrong credentials.");
-        setLoading(false);
+        setError(response.message || "Wrong credentials.");
         return;
       }
 
-      // expect backend returns: { user, token }
-      login(data.user, data.token);
+      // 🔥 Extract correct token & user from backend (IMPORTANT)
+      const token = response?.data?.token;
+      const user = response?.data?.user;
+
+      if (!token || !user) {
+        setError("Invalid backend response.");
+        return;
+      }
+
+      // 🔥 Save token locally
+      localStorage.setItem("token", token);
+
+      // 🔥 Login user into AuthContext
+      login(user, token);
+
+      // close modal
       onClose();
     } catch (err) {
-      console.error(err);
+      console.error("Login Error:", err);
       setError("Something went wrong. Try again.");
     } finally {
       setLoading(false);

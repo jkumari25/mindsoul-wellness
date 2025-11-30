@@ -1,7 +1,9 @@
 // src/context/AuthContext.js
 import React, { createContext, useState, useEffect, useContext } from "react";
 
-const AuthContext = createContext();
+// const AuthContext = createContext();
+
+export const AuthContext = createContext(); // 👈 FIXED
 
 export function AuthProvider({ children }) {
   // Safe JSON parse helper

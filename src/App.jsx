@@ -14,6 +14,7 @@ import Counsellors from "./components/Counsellor/Counsellors.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import BookingPage from "./components/Booking/BookingPage.jsx";
 import OtpPage from "./components/Counsellor/OtpPage.jsx";
+import ProtectedCounsellorRoute from "./routes/ProtectedCounsellorRoute.jsx";
 
 function App() {
   return (
@@ -26,7 +27,14 @@ function App() {
       <Route path="/appointment" element={<AppointmentForm />} />
       <Route path="/about" element={<Breadcrumb />} />
       <Route path="/contacts" element={<Contacts />} />
-      <Route path="/counsellor/profile" element={<CounsellorProfileUpdate />} />
+      <Route
+        path="/counsellor/profile"
+        element={
+          <ProtectedCounsellorRoute>
+            <CounsellorProfileUpdate />
+          </ProtectedCounsellorRoute>
+        }
+      />
       <Route path="/otp" element={<OtpPage />} />
       <Route
         path="/counsellors"

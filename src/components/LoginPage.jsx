@@ -173,6 +173,8 @@ import React, { useState, useEffect } from "react";
 import { FaHeart, FaPlay, FaGoogle } from "react-icons/fa";
 import Registration from "./Registration";
 import { useAuth } from "../context/AuthContext";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { app } from "../FirebaseConfig"; // your firebase config file
 
 export default function LoginPage({
   isOpen,
@@ -287,19 +289,52 @@ export default function LoginPage({
       setError("");
       setLoading(true);
 
-      const res = await fetch(API_GOOGLE, { method: "POST" });
-      const data = await res.json();
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider();
 
-      if (!res.ok) {
+      // IMPORTANT for some browsers — prevents popup auto-close
+      auth.languageCode = "en";
+
+      // Step 1: Firebase Popup
+      const result = await signInWithPopup(auth, provider);
+      const googleUser = result.user;
+
+      console.log("🔵 Firebase Google User:", googleUser);
+
+      // Step 2: Get Firebase ID Token
+      const idToken = await googleUser.getIdToken();
+
+      // Step 3: Send token to your backend Google API
+      const res = await fetch(API_GOOGLE, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken }),
+      });
+
+      const data = await res.json();
+      console.log("🟢 BACKEND GOOGLE LOGIN RESPONSE:", data);
+
+      if (!res.ok || !data?.data?.user || !data?.data?.token) {
         setError(data.message || "Google login failed.");
         return;
       }
 
-      login(data.user, data.token);
+      // Step 4: Save token + user in localStorage and AuthContext
+      const backendUser = data.data.user;
+      const backendToken = data.data.token;
+
+      localStorage.setItem("token", backendToken);
+      login(backendUser, backendToken);
+
       onClose();
     } catch (error) {
-      console.error("Google Login Error:", error);
-      setError("Google Sign-In failed. Try again.");
+      console.error("❌ Google Sign-In Error:", error);
+
+      if (error.code === "auth/popup-closed-by-user") {
+        setError("Popup closed! Please try again.");
+      } else {
+        setError("Google Sign-In failed.");
+      }
     } finally {
       setLoading(false);
     }

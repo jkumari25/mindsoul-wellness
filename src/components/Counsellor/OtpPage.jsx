@@ -295,12 +295,18 @@ export default function OtpPage({ onClose, phone }) {
         otp,
       });
 
-      // ⭐ Save counsellorId if backend sends it (optional)
+      // Save counsellorId if backend sends it (optional)
       if (res.data?.counsellorId) {
         localStorage.setItem("counsellorId", res.data.counsellorId);
       }
 
-      // ⭐ Save auth token (THIS WAS THE MAIN ISSUE)
+      // Save role for protected route
+      if (res.data?.role) {
+        localStorage.setItem("role", res.data.role);
+        console.log("ROLE SAVED:", res.data.role);
+      }
+
+      // Save auth token
       if (res.data?.token) {
         localStorage.setItem("authToken", res.data.token);
         console.log("TOKEN SAVED:", res.data.token);

@@ -39,9 +39,9 @@ function App() {
       <Route
         path="/counsellors"
         element={
-          <ProtectedRoute>
-            <Counsellors />
-          </ProtectedRoute>
+          // <ProtectedRoute>
+          <Counsellors />
+          // </ProtectedRoute>
         }
       />
       <Route path="/booking" element={<BookingPage />} />

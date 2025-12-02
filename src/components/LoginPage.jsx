@@ -169,6 +169,285 @@
 //   );
 // }
 
+// import React, { useState, useEffect } from "react";
+// import { FaHeart, FaPlay, FaGoogle } from "react-icons/fa";
+// import Registration from "./Registration";
+// import { useAuth } from "../context/AuthContext";
+// import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+// import { app } from "../FirebaseConfig"; // your firebase config file
+
+// export default function LoginPage({
+//   isOpen,
+//   onClose,
+//   onSwitchToSignup,
+//   defaultEmail,
+// }) {
+//   const { login } = useAuth();
+
+//   const [email, setEmail] = useState(defaultEmail || "");
+//   const [password, setPassword] = useState("");
+//   const [error, setError] = useState("");
+//   const [loading, setLoading] = useState(false);
+//   const [isRegisterOpen, setRegisterOpen] = useState(false);
+
+//   useEffect(() => {
+//     setEmail(defaultEmail || "");
+//   }, [defaultEmail]);
+
+//   if (!isOpen) return null;
+
+//   const API_LOGIN =
+//     "https://mindsoul-backend-772700176760.asia-south1.run.app/api/auth/login";
+
+//   const API_GOOGLE =
+//     "https://mindsoul-backend-772700176760.asia-south1.run.app/api/auth/google";
+
+//   // ---------------------------------------
+//   // EMAIL + PASSWORD LOGIN (Using API)
+//   // ---------------------------------------
+//   // const handleLogin = async (e) => {
+//   //   e.preventDefault();
+//   //   setError("");
+//   //   setLoading(true);
+
+//   //   try {
+//   //     const res = await fetch(API_LOGIN, {
+//   //       method: "POST",
+//   //       headers: { "Content-Type": "application/json" },
+//   //       body: JSON.stringify({ email, password }),
+//   //     });
+
+//   //     const data = await res.json();
+
+//   //     if (!res.ok) {
+//   //       setError(data.message || "Wrong credentials.");
+//   //       setLoading(false);
+//   //       return;
+//   //     }
+
+//   //     // expect backend returns: { user, token }
+//   //     login(data.user, data.token);
+//   //     onClose();
+//   //   } catch (err) {
+//   //     console.error(err);
+//   //     setError("Something went wrong. Try again.");
+//   //   } finally {
+//   //     setLoading(false);
+//   //   }
+//   // };
+
+//   const handleLogin = async (e) => {
+//     e.preventDefault();
+//     setError("");
+//     setLoading(true);
+
+//     try {
+//       const res = await fetch(API_LOGIN, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ email, password }),
+//       });
+
+//       const response = await res.json();
+//       console.log("LOGIN RESPONSE =>", response);
+
+//       if (!res.ok) {
+//         setError(response.message || "Wrong credentials.");
+//         return;
+//       }
+
+//       // 🔥 Extract correct token & user from backend (IMPORTANT)
+//       const token = response?.data?.token;
+//       const user = response?.data?.user;
+
+//       if (!token || !user) {
+//         setError("Invalid backend response.");
+//         return;
+//       }
+
+//       // 🔥 Save token locally
+//       localStorage.setItem("token", token);
+
+//       // 🔥 Login user into AuthContext
+//       login(user, token);
+
+//       // close modal
+//       onClose();
+//     } catch (err) {
+//       console.error("Login Error:", err);
+//       setError("Something went wrong. Try again.");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // ---------------------------------------
+//   // GOOGLE LOGIN (Using API)
+//   // ---------------------------------------
+//   const handleGoogleLogin = async () => {
+//     try {
+//       setError("");
+//       setLoading(true);
+
+//       const auth = getAuth(app);
+//       const provider = new GoogleAuthProvider();
+
+//       // IMPORTANT for some browsers — prevents popup auto-close
+//       auth.languageCode = "en";
+
+//       // Step 1: Firebase Popup
+//       const result = await signInWithPopup(auth, provider);
+//       const googleUser = result.user;
+
+//       console.log("🔵 Firebase Google User:", googleUser);
+
+//       // Step 2: Get Firebase ID Token
+//       const idToken = await googleUser.getIdToken();
+
+//       // Step 3: Send token to your backend Google API
+//       const res = await fetch(API_GOOGLE, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ idToken }),
+//       });
+
+//       const data = await res.json();
+//       console.log("🟢 BACKEND GOOGLE LOGIN RESPONSE:", data);
+
+//       if (!res.ok || !data?.data?.user || !data?.data?.token) {
+//         setError(data.message || "Google login failed.");
+//         return;
+//       }
+
+//       // Step 4: Save token + user in localStorage and AuthContext
+//       const backendUser = data.data.user;
+//       const backendToken = data.data.token;
+
+//       localStorage.setItem("token", backendToken);
+//       login(backendUser, backendToken);
+
+//       onClose();
+//     } catch (error) {
+//       console.error("❌ Google Sign-In Error:", error);
+
+//       if (error.code === "auth/popup-closed-by-user") {
+//         setError("Popup closed! Please try again.");
+//       } else {
+//         setError("Google Sign-In failed.");
+//       }
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const accent = "#7a3cff";
+
+//   return (
+//     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+//       <div className="relative bg-transparent shadow-2xl w-[90%] md:w-[850px] h-auto md:h-[500px] rounded-2xl overflow-hidden flex flex-col md:flex-row text-white">
+//         {/* LEFT SECTION — SAME AS OLD UI */}
+//         <div
+//           className="hidden md:flex flex-col justify-between w-[55%] p-10 rounded-tl-2xl rounded-bl-2xl"
+//           style={{ backgroundColor: accent }}
+//         >
+//           <div className="flex items-center gap-3 font-medium cursor-pointer font-serif">
+//             <FaHeart className="text-2xl" />
+//             <p className="text-2xl">MindSoul</p>
+//           </div>
+
+//           <div className="flex flex-col gap-6 font-sans">
+//             <p className="text-3xl font-medium max-w-[90%] leading-snug font-serif">
+//               Supporting children to grow emotionally, socially, and
+//               confidently.
+//             </p>
+//             <button className="w-[165px] h-[45px] flex items-center justify-center gap-3 bg-[#15171B] rounded-full hover:bg-black transition">
+//               <FaPlay className="text-white" />
+//               Our Approach
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* RIGHT SECTION — OLD UI + NEW API */}
+//         <div className="flex flex-col items-center justify-center bg-[#16181C] w-full md:w-[45%] p-8 rounded-tr-2xl rounded-br-2xl space-y-5 relative">
+//           <button
+//             onClick={onClose}
+//             className="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl"
+//           >
+//             ×
+//           </button>
+
+//           <div className="text-left space-y-2 w-[285px]">
+//             <h3 className="font-medium text-xl font-serif">Welcome Back</h3>
+//             <p className="text-[12px] text-gray-400 leading-relaxed">
+//               Continue your journey of mindful growth and emotional support.
+//             </p>
+//           </div>
+
+//           {/* EMAIL + PASSWORD LOGIN */}
+//           <form
+//             onSubmit={handleLogin}
+//             className="flex flex-col gap-4 w-[285px]"
+//           >
+//             <input
+//               type="email"
+//               placeholder="Your email"
+//               value={email}
+//               onChange={(e) => setEmail(e.target.value)}
+//               required
+//               className="w-full h-[42px] bg-black/60 px-3 rounded-md text-white text-sm outline-none placeholder-gray-400"
+//             />
+
+//             <input
+//               type="password"
+//               placeholder="********"
+//               value={password}
+//               onChange={(e) => setPassword(e.target.value)}
+//               required
+//               className="w-full h-[42px] bg-black/60 px-3 rounded-md text-white text-sm outline-none placeholder-gray-400"
+//             />
+
+//             {error && (
+//               <p className="text-red-400 text-xs text-center">{error}</p>
+//             )}
+
+//             <button
+//               type="submit"
+//               disabled={loading}
+//               className="w-[285px] h-[45px] bg-[#5E40F0] hover:bg-[#4621FF] rounded-md transition text-white text-sm disabled:opacity-60"
+//             >
+//               {loading ? "Logging in..." : "Continue"}
+//             </button>
+//           </form>
+
+//           {/* GOOGLE LOGIN — OLD UI, NEW API */}
+//           <div className="flex flex-col items-center gap-3 text-[11px]">
+//             <p className="text-lg">Or Login with Google</p>
+
+//             <FaGoogle
+//               onClick={handleGoogleLogin}
+//               className="text-2xl cursor-pointer hover:scale-110 transition"
+//             />
+
+//             <p
+//               onClick={() => setRegisterOpen(true)}
+//               className="text-[#4A62FF] hover:underline cursor-pointer mt-2"
+//             >
+//               Don’t have an account? Sign Up
+//             </p>
+
+//             {/* EMBEDDED SIGNUP MODAL */}
+//             <Registration
+//               isOpen={isRegisterOpen}
+//               onClose={() => setRegisterOpen(false)}
+//               onSignupSuccess={() => {}}
+//             />
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
 import React, { useState, useEffect } from "react";
 import { FaHeart, FaPlay, FaGoogle } from "react-icons/fa";
 import Registration from "./Registration";
@@ -202,40 +481,9 @@ export default function LoginPage({
   const API_GOOGLE =
     "https://mindsoul-backend-772700176760.asia-south1.run.app/api/auth/google";
 
-  // ---------------------------------------
-  // EMAIL + PASSWORD LOGIN (Using API)
-  // ---------------------------------------
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   setError("");
-  //   setLoading(true);
-
-  //   try {
-  //     const res = await fetch(API_LOGIN, {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ email, password }),
-  //     });
-
-  //     const data = await res.json();
-
-  //     if (!res.ok) {
-  //       setError(data.message || "Wrong credentials.");
-  //       setLoading(false);
-  //       return;
-  //     }
-
-  //     // expect backend returns: { user, token }
-  //     login(data.user, data.token);
-  //     onClose();
-  //   } catch (err) {
-  //     console.error(err);
-  //     setError("Something went wrong. Try again.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
+  // ---------------------------------------------------
+  // EMAIL + PASSWORD LOGIN
+  // ---------------------------------------------------
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -256,7 +504,7 @@ export default function LoginPage({
         return;
       }
 
-      // 🔥 Extract correct token & user from backend (IMPORTANT)
+      // Extract values
       const token = response?.data?.token;
       const user = response?.data?.user;
 
@@ -265,13 +513,15 @@ export default function LoginPage({
         return;
       }
 
-      // 🔥 Save token locally
+      // 🔥 Save token
       localStorage.setItem("token", token);
 
-      // 🔥 Login user into AuthContext
+      // 🔥 Save role
+      localStorage.setItem("role", user.role);
+
+      // 🔥 Auth Context login
       login(user, token);
 
-      // close modal
       onClose();
     } catch (err) {
       console.error("Login Error:", err);
@@ -281,9 +531,9 @@ export default function LoginPage({
     }
   };
 
-  // ---------------------------------------
-  // GOOGLE LOGIN (Using API)
-  // ---------------------------------------
+  // ---------------------------------------------------
+  // GOOGLE LOGIN
+  // ---------------------------------------------------
   const handleGoogleLogin = async () => {
     try {
       setError("");
@@ -292,19 +542,18 @@ export default function LoginPage({
       const auth = getAuth(app);
       const provider = new GoogleAuthProvider();
 
-      // IMPORTANT for some browsers — prevents popup auto-close
       auth.languageCode = "en";
 
-      // Step 1: Firebase Popup
+      // Step 1: Firebase popup sign-in
       const result = await signInWithPopup(auth, provider);
       const googleUser = result.user;
 
       console.log("🔵 Firebase Google User:", googleUser);
 
-      // Step 2: Get Firebase ID Token
+      // Step 2: Get Firebase ID token
       const idToken = await googleUser.getIdToken();
 
-      // Step 3: Send token to your backend Google API
+      // Step 3: Send token to backend
       const res = await fetch(API_GOOGLE, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -319,11 +568,16 @@ export default function LoginPage({
         return;
       }
 
-      // Step 4: Save token + user in localStorage and AuthContext
       const backendUser = data.data.user;
       const backendToken = data.data.token;
 
+      // 🔥 Save token
       localStorage.setItem("token", backendToken);
+
+      // 🔥 Save role
+      localStorage.setItem("role", backendUser.role);
+
+      // 🔥 Auth Context login
       login(backendUser, backendToken);
 
       onClose();
@@ -345,7 +599,7 @@ export default function LoginPage({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
       <div className="relative bg-transparent shadow-2xl w-[90%] md:w-[850px] h-auto md:h-[500px] rounded-2xl overflow-hidden flex flex-col md:flex-row text-white">
-        {/* LEFT SECTION — SAME AS OLD UI */}
+        {/* LEFT SECTION */}
         <div
           className="hidden md:flex flex-col justify-between w-[55%] p-10 rounded-tl-2xl rounded-bl-2xl"
           style={{ backgroundColor: accent }}
@@ -367,7 +621,7 @@ export default function LoginPage({
           </div>
         </div>
 
-        {/* RIGHT SECTION — OLD UI + NEW API */}
+        {/* RIGHT SECTION */}
         <div className="flex flex-col items-center justify-center bg-[#16181C] w-full md:w-[45%] p-8 rounded-tr-2xl rounded-br-2xl space-y-5 relative">
           <button
             onClick={onClose}
@@ -383,7 +637,7 @@ export default function LoginPage({
             </p>
           </div>
 
-          {/* EMAIL + PASSWORD LOGIN */}
+          {/* LOGIN FORM */}
           <form
             onSubmit={handleLogin}
             className="flex flex-col gap-4 w-[285px]"
@@ -419,7 +673,7 @@ export default function LoginPage({
             </button>
           </form>
 
-          {/* GOOGLE LOGIN — OLD UI, NEW API */}
+          {/* GOOGLE LOGIN */}
           <div className="flex flex-col items-center gap-3 text-[11px]">
             <p className="text-lg">Or Login with Google</p>
 
@@ -435,7 +689,7 @@ export default function LoginPage({
               Don’t have an account? Sign Up
             </p>
 
-            {/* EMBEDDED SIGNUP MODAL */}
+            {/* SIGNUP MODAL */}
             <Registration
               isOpen={isRegisterOpen}
               onClose={() => setRegisterOpen(false)}

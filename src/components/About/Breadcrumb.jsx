@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import EditProfileModal from "../Profile/EditProfileModal";
-import BookAppointmentModal from "../Profile/BookAppointmentModal";
 import AppointmentConfirmationModal from "../Profile/AppointmentConfirmationModal";
 
 export default function Breadcrumb() {
   const [open, setOpen] = useState(false);
-  const [appointmentopen, setAppointmentOpen] = useState(false);
   const [confirmationopen, setConfirmationOpen] = useState(false);
 
   return (
@@ -25,27 +22,6 @@ export default function Breadcrumb() {
         </p>
 
         {/* Modal Buttons start */}
-        <button
-          onClick={() => setOpen(true)}
-          className="px-6 py-3 bg-accent text-white rounded-lg mt-10 font-body text-xl"
-        >
-          Open Edit Profile
-        </button>
-
-        <EditProfileModal isOpen={open} onClose={() => setOpen(false)} />
-        <br />
-        <button
-          onClick={() => setAppointmentOpen(true)}
-          className="px-6 py-3 bg-accent text-white rounded-lg mt-10 font-body text-xl"
-        >
-          Book Appointment
-        </button>
-
-        <BookAppointmentModal
-          isOpen={appointmentopen}
-          onClose={() => setAppointmentOpen(false)}
-        />
-
         <button
           onClick={() => setConfirmationOpen(true)}
           className="px-6 py-3 bg-accent text-white rounded-lg mt-10 font-body text-xl"

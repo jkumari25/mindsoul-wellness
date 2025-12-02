@@ -225,3 +225,137 @@ export default function CounselorProfile() {
     </div>
   );
 }
+
+// import React, { useEffect, useState } from "react";
+// import { useLocation } from "react-router-dom";
+// import { Star, Calendar, MessageCircle } from "lucide-react";
+// import LoginPage from "../LoginPage";
+// import AppointmentFormModal from "../Appointments/AppointmentFormModal";
+
+// export default function CounselorProfile() {
+//   const { state } = useLocation();
+
+//   const [showLoginModal, setShowLoginModal] = useState(false);
+//   const [showAppointmentForm, setShowAppointmentForm] = useState(false);
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+//   useEffect(() => {
+//     window.scrollTo(0, 0);
+
+//     const role = localStorage.getItem("role");
+//     const token = localStorage.getItem("authToken");
+
+//     // User is logged in only when user role AND token exist
+//     if (role === "user" && token) {
+//       setIsLoggedIn(true);
+//     }
+//   }, []);
+
+//   if (!state) return <div className="p-10">Counsellor Not Found</div>;
+
+//   // ✅ MAIN FUNCTIONALITY YOU WANT
+//   const handleBookAppointment = () => {
+//     const role = localStorage.getItem("role");
+//     const token = localStorage.getItem("authToken");
+
+//     if (role === "user" && token) {
+//       // 🎯 User is logged in → directly open appointment modal
+//       setShowAppointmentForm(true);
+//     } else {
+//       // ❌ User not logged in → open login modal
+//       setShowLoginModal(true);
+//     }
+//   };
+
+//   // When login is successful
+//   const handleLoginSuccess = () => {
+//     setShowLoginModal(false);
+//     setIsLoggedIn(true);
+
+//     // After login → open appointment modal
+//     setTimeout(() => {
+//       setShowAppointmentForm(true);
+//     }, 300);
+//   };
+
+//   return (
+//     <div className="max-w-7xl mx-auto px-5 py-10 flex flex-col lg:flex-row gap-8 mt-32">
+
+//       {/* LEFT MAIN CONTENT */}
+//       <div className="flex-1 space-y-8">
+
+//         {/* PROFILE CARD */}
+//         <div className="bg-white shadow-md rounded-2xl p-6 border border-gray-200">
+//           <div className="flex flex-col md:flex-row items-center gap-6">
+
+//             <img
+//               src={state.image}
+//               alt={state.name}
+//               className="w-36 h-36 object-cover rounded-xl shadow"
+//             />
+
+//             <div className="flex-1">
+//               <h2 className="text-3xl font-semibold text-gray-900">{state.name}</h2>
+
+//               {state.location && (
+//                 <p className="text-gray-600 mt-1">{state.location}</p>
+//               )}
+
+//               <div className="flex gap-6 mt-4 text-gray-700 text-md">
+//                 {state.experience && (
+//                   <div className="flex items-center gap-1">
+//                     <Calendar size={16} /> {state.experience}
+//                   </div>
+//                 )}
+
+//                 {state.languages && (
+//                   <div className="flex items-center gap-1">
+//                     <MessageCircle size={16} /> {state.languages}
+//                   </div>
+//                 )}
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* SESSION PLANS */}
+//           <div className="mt-8">
+//             <h3 className="font-semibold text-gray-900 mb-3 text-lg">Session Plans</h3>
+
+//             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+//               <div className="p-4 border rounded-xl text-center bg-purple-50">
+//                 <p className="font-semibold text-purple-700">Intro Session</p>
+//                 <p className="text-gray-700 mt-1">₹{state.price}</p>
+//               </div>
+//             </div>
+
+//             <button
+//               onClick={handleBookAppointment}
+//               className="mt-6 w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition text-lg"
+//             >
+//               Book Appointment
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* ABOUT SECTION */}
+//         {/* --- your about section remains same --- */}
+//       </div>
+
+//       {/* RIGHT SIDEBAR */}
+//       {/* --- remains same --- */}
+
+//       {/* MODALS */}
+//       <LoginPage
+//         isOpen={showLoginModal}
+//         onClose={() => setShowLoginModal(false)}
+//         onLoginSuccess={handleLoginSuccess}
+//       />
+
+//       <AppointmentFormModal
+//         isOpen={showAppointmentForm}
+//         onClose={() => setShowAppointmentForm(false)}
+//         counselor={state}
+//       />
+//     </div>
+//   );
+// }

@@ -7,12 +7,15 @@ import {
   Star,
   CheckCircle,
   ChevronDown,
+  Briefcase,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Counsellors() {
   const [allCounsellors, setAllCounsellors] = useState([]);
   const [counsellors, setCounsellors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const [selectedLang, setSelectedLang] = useState({
     Hindi: false,
@@ -128,6 +131,10 @@ export default function Counsellors() {
     );
   }
 
+  const openProfile = (c) => {
+    navigate(`/counsellor/${c._id}`, { state: c });
+  };
+
   return (
     <div className="w-full bg-gray-50 mt-30 py-10">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 p-4">
@@ -228,6 +235,7 @@ export default function Counsellors() {
             {counsellors.map((c) => (
               <div
                 key={c.email}
+                onClick={() => openProfile(c)}
                 className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition"
               >
                 <img
@@ -258,9 +266,18 @@ export default function Counsellors() {
                     Verified
                   </div>
 
-                  <p className="text-md text-gray-600 mt-1">
+                  {/* <p className="text-md text-gray-600 mt-1">
                     {c.experience || "Experience Not Available"}
-                  </p>
+                  </p> */}
+
+                  <span className="flex items-center gap-1">
+                    <Briefcase size={16} />
+                    {c.experience
+                      ? c.experience.toLowerCase().includes("year")
+                        ? c.experience
+                        : `${c.experience} years`
+                      : "Experience N/A"}
+                  </span>
 
                   {/* <div className="flex items-center text-md mt-2 text-gray-600">
                     <MapPin size={14} className="mr-1" />

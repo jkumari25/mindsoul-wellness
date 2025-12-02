@@ -132,7 +132,7 @@ export default function Counsellors() {
   }
 
   const openProfile = (c) => {
-    navigate(`/counsellor/${c._id}`, { state: c });
+    navigate(`/counsellor/${c.counsellorId}`, { state: c });
   };
 
   return (
@@ -234,7 +234,7 @@ export default function Counsellors() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 font-body">
             {counsellors.map((c) => (
               <div
-                key={c.email}
+                key={c.counsellorId}
                 onClick={() => openProfile(c)}
                 className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition"
               >

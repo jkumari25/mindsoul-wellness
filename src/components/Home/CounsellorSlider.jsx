@@ -455,7 +455,7 @@ export default function CounsellorSlider() {
   }, []);
 
   const openProfile = (c) => {
-    navigate(`/counsellor/${c._id}`, { state: c });
+    navigate(`/counsellor/${c.counsellorId}`, { state: c });
   };
 
   return (
@@ -484,8 +484,8 @@ export default function CounsellorSlider() {
         }}
         className="pb-10"
       >
-        {counsellors.map((c, index) => (
-          <SwiperSlide key={index}>
+        {counsellors.map((c) => (
+          <SwiperSlide key={c.counsellorId}>
             <div
               onClick={() => openProfile(c)}
               className="cursor-pointer shadow-lg rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition pt-10 pb-10"

@@ -22,7 +22,7 @@ function App() {
       <Route path="/" element={<Home />} />
       {/* <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} /> */}
-      <Route path="/counsellor/:id" element={<CounselorProfile />} />
+      <Route path="/counsellor/:counsellorId" element={<CounselorProfile />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/appointment" element={<AppointmentForm />} />
       <Route path="/about" element={<Breadcrumb />} />
@@ -39,9 +39,9 @@ function App() {
       <Route
         path="/counsellors"
         element={
-          <ProtectedRoute>
-            <Counsellors />
-          </ProtectedRoute>
+          // <ProtectedRoute>
+          <Counsellors />
+          // </ProtectedRoute>
         }
       />
       <Route path="/booking" element={<BookingPage />} />

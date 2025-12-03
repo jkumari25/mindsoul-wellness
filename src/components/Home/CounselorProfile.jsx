@@ -101,7 +101,12 @@ export default function CounselorProfile() {
               <div className="flex gap-6 mt-4 text-gray-700 text-md">
                 {counsellor.experience && (
                   <div className="flex items-center gap-1">
-                    <Calendar size={16} /> {counsellor.experience} years
+                    <Calendar size={16} />{" "}
+                    {counsellor.experience
+                      ? counsellor.experience.toLowerCase().includes("year")
+                        ? counsellor.experience
+                        : `${counsellor.experience} years`
+                      : "Experience N/A"}
                   </div>
                 )}
 
@@ -256,7 +261,7 @@ export default function CounselorProfile() {
       <BookAppointmentModal
         isOpen={showBookAppointmentModal}
         onClose={() => setShowBookAppointmentModal(false)}
-        counselor={counsellor}
+        counsellorId={counsellor.counsellorId}
       />
     </div>
   );

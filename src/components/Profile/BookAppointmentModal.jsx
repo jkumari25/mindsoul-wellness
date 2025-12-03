@@ -1,34 +1,112 @@
-import React, { useState } from "react";
-import {
-  FiX,
-  FiStar,
-  FiChevronDown,
-  FiChevronUp,
-  FiCalendar,
-} from "react-icons/fi";
+import React, { useState, useEffect } from "react";
+import { FiX, FiStar, FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-export default function BookAppointmentModal({ isOpen, onClose }) {
-  const [selectedDay, setSelectedDay] = useState("Tomorrow");
+export default function BookAppointmentModal({
+  isOpen,
+  onClose,
+  counsellorId,
+}) {
+  const [selectedDay, setSelectedDay] = useState("");
   const [openMorning, setOpenMorning] = useState(true);
   const [openAfternoon, setOpenAfternoon] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);
+  const [counsellor, setCounsellor] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // Generate next 7 days
+  const generateNext7Days = () => {
+    const labels = ["Today", "Tomorrow"];
+    const days = [];
+
+    for (let i = 0; i < 7; i++) {
+      const d = new Date();
+      d.setDate(d.getDate() + i);
+
+      const label = labels[i]
+        ? labels[i]
+        : d.toLocaleDateString("en-US", { weekday: "short" });
+
+      const date = d.toLocaleDateString("en-US", {
+        day: "2-digit",
+        month: "short",
+      });
+
+      days.push({ label, date });
+    }
+    return days;
+  };
+
+  const days = generateNext7Days();
+
+  // Generate slots function
+  const generateSlots = (start, end) => {
+    if (!start || !end) return [];
+
+    const slots = [];
+    let current = new Date(`2000-01-01T${start}`);
+    const last = new Date(`2000-01-01T${end}`);
+
+    while (current < last) {
+      const next = new Date(current.getTime() + 30 * 60000);
+
+      const formatTime = (date) =>
+        date.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+      slots.push(`${formatTime(current)} - ${formatTime(next)}`);
+      current = next;
+    }
+
+    return slots;
+  };
+
+  // Fetch counsellor details
+  useEffect(() => {
+    if (!counsellorId || !isOpen) return;
+
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const safeId = encodeURIComponent(counsellorId);
+
+        const res = await fetch(
+          `https://mindsoul-backend-772700176760.asia-south1.run.app/api/counsellor/${safeId}`
+        );
+
+        const data = await res.json();
+
+        if (data?.counsellor) {
+          setCounsellor(data.counsellor);
+          setSelectedDay(days[0].label);
+        }
+      } catch (err) {
+        console.error("Error fetching counsellor:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [counsellorId, isOpen]);
 
   if (!isOpen) return null;
 
-  const days = [
-    { label: "Today", date: "13 Nov" },
-    { label: "Tomorrow", date: "14 Nov" },
-    { label: "Sat", date: "15 Nov" },
-  ];
+  // Extract working hours
+  const morningSlots = counsellor?.workingHours?.morning
+    ? generateSlots(
+        counsellor.workingHours.morning.start,
+        counsellor.workingHours.morning.end
+      )
+    : [];
 
-  const morningSlots = [
-    "09:00–09:30 AM",
-    "09:30–10:00 AM",
-    "10:00–10:30 AM",
-    "10:30–11:00 AM",
-    "11:00–11:30 AM",
-    "11:30–12:00 AM",
-  ];
+  const afternoonSlots = counsellor?.workingHours?.afternoon
+    ? generateSlots(
+        counsellor.workingHours.afternoon.start,
+        counsellor.workingHours.afternoon.end
+      )
+    : [];
 
   const SlotCard = ({ time }) => (
     <label className="flex items-center gap-2 border rounded-lg px-4 py-2 cursor-pointer bg-white hover:bg-gray-50 shadow-sm">
@@ -45,7 +123,7 @@ export default function BookAppointmentModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl overflow-hidden animate-fadeIn relative max-h-[90vh] overflow-y-auto">
+      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl relative max-h-[90vh] overflow-y-auto">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -54,30 +132,48 @@ export default function BookAppointmentModal({ isOpen, onClose }) {
           <FiX />
         </button>
 
-        {/* Header */}
+        {/* Title */}
         <div className="px-6 pt-6">
           <h2 className="text-2xl font-semibold text-gray-800">
             Book Appointment
           </h2>
         </div>
 
-        {/* Counselor Section */}
+        {/* Counsellor Section */}
         <div className="px-6 mt-4 flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center text-xl font-semibold text-indigo-700">
-            MS
-          </div>
+          {loading ? (
+            <p className="text-gray-500">Loading...</p>
+          ) : counsellor ? (
+            <>
+              <img
+                src={counsellor.imageUrl}
+                alt={counsellor.firstName}
+                className="w-16 h-16 rounded-full object-cover bg-gray-200"
+                referrerPolicy="no-referrer"
+                crossOrigin="anonymous"
+                onError={(e) => (e.target.src = "/fallback.jpg")}
+              />
 
-          <div>
-            <h3 className="text-lg font-semibold text-gray-800">
-              Manish Sharma
-            </h3>
-            <p className="text-gray-500 text-sm">Pune</p>
-          </div>
-
-          <div className="flex items-center gap-1 ml-auto">
-            <FiStar className="text-yellow-400" />
-            <span className="text-gray-700 text-sm font-medium">4 (1)</span>
-          </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800">
+                  {counsellor.firstName} {counsellor.lastName}
+                </h3>
+                <p className="text-gray-500 text-sm">
+                  {counsellor.experience
+                    ? counsellor.experience.toLowerCase().includes("year")
+                      ? counsellor.experience
+                      : `${counsellor.experience} years`
+                    : "Experience N/A"}{" "}
+                  Experience
+                </p>
+                <p className="text-gray-500 text-sm">
+                  {counsellor.expertise?.join(", ")}
+                </p>
+              </div>
+            </>
+          ) : (
+            <p className="text-red-500">Counsellor not found</p>
+          )}
         </div>
 
         {/* Date Selector */}
@@ -110,23 +206,20 @@ export default function BookAppointmentModal({ isOpen, onClose }) {
             onClick={() => setOpenMorning(!openMorning)}
             className="flex justify-between w-full items-center mb-2"
           >
-            <div className="flex items-center gap-2">
-              <img
-                src="https://img.icons8.com/color/48/sunrise.png"
-                alt="sun"
-                className="w-6"
-              />
-              <span className="font-medium">Morning Slots</span>
-            </div>
+            <span className="font-medium">Morning Slots</span>
             {openMorning ? <FiChevronUp /> : <FiChevronDown />}
           </button>
 
-          {openMorning && (
+          {openMorning && morningSlots.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
               {morningSlots.map((time) => (
                 <SlotCard key={time} time={time} />
               ))}
             </div>
+          ) : (
+            openMorning && (
+              <p className="text-gray-500 text-sm italic">No morning slots</p>
+            )
           )}
         </div>
 
@@ -136,19 +229,20 @@ export default function BookAppointmentModal({ isOpen, onClose }) {
             onClick={() => setOpenAfternoon(!openAfternoon)}
             className="flex justify-between w-full items-center mb-2"
           >
-            <div className="flex items-center gap-2">
-              <img
-                src="https://img.icons8.com/color/48/sun.png"
-                alt="afternoon"
-                className="w-6"
-              />
-              <span className="font-medium">Afternoon Slots</span>
-            </div>
+            <span className="font-medium">Afternoon Slots</span>
             {openAfternoon ? <FiChevronUp /> : <FiChevronDown />}
           </button>
 
-          {openAfternoon && (
-            <p className="text-gray-500 text-sm italic">No slots available</p>
+          {openAfternoon && afternoonSlots.length > 0 ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
+              {afternoonSlots.map((time) => (
+                <SlotCard key={time} time={time} />
+              ))}
+            </div>
+          ) : (
+            openAfternoon && (
+              <p className="text-gray-500 text-sm italic">No afternoon slots</p>
+            )
           )}
         </div>
 

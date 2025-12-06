@@ -111,12 +111,23 @@ export default function CounsellorProfileUpdate() {
       }
 
       // API CALL
+      // const response = await axios.post(
+      //   "https://mindsoul-backend-772700176760.asia-south1.run.app/api/counsellor/update-profile",
+      //   apiBody,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // );
+
       const response = await axios.post(
         "https://mindsoul-backend-772700176760.asia-south1.run.app/api/counsellor/update-profile",
         apiBody,
         {
+          withCredentials: true, // ⭐ sends cookie automatically
           headers: {
-            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );

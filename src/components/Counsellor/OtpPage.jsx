@@ -274,6 +274,58 @@ export default function OtpPage({ onClose, phone }) {
   // }
 
   // VERIFY OTP FUNCTION
+  // async function handleVerifyOtp() {
+  //   const otp = inputsRef.current.map((input) => input.value).join("");
+
+  //   if (otp.length !== 6) {
+  //     setError("Please enter a valid 6-digit OTP.");
+  //     return;
+  //   }
+
+  //   if (!email) {
+  //     setError("Email missing. Please resend OTP.");
+  //     return;
+  //   }
+
+  //   setError("");
+
+  //   try {
+  //     const res = await api.post("/api/counsellor/verify-otp", {
+  //       email,
+  //       otp,
+  //     });
+
+  //     // Save counsellorId if backend sends it (optional)
+  //     if (res.data?.counsellorId) {
+  //       localStorage.setItem("counsellorId", res.data.counsellorId);
+  //     }
+
+  //     // Save role for protected route
+  //     if (res.data?.role) {
+  //       localStorage.setItem("role", res.data.role);
+  //       console.log("ROLE SAVED:", res.data.role);
+  //     }
+
+  //     // Save auth token
+  //     if (res.data?.token) {
+  //       localStorage.setItem("authToken", res.data.token);
+  //       console.log("TOKEN SAVED:", res.data.token);
+  //     } else {
+  //       console.warn("No token from backend");
+  //     }
+
+  //     // Close OTP modal
+  //     onClose();
+
+  //     // Navigate after small delay
+  //     setTimeout(() => {
+  //       navigate("/counsellor/profile");
+  //     }, 300);
+  //   } catch (err) {
+  //     setError("Invalid OTP");
+  //   }
+  // }
+
   async function handleVerifyOtp() {
     const otp = inputsRef.current.map((input) => input.value).join("");
 
@@ -295,33 +347,26 @@ export default function OtpPage({ onClose, phone }) {
         otp,
       });
 
-      // Save counsellorId if backend sends it (optional)
+      // Save counsellorId (optional)
       if (res.data?.counsellorId) {
         localStorage.setItem("counsellorId", res.data.counsellorId);
       }
 
-      // Save role for protected route
+      // Save role
       if (res.data?.role) {
         localStorage.setItem("role", res.data.role);
-        console.log("ROLE SAVED:", res.data.role);
       }
 
-      // Save auth token
-      if (res.data?.token) {
-        localStorage.setItem("authToken", res.data.token);
-        console.log("TOKEN SAVED:", res.data.token);
-      } else {
-        console.warn("No token from backend");
-      }
+      // ⭐ DO NOT SAVE TOKEN IN LOCALSTORAGE (HttpOnly cookie)
+      // Browser already received secure cookie from backend
 
-      // Close OTP modal
       onClose();
 
-      // Navigate after small delay
       setTimeout(() => {
         navigate("/counsellor/profile");
       }, 300);
     } catch (err) {
+      console.error(err);
       setError("Invalid OTP");
     }
   }

@@ -11,10 +11,10 @@ export default defineConfig({
     //   "Cross-Origin-Opener-Policy": "unsafe-none",
     //   "Cross-Origin-Embedder-Policy": "unsafe-none",
     // },
-    headers: {
-      "Cross-Origin-Opener-Policy": "same-origin",
-      "Cross-Origin-Embedder-Policy": "require-corp",
-    },
+    // headers: {
+    //   "Cross-Origin-Opener-Policy": "same-origin",
+    //   "Cross-Origin-Embedder-Policy": "require-corp",
+    // },
     port: 5173, // optional: set your preferred dev port
   },
 });

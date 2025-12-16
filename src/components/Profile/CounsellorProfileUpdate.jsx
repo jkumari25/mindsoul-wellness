@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import api from "../../api/axios";
 
 export default function CounsellorProfileUpdate() {
   const [formData, setFormData] = useState({
@@ -68,65 +67,96 @@ export default function CounsellorProfileUpdate() {
   };
 
   // --------------------------------------------------
-  //  FINAL SUBMIT HANDLER (FIXED FOR 404 ISSUE)
+  //  SUBMIT HANDLER (BACKEND-COMPATIBLE)
   // --------------------------------------------------
   const handleSubmit = async () => {
     try {
       const apiBody = new FormData();
+      const counsellorId = localStorage.getItem("counsellorId");
 
-      // SIMPLE FIELDS
-      apiBody.append("email", formData.email);
-      apiBody.append("firstName", formData.firstName);
-      apiBody.append("lastName", formData.lastName);
-      apiBody.append("phoneNumber", formData.phoneNumber);
-      apiBody.append("description", formData.description);
-      apiBody.append("experience", formData.experience);
-      apiBody.append("sessionPrice", formData.sessionPrice);
-      apiBody.append("slotDuration", formData.slotDuration);
+      if (!counsellorId) {
+        alert("Counsellor ID missing. Please login again.");
+        return;
+      }
 
-      // ARRAY FIELDS
-      formData.expertise.forEach((item) => apiBody.append("expertise[]", item));
-      formData.languages.forEach((item) => apiBody.append("languages[]", item));
-      formData.focusAreas.forEach((item) =>
-        apiBody.append("focusAreas[]", item)
-      );
-      formData.workingDays.forEach((item) =>
-        apiBody.append("workingDays[]", item)
-      );
+      // REQUIRED
+      apiBody.append("counsellorId", counsellorId);
+      if (formData.email) apiBody.append("email", formData.email);
 
-      // WORKING HOURS AS JSON STRING
-      apiBody.append("workingHours", JSON.stringify(formData.workingHours));
+      // BASIC FIELDS (send only if present)
+      if (formData.firstName) apiBody.append("firstName", formData.firstName);
+      if (formData.lastName) apiBody.append("lastName", formData.lastName);
+      if (formData.phoneNumber)
+        apiBody.append("phoneNumber", formData.phoneNumber);
+      if (formData.description)
+        apiBody.append("description", formData.description);
+      if (formData.experience)
+        apiBody.append("experience", formData.experience);
+      if (formData.sessionPrice)
+        apiBody.append("sessionPrice", formData.sessionPrice);
 
-      // IMAGE (optional)
+      // SLOT DURATION (must be positive number)
+      if (formData.slotDuration && Number(formData.slotDuration) > 0) {
+        apiBody.append("slotDuration", Number(formData.slotDuration));
+      }
+
+      // Expertise
+      formData.expertise.forEach((item) => {
+        apiBody.append("expertise", item.trim());
+      });
+
+      // Languages
+      formData.languages.forEach((item) => {
+        apiBody.append("languages", item.trim());
+      });
+
+      // Focus Areas
+      formData.focusAreas.forEach((item) => {
+        apiBody.append("focusAreas", item.trim());
+      });
+
+      // WORKING DAYS — MUST BE ARRAY (NOT JSON STRING)
+      formData.workingDays.forEach((day) => {
+        apiBody.append("workingDays", day);
+      });
+
+      // WORKING HOURS — SEND ONLY FILLED SLOTS
+      const wh = {};
+
+      if (
+        formData.workingHours.morning.start &&
+        formData.workingHours.morning.end
+      ) {
+        wh.morning = formData.workingHours.morning;
+      }
+
+      if (
+        formData.workingHours.afternoon.start &&
+        formData.workingHours.afternoon.end
+      ) {
+        wh.afternoon = formData.workingHours.afternoon;
+      }
+
+      if (Object.keys(wh).length > 0) {
+        apiBody.append("workingHours", JSON.stringify(wh));
+      }
+
+      // IMAGE
       if (formData.profileImage) {
         apiBody.append("profileImage", formData.profileImage);
       }
 
-      // AUTH TOKEN
-      const token = localStorage.getItem("token");
-
-      // DEBUG LOG
-      console.log("------ FINAL FORMDATA SENT -------");
+      // DEBUG LOG (keep once)
+      console.log("------ FINAL PAYLOAD ------");
       for (let p of apiBody.entries()) {
         console.log(p[0], p[1]);
       }
 
-      // API CALL
-      // const response = await axios.post(
-      //   "https://mindsoul-backend-772700176760.asia-south1.run.app/api/counsellor/update-profile",
-      //   apiBody,
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //   }
-      // );
-
-      const response = await api.post(
-        "/api/counsellor/update-profile",
+      const response = await axios.post(
+        "https://mindsoul-backend-772700176760.asia-south1.run.app/api/counsellor/update-profile",
         apiBody,
         {
-          withCredentials: true, // ⭐ sends cookie automatically
+          withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -136,8 +166,8 @@ export default function CounsellorProfileUpdate() {
       console.log("UPDATE RESPONSE:", response.data);
       alert("Profile updated successfully!");
     } catch (err) {
-      console.error("UPDATE ERROR:", err);
-      alert("Something went wrong while updating!");
+      console.error("UPDATE ERROR:", err.response?.data || err);
+      alert(err.response?.data?.message || "Update failed");
     }
   };
 
@@ -442,301 +472,3 @@ export default function CounsellorProfileUpdate() {
     </div>
   );
 }
-
-// import React, { useState, useEffect } from "react";
-// import api from "../../api/axios";
-
-// export default function CounsellorProfileForm() {
-//   const [loading, setLoading] = useState(false);
-//   const counsellorId = localStorage.getItem("counsellorId");
-//   const email = localStorage.getItem("email");
-
-//   const [form, setForm] = useState({
-//     firstName: "",
-//     lastName: "",
-//     phoneNumber: "",
-//     description: "",
-//     languages: [],
-//     sessionPrice: "",
-//     focusAreas: [],
-//     expertise: [],
-//     experience: "",
-//     workingHours: {
-//       morning: { start: "09:00", end: "12:00" },
-//       afternoon: { start: "13:00", end: "17:00" },
-//     },
-//     workingDays: [],
-//     slotDuration: "",
-//     image: null,
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setForm((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleMultiSelect = (name, value) => {
-//     setForm((prev) => ({
-//       ...prev,
-//       [name]: prev[name].includes(value)
-//         ? prev[name].filter((v) => v !== value)
-//         : [...prev[name], value],
-//     }));
-//   };
-
-//   const handleWorkingHours = (period, field, value) => {
-//     setForm((prev) => ({
-//       ...prev,
-//       workingHours: {
-//         ...prev.workingHours,
-//         [period]: {
-//           ...prev.workingHours[period],
-//           [field]: value,
-//         },
-//       },
-//     }));
-//   };
-
-//   async function handleSubmit(e) {
-//     e.preventDefault();
-//     setLoading(true);
-
-//     try {
-//       const fd = new FormData();
-//       fd.append("email", email);
-//       fd.append("counsellorId", counsellorId);
-
-//       Object.keys(form).forEach((key) => {
-//         if (key === "image" && form.image) {
-//           fd.append("image", form.image);
-//         } else if (key === "workingHours") {
-//           fd.append("workingHours", JSON.stringify(form.workingHours));
-//         } else if (Array.isArray(form[key])) {
-//           form[key].forEach((val) => fd.append(key, val));
-//         } else {
-//           fd.append(key, form[key]);
-//         }
-//       });
-
-//       const res = await api.post("/api/counsellor/update-profile", fd, {
-//         headers: { "Content-Type": "multipart/form-data" },
-//         withCredentials: true,
-//       });
-
-//       alert("Profile Updated Successfully!");
-//     } catch (err) {
-//       console.error(err);
-//       alert("Profile update failed");
-//     }
-
-//     setLoading(false);
-//   }
-
-//   return (
-//     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-30">
-//       <h2 className="text-2xl font-semibold mb-4 text-center">
-//         Update Counsellor Profile
-//       </h2>
-
-//       <form onSubmit={handleSubmit} className="space-y-6">
-//         {/* NAME ROW */}
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//           <input
-//             name="firstName"
-//             placeholder="First Name"
-//             className="input"
-//             value={form.firstName}
-//             onChange={handleChange}
-//           />
-//           <input
-//             name="lastName"
-//             placeholder="Last Name"
-//             className="input"
-//             value={form.lastName}
-//             onChange={handleChange}
-//           />
-//         </div>
-
-//         {/* PHONE */}
-//         <input
-//           name="phoneNumber"
-//           placeholder="Phone Number"
-//           className="input w-full"
-//           value={form.phoneNumber}
-//           onChange={handleChange}
-//         />
-
-//         {/* DESCRIPTION */}
-//         <textarea
-//           name="description"
-//           placeholder="Write about yourself..."
-//           className="input w-full h-24"
-//           value={form.description}
-//           onChange={handleChange}
-//         ></textarea>
-
-//         {/* EXPERIENCE */}
-//         <input
-//           name="experience"
-//           placeholder="Experience (e.g., 5 Years)"
-//           className="input w-full"
-//           value={form.experience}
-//           onChange={handleChange}
-//         />
-
-//         {/* SESSION PRICE */}
-//         <input
-//           name="sessionPrice"
-//           placeholder="Session Price (₹)"
-//           className="input w-full"
-//           value={form.sessionPrice}
-//           onChange={handleChange}
-//         />
-
-//         {/* SLOT DURATION */}
-//         <input
-//           name="slotDuration"
-//           placeholder="Slot Duration (minutes)"
-//           className="input w-full"
-//           value={form.slotDuration}
-//           onChange={handleChange}
-//         />
-
-//         {/* MULTI SELECT FIELDS */}
-//         <div>
-//           <label className="font-semibold">Languages</label>
-//           <div className="flex flex-wrap gap-2 mt-2">
-//             {["English", "Hindi", "Bengali", "Tamil", "Marathi"].map((l) => (
-//               <button
-//                 type="button"
-//                 key={l}
-//                 className={`px-3 py-1 rounded border ${
-//                   form.languages.includes(l)
-//                     ? "bg-blue-600 text-white"
-//                     : "bg-gray-100"
-//                 }`}
-//                 onClick={() => handleMultiSelect("languages", l)}
-//               >
-//                 {l}
-//               </button>
-//             ))}
-//           </div>
-//         </div>
-
-//         <div>
-//           <label className="font-semibold">Expertise</label>
-//           <div className="flex flex-wrap gap-2 mt-2">
-//             {["Stress", "Anxiety", "Depression", "Relationships"].map((e) => (
-//               <button
-//                 type="button"
-//                 key={e}
-//                 className={`px-3 py-1 rounded border ${
-//                   form.expertise.includes(e)
-//                     ? "bg-blue-600 text-white"
-//                     : "bg-gray-100"
-//                 }`}
-//                 onClick={() => handleMultiSelect("expertise", e)}
-//               >
-//                 {e}
-//               </button>
-//             ))}
-//           </div>
-//         </div>
-
-//         <div>
-//           <label className="font-semibold">Focus Areas</label>
-//           <div className="flex flex-wrap gap-2 mt-2">
-//             {["Career", "Family", "Trauma", "Confidence"].map((f) => (
-//               <button
-//                 type="button"
-//                 key={f}
-//                 className={`px-3 py-1 rounded border ${
-//                   form.focusAreas.includes(f)
-//                     ? "bg-blue-600 text-white"
-//                     : "bg-gray-100"
-//                 }`}
-//                 onClick={() => handleMultiSelect("focusAreas", f)}
-//               >
-//                 {f}
-//               </button>
-//             ))}
-//           </div>
-//         </div>
-
-//         {/* WORKING DAYS */}
-//         <div>
-//           <label className="font-semibold">Working Days</label>
-//           <div className="flex flex-wrap gap-2 mt-2">
-//             {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
-//               <button
-//                 type="button"
-//                 key={d}
-//                 className={`px-3 py-1 rounded border ${
-//                   form.workingDays.includes(d)
-//                     ? "bg-blue-600 text-white"
-//                     : "bg-gray-100"
-//                 }`}
-//                 onClick={() => handleMultiSelect("workingDays", d)}
-//               >
-//                 {d}
-//               </button>
-//             ))}
-//           </div>
-//         </div>
-
-//         {/* WORKING HOURS */}
-//         <div className="mt-4">
-//           <label className="font-semibold">Working Hours</label>
-
-//           {["morning", "afternoon"].map((period) => (
-//             <div key={period} className="grid grid-cols-2 gap-4 mt-2">
-//               <div>
-//                 <label className="text-sm">{period} Start</label>
-//                 <input
-//                   type="time"
-//                   value={form.workingHours[period].start}
-//                   onChange={(e) =>
-//                     handleWorkingHours(period, "start", e.target.value)
-//                   }
-//                   className="input"
-//                 />
-//               </div>
-
-//               <div>
-//                 <label className="text-sm">{period} End</label>
-//                 <input
-//                   type="time"
-//                   value={form.workingHours[period].end}
-//                   onChange={(e) =>
-//                     handleWorkingHours(period, "end", e.target.value)
-//                   }
-//                   className="input"
-//                 />
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-
-//         {/* IMAGE UPLOAD */}
-//         <div>
-//           <label className="font-semibold">Profile Image</label>
-//           <input
-//             type="file"
-//             accept="image/*"
-//             className="mt-2"
-//             onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
-//           />
-//         </div>
-
-//         {/* SUBMIT */}
-//         <button
-//           type="submit"
-//           className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg"
-//           disabled={loading}
-//         >
-//           {loading ? "Updating..." : "Update Profile"}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }

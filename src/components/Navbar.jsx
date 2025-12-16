@@ -513,7 +513,7 @@ export default function Navbar() {
               onClick={() => setLoginOpen(true)}
               className="bg-[#c5b4e3] text-black ml-4 px-5 py-2 rounded-full font-semibold"
             >
-              Counselor Login
+              Counsellor Login
             </button>
           </div>
 
@@ -595,7 +595,7 @@ export default function Navbar() {
             }}
             className="bg-[#c5b4e3] text-black px-4 py-2 rounded-lg"
           >
-            Counselor Login
+            Counsellor Login
           </button>
         </div>
       </div>

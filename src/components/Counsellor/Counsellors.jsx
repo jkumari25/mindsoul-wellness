@@ -15,6 +15,8 @@ export default function Counsellors() {
     Marathi: false,
     Tamil: false,
     Telugu: false,
+    Punjabi: false,
+    French: false,
   });
 
   const [selectedExpertise, setSelectedExpertise] = useState({
@@ -24,6 +26,7 @@ export default function Counsellors() {
     "Counselling Psychologist": false,
   });
 
+  // ---------------- TOGGLES ----------------
   const toggleLang = (lang) => {
     setSelectedLang((prev) => ({ ...prev, [lang]: !prev[lang] }));
   };
@@ -32,6 +35,7 @@ export default function Counsellors() {
     setSelectedExpertise((prev) => ({ ...prev, [exp]: !prev[exp] }));
   };
 
+  // ---------------- CLEAR FILTERS ----------------
   const clearAllFilters = () => {
     setSelectedLang({
       Hindi: false,
@@ -40,6 +44,8 @@ export default function Counsellors() {
       Marathi: false,
       Tamil: false,
       Telugu: false,
+      Punjabi: false,
+      French: false,
     });
 
     setSelectedExpertise({
@@ -57,7 +63,7 @@ export default function Counsellors() {
     ...Object.values(selectedExpertise),
   ].filter(Boolean).length;
 
-  // FETCH DATA
+  // ---------------- FETCH COUNSELLORS ----------------
   useEffect(() => {
     const fetchCounsellors = async () => {
       try {
@@ -71,7 +77,7 @@ export default function Counsellors() {
           setCounsellors(data.counsellors);
         }
       } catch (err) {
-        console.error(err);
+        console.error("Fetch error:", err);
       } finally {
         setLoading(false);
       }
@@ -80,35 +86,38 @@ export default function Counsellors() {
     fetchCounsellors();
   }, []);
 
-  // APPLY FILTERS
+  // ---------------- APPLY FILTERS (CASE INSENSITIVE) ----------------
   useEffect(() => {
     let filtered = allCounsellors;
 
-    // Languages filter
-    const activeLangs = Object.keys(selectedLang).filter(
-      (l) => selectedLang[l]
-    );
+    const activeLangs = Object.keys(selectedLang)
+      .filter((l) => selectedLang[l])
+      .map((l) => l.toLowerCase().trim());
 
     if (activeLangs.length > 0) {
       filtered = filtered.filter((c) =>
-        c.languages?.some((lang) => activeLangs.includes(lang))
+        c.languages?.some((lang) =>
+          activeLangs.includes(lang.toLowerCase().trim())
+        )
       );
     }
 
-    // ✅ FIXED EXPERTISE FILTER
-    const activeExpertise = Object.keys(selectedExpertise).filter(
-      (e) => selectedExpertise[e]
-    );
+    const activeExpertise = Object.keys(selectedExpertise)
+      .filter((e) => selectedExpertise[e])
+      .map((e) => e.toLowerCase().trim());
 
     if (activeExpertise.length > 0) {
       filtered = filtered.filter((c) =>
-        c.expertise?.some((exp) => activeExpertise.includes(exp))
+        c.expertise?.some((exp) =>
+          activeExpertise.includes(exp.toLowerCase().trim())
+        )
       );
     }
 
     setCounsellors(filtered);
   }, [selectedLang, selectedExpertise, allCounsellors]);
 
+  // ---------------- LOADING ----------------
   if (loading) {
     return (
       <div className="w-full h-screen flex items-center justify-center">
@@ -121,6 +130,7 @@ export default function Counsellors() {
     navigate(`/counsellor/${c.counsellorId}`, { state: c });
   };
 
+  // ---------------- UI ----------------
   return (
     <div className="w-full bg-gray-50 mt-30 py-10">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 p-4">
@@ -175,47 +185,75 @@ export default function Counsellors() {
           </button>
         </div>
 
-        {/* CARDS */}
-        <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {counsellors.map((c) => (
-            <div
-              key={c.counsellorId}
-              onClick={() => openProfile(c)}
-              className="bg-white rounded-xl shadow hover:shadow-lg cursor-pointer"
-            >
-              <img
-                src={c.imageUrl}
-                alt={c.firstName}
-                className="h-52 w-full object-cover"
-              />
-
-              <div className="p-4">
-                <div className="flex items-center gap-1">
-                  <Star size={16} className="text-yellow-500" />
-                  <span>{c.rating || "4.0"}</span>
-                </div>
-
-                <h3 className="text-xl font-semibold">
-                  {c.firstName} {c.lastName}
-                </h3>
-
-                <div className="flex items-center gap-1 text-green-600">
-                  <CheckCircle size={16} /> Verified
-                </div>
-
-                <div className="flex items-center gap-1 mt-1">
-                  <Briefcase size={16} />
-                  {c.experience || "Experience N/A"}
-                </div>
-
-                <p className="text-gray-600 mt-1">{c.languages?.join(" | ")}</p>
-
-                <p className="mt-2 font-semibold">
-                  ₹{c.sessionPrice || "1500"}
-                </p>
-              </div>
+        {/* COUNSELLORS / NO DATA UI */}
+        <div className="md:col-span-3">
+          {counsellors.length === 0 ? (
+            <div className="w-full h-[300px] flex flex-col items-center justify-center bg-white rounded-xl shadow">
+              <p className="text-xl font-semibold text-gray-600">
+                No counsellors found
+              </p>
+              <p className="text-gray-500 mt-2">
+                Try adjusting or clearing the filters
+              </p>
+              <button
+                onClick={clearAllFilters}
+                className="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-lg"
+              >
+                Clear Filters
+              </button>
             </div>
-          ))}
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {counsellors.map((c) => (
+                <div
+                  key={c.counsellorId}
+                  onClick={() => openProfile(c)}
+                  className="bg-white rounded-xl shadow hover:shadow-lg cursor-pointer"
+                >
+                  <img
+                    src={c.imageUrl}
+                    alt={c.firstName}
+                    className="h-52 w-full object-cover"
+                    onError={(e) => (e.target.src = "/fallback.jpg")}
+                  />
+
+                  <div className="p-4">
+                    <div className="flex items-center gap-1">
+                      <Star size={16} className="text-yellow-500" />
+                      <span>{c.rating || "4.0"}</span>
+                    </div>
+
+                    <h3 className="text-xl font-semibold">
+                      {c.firstName} {c.lastName}
+                    </h3>
+
+                    <div className="flex items-center gap-1 text-green-600">
+                      <CheckCircle size={16} /> Verified
+                    </div>
+
+                    <div className="flex items-center gap-1 mt-1">
+                      <Briefcase size={16} />
+                      {c.experience || "Experience N/A"}
+                    </div>
+
+                    <p className="text-gray-600 mt-1">
+                      {c.languages
+                        ?.map(
+                          (l) =>
+                            l.trim().charAt(0).toUpperCase() +
+                            l.trim().slice(1).toLowerCase()
+                        )
+                        .join(" | ")}
+                    </p>
+
+                    <p className="mt-2 font-semibold">
+                      ₹{c.sessionPrice || "1500"}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

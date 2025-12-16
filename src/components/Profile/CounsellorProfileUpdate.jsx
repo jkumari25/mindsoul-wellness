@@ -46,7 +46,16 @@ export default function CounsellorProfileUpdate() {
     "Family Issues",
   ];
 
-  const languageOptions = ["English", "Hindi", "Punjabi", "French"];
+  const languageOptions = [
+    "English",
+    "Hindi",
+    "Kannada",
+    "Marathi",
+    "Tamil",
+    "Telugu",
+    "Punjabi",
+    "French",
+  ];
 
   const toggleMultiSelect = (field, value) => {
     setFormData((prev) => ({

@@ -467,9 +467,11 @@ export default function CounsellorSlider() {
         <h2 className="text-5xl font-semibold text-gray-900 font-heading">
           Counsellors
         </h2>
-        <button className="flex items-center gap-1 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-100 font-body transition">
-          See All <ArrowUpRight size={18} />
-        </button>
+        <a href="/counsellors">
+          <button className="flex items-center gap-1 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-100 font-body transition">
+            See All <ArrowUpRight size={18} />
+          </button>
+        </a>
       </div>
 
       <Swiper

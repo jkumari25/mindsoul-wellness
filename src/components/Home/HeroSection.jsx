@@ -42,14 +42,14 @@ export default function HeroSection() {
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
             <button
               onClick={scrollToCounsellor}
-              className="bg-[#06283D] text-white px-6 py-3 rounded-md hover:bg-[#021c2a] transition font-body"
+              className="bg-[#06283D] text-white px-6 py-3 rounded-md hover:bg-[#021c2a] transition font-body cursor-pointer"
             >
               Book a Session
             </button>
 
-            <button className="border border-[#06283D] text-[#06283D] px-6 py-3 rounded-md hover:bg-[#06283D] hover:text-white transition font-body">
+            {/* <button className="border border-[#06283D] text-[#06283D] px-6 py-3 rounded-md hover:bg-[#06283D] hover:text-white transition font-body cursor-pointer">
               Take our assessment
-            </button>
+            </button> */}
           </div>
         </div>
 

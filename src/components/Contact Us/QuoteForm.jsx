@@ -224,7 +224,7 @@ export default function QuoteForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full mt-6 bg-accent hover:bg-primary text-white hover:text-black font-semibold py-3 rounded-xl transition text-lg"
+          className="w-full mt-6 bg-accent hover:bg-primary text-white hover:text-black font-semibold py-3 rounded-xl transition text-lg cursor-pointer"
         >
           {loading ? "Submitting..." : "Schedule your quote"}
         </button>

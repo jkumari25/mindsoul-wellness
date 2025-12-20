@@ -20,21 +20,6 @@ export default function Breadcrumb() {
           health insights. Personalized, high-quality care for families wherever
           they are.
         </p>
-
-        {/* Modal Buttons start */}
-        <button
-          onClick={() => setConfirmationOpen(true)}
-          className="px-6 py-3 bg-accent text-white rounded-lg mt-10 font-body text-xl"
-        >
-          Open Confirmation Modal
-        </button>
-
-        <AppointmentConfirmationModal
-          isOpen={confirmationopen}
-          onClose={() => setConfirmationOpen(false)}
-        />
-
-        {/* Modal Buttons ends */}
       </section>
 
       {/* Story Section */}

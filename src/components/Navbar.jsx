@@ -322,7 +322,7 @@ export default function Navbar() {
             {!isUserLoggedIn ? (
               <button
                 onClick={() => setUserLoginOpen(true)}
-                className="px-5 py-2 rounded-full font-semibold"
+                className="px-5 py-2 rounded-full font-semibold cursor-pointer"
                 style={{ backgroundColor: primary, color: textDark }}
               >
                 User Login
@@ -331,7 +331,7 @@ export default function Navbar() {
               <div className="relative" ref={profileRef}>
                 <button
                   onClick={() => setProfileOpen(!profileOpen)}
-                  className="w-10 h-10 rounded-full bg-white flex items-center justify-center"
+                  className="w-10 h-10 rounded-full bg-white flex items-center justify-center cursor-pointer"
                 >
                   <User size={20} />
                 </button>
@@ -343,13 +343,13 @@ export default function Navbar() {
                         navigate("/user-dashboard");
                         setProfileOpen(false);
                       }}
-                      className="w-full text-left px-4 py-3 hover:bg-gray-100"
+                      className="w-full text-left px-4 py-3 hover:bg-gray-100 cursor-pointer"
                     >
                       Dashboard
                     </button>
                     <button
                       onClick={handleUserLogout}
-                      className="w-full text-left px-4 py-3 text-red-500 hover:bg-gray-100"
+                      className="w-full text-left px-4 py-3 text-red-500 hover:bg-gray-100 cursor-pointer"
                     >
                       Logout
                     </button>
@@ -362,14 +362,14 @@ export default function Navbar() {
             {role === "counsellor" ? (
               <button
                 onClick={handleCounsellorLogout}
-                className="px-5 py-2 rounded-full bg-red-500 text-white"
+                className="px-5 py-2 rounded-full bg-red-500 text-white cursor-pointer"
               >
                 Counsellor Logout
               </button>
             ) : (
               <button
                 onClick={() => setLoginOpen(true)}
-                className="bg-[#c5b4e3] text-black px-5 py-2 rounded-full font-semibold"
+                className="bg-[#c5b4e3] text-black px-5 py-2 rounded-full font-semibold cursor-pointer"
               >
                 Counsellor Login
               </button>

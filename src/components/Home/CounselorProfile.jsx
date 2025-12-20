@@ -21,6 +21,28 @@ export default function CounselorProfile() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loggedInRole, setLoggedInRole] = useState(null);
 
+  const createRipple = (event) => {
+    const button = event.currentTarget;
+    const circle = document.createElement("span");
+
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${
+      event.clientX - button.getBoundingClientRect().left - radius
+    }px`;
+    circle.style.top = `${
+      event.clientY - button.getBoundingClientRect().top - radius
+    }px`;
+    circle.classList.add("ripple");
+
+    const ripple = button.getElementsByClassName("ripple")[0];
+    if (ripple) ripple.remove();
+
+    button.appendChild(circle);
+  };
+
   // 🔵 FETCH COUNSELLOR DETAILS & CHECK LOGIN
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -96,7 +118,7 @@ export default function CounselorProfile() {
                 {counsellor.firstName} {counsellor.lastName}
               </h2>
 
-              <p className="text-gray-600 mt-1">{counsellor.email}</p>
+              {/* <p className="text-gray-600 mt-1">{counsellor.email}</p> */}
 
               <div className="flex gap-6 mt-4 text-gray-700 text-md">
                 {counsellor.experience && (
@@ -133,7 +155,7 @@ export default function CounselorProfile() {
 
             <button
               onClick={handleBookAppointment}
-              className="mt-6 w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition text-lg"
+              className="mt-6 w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition text-lg cursor-pointer"
             >
               Book Appointment
             </button>
@@ -223,6 +245,11 @@ export default function CounselorProfile() {
                 Afternoon: {counsellor.workingHours.afternoon.start} -{" "}
                 {counsellor.workingHours.afternoon.end}
               </p>
+
+              <p className="text-gray-700 mt-1">
+                Evening: {counsellor.workingHours.evening.start} -{" "}
+                {counsellor.workingHours.evening.end}
+              </p>
             </div>
           )}
         </div>
@@ -238,7 +265,7 @@ export default function CounselorProfile() {
 
           <button
             onClick={handleBookAppointment}
-            className="mt-4 w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg text-xl"
+            className="mt-4 w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg text-xl cursor-pointer"
           >
             Book Free Session
           </button>

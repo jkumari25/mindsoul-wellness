@@ -113,9 +113,11 @@ export default function HowItWorks() {
           MindSoul provides compassionate, expert mental health care designed
           especially for children. Get access to the right support, right away.
         </p>
-        <button className="mt-6 px-6 py-3 bg-[#0B2B38] text-white font-medium rounded-md hover:bg-[#143E52] transition font-body">
-          Get support now
-        </button>
+        <a href="/contacts">
+          <button className="mt-6 px-6 py-3 bg-[#0B2B38] text-white font-medium rounded-md hover:bg-[#143E52] transition font-body cursor-pointer">
+            Get support now
+          </button>
+        </a>
       </div>
 
       {/* === Content Section === */}

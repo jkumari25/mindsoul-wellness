@@ -1,8 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
-import Login from "./pages/Login.jsx";
-import Registration from "./components/Registration.jsx";
 import Profile from "./pages/Profile.jsx";
 import CounselorProfile from "./components/Home/CounselorProfile.jsx";
 import CounsellorSlider from "./components/Home/CounsellorSlider.jsx";
@@ -15,13 +13,12 @@ import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import BookingPage from "./components/Booking/BookingPage.jsx";
 import OtpPage from "./components/Counsellor/OtpPage.jsx";
 import ProtectedCounsellorRoute from "./routes/ProtectedCounsellorRoute.jsx";
+import UserDashboard from "./pages/UserDashboard.jsx";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      {/* <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Registration />} /> */}
       <Route path="/counsellor/:counsellorId" element={<CounselorProfile />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/appointment" element={<AppointmentForm />} />
@@ -45,6 +42,7 @@ function App() {
         }
       />
       <Route path="/booking" element={<BookingPage />} />
+      <Route path="/user-dashboard" element={<UserDashboard />} />
     </Routes>
   );
 }

@@ -17,6 +17,7 @@ export default function CounsellorProfileUpdate() {
     workingHours: {
       morning: { start: "", end: "" },
       afternoon: { start: "", end: "" },
+      evening: { start: "", end: "" },
     },
     workingDays: [],
     profileImage: null,
@@ -144,6 +145,13 @@ export default function CounsellorProfileUpdate() {
         formData.workingHours.afternoon.end
       ) {
         wh.afternoon = formData.workingHours.afternoon;
+      }
+
+      if (
+        formData.workingHours.evening.start &&
+        formData.workingHours.evening.end
+      ) {
+        wh.evening = formData.workingHours.evening;
       }
 
       if (Object.keys(wh).length > 0) {
@@ -345,7 +353,7 @@ export default function CounsellorProfileUpdate() {
       <div className="mt-8">
         <label className="font-medium text-lg">Working Hours</label>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-3">
           {/* Morning */}
           <div>
             <p className="font-semibold mb-2">Morning</p>
@@ -415,6 +423,45 @@ export default function CounsellorProfileUpdate() {
                       ...formData.workingHours,
                       afternoon: {
                         ...formData.workingHours.afternoon,
+                        end: e.target.value,
+                      },
+                    },
+                  })
+                }
+              />
+            </div>
+          </div>
+
+          {/* Evening */}
+          <div>
+            <p className="font-semibold mb-2">Evening</p>
+            <div className="flex gap-3">
+              <input
+                type="time"
+                className="p-3 border rounded-lg"
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    workingHours: {
+                      ...formData.workingHours,
+                      evening: {
+                        ...formData.workingHours.evening,
+                        start: e.target.value,
+                      },
+                    },
+                  })
+                }
+              />
+              <input
+                type="time"
+                className="p-3 border rounded-lg"
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    workingHours: {
+                      ...formData.workingHours,
+                      evening: {
+                        ...formData.workingHours.evening,
                         end: e.target.value,
                       },
                     },

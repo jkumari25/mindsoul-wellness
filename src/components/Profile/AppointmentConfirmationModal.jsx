@@ -1,23 +1,42 @@
 import React from "react";
-import { FiX, FiCalendar, FiClock, FiMapPin } from "react-icons/fi";
+import { FiX, FiCalendar, FiClock, FiMapPin, FiVideo } from "react-icons/fi";
 
 export default function AppointmentConfirmationModal({
   isOpen,
   onClose,
-  counselor = {
-    initials: "MS",
-    name: "Manish Sharma",
-    date: "Nov 14, 2025",
-    time: "12:00–12:30 PM",
-    duration: "30 Minutes",
-    format: "Online",
-  },
+  appointment,
 }) {
-  if (!isOpen) return null;
+  if (!isOpen || !appointment) return null;
+
+  const { counsellorProfileSnapshot, date, timeSlot, zoomLink } = appointment;
+
+  /* ---- Helpers ---- */
+  const getInitials = (firstName = "", lastName = "") =>
+    `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+
+  const formatDate = (dateStr) =>
+    new Date(dateStr).toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+
+  const getDurationFromSlot = (slot) => {
+    if (!slot) return "";
+    const [start, end] = slot.split("-");
+    const startTime = new Date(`1970-01-01T${start}:00`);
+    const endTime = new Date(`1970-01-01T${end}:00`);
+    const diff = (endTime - startTime) / (1000 * 60);
+    return `${diff} Minutes`;
+  };
+
+  const counselorName = `${counsellorProfileSnapshot?.firstName || ""} ${
+    counsellorProfileSnapshot?.lastName || ""
+  }`;
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl overflow-hidden animate-fadeIn relative p-6 max-h-[90vh] overflow-y-auto">
+      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl relative p-6 max-h-[90vh] overflow-y-auto">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -28,18 +47,16 @@ export default function AppointmentConfirmationModal({
 
         {/* Header */}
         <div className="text-center mt-2">
-          <h2 className="text-2xl font-semibold text-gray-800">
+          <h2 className="text-3xl font-semibold text-gray-800">
             Appointment Confirmation
           </h2>
 
-          {/* Success Icon */}
           <div className="flex justify-center mt-4">
             <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
               <svg
-                xmlns="http://www.w3.org/2000/svg"
                 className="w-8 h-8 text-green-500"
-                viewBox="0 0 20 20"
                 fill="currentColor"
+                viewBox="0 0 20 20"
               >
                 <path
                   fillRule="evenodd"
@@ -50,68 +67,85 @@ export default function AppointmentConfirmationModal({
             </div>
           </div>
 
-          <h3 className="text-xl font-semibold text-indigo-700 mt-4">
+          <h3 className="text-2xl font-semibold text-indigo-700 mt-4">
             Appointment Confirmed
           </h3>
 
-          <p className="text-gray-500 mt-1 text-sm">
-            Thank you for booking! Your session has been scheduled successfully.
+          <p className="text-gray-500 mt-1 text-lg">
+            Your counselling session has been scheduled successfully.
           </p>
         </div>
 
         {/* Session Card */}
         <div className="bg-gray-50 mt-8 rounded-xl p-5 shadow-sm">
-          {/* Counselor Block */}
+          {/* Counselor */}
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-full bg-indigo-100 flex items-center justify-center text-lg font-semibold text-indigo-700">
-              {counselor.initials}
+            <div className="w-14 h-14 rounded-full bg-indigo-100 flex items-center justify-center text-xl font-semibold text-indigo-700">
+              {getInitials(
+                counsellorProfileSnapshot?.firstName,
+                counsellorProfileSnapshot?.lastName
+              )}
             </div>
 
             <div>
               <h4 className="text-lg font-semibold text-gray-800">
                 Counselling Session
               </h4>
-              <p className="text-gray-600 text-sm">with {counselor.name}</p>
+              <p className="text-gray-600 text-md">with {counselorName}</p>
             </div>
           </div>
 
-          {/* Date & Time Info */}
+          {/* Date & Time */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
-            {/* Date */}
-            <div className="bg-white border rounded-xl p-4 flex items-center gap-3 shadow-sm">
+            <div className="bg-white border rounded-xl p-4 flex items-center gap-3">
               <FiCalendar className="text-indigo-600 text-xl" />
               <div>
-                <p className="text-xs text-gray-500">Date</p>
-                <p className="font-medium text-gray-800">{counselor.date}</p>
+                <p className="text-lg text-gray-500">Date</p>
+                <p className="font-medium text-md text-gray-800">
+                  {formatDate(date)}
+                </p>
               </div>
             </div>
 
-            {/* Time */}
-            <div className="bg-white border rounded-xl p-4 flex items-center gap-3 shadow-sm">
+            <div className="bg-white border rounded-xl p-4 flex items-center gap-3">
               <FiClock className="text-indigo-600 text-xl" />
               <div>
-                <p className="text-xs text-gray-500">Timing</p>
-                <p className="font-medium text-gray-800">{counselor.time}</p>
+                <p className="text-lg text-gray-500">Timing</p>
+                <p className="font-medium text-md text-gray-800">{timeSlot}</p>
               </div>
             </div>
           </div>
 
           {/* Session Details */}
           <div className="mt-6">
-            <h5 className="text-gray-700 font-semibold mb-2">
+            <h5 className="text-gray-700 text-lg font-semibold mb-2">
               Session Details
             </h5>
 
             <div className="flex flex-col gap-2 text-gray-600">
               <div className="flex items-center gap-2">
                 <FiClock className="text-indigo-600" />
-                <span>Duration: {counselor.duration}</span>
+                <span>Duration: {getDurationFromSlot(timeSlot)}</span>
               </div>
 
               <div className="flex items-center gap-2">
                 <FiMapPin className="text-indigo-600" />
-                <span>Format: {counselor.format}</span>
+                <span>Format: Online</span>
               </div>
+
+              {zoomLink && (
+                <div className="flex items-center gap-2">
+                  <FiVideo className="text-indigo-600" />
+                  <a
+                    href={zoomLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-indigo-600 underline"
+                  >
+                    Join Zoom Meeting
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>

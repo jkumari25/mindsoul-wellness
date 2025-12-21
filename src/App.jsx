@@ -14,6 +14,8 @@ import BookingPage from "./components/Booking/BookingPage.jsx";
 import OtpPage from "./components/Counsellor/OtpPage.jsx";
 import ProtectedCounsellorRoute from "./routes/ProtectedCounsellorRoute.jsx";
 import UserDashboard from "./pages/UserDashboard.jsx";
+import Policy from "./pages/Policy.jsx";
+import CounsellorDashboard from "./pages/CounsellorDashboard.jsx";
 
 function App() {
   return (
@@ -42,7 +44,16 @@ function App() {
         }
       />
       <Route path="/booking" element={<BookingPage />} />
+      <Route path="/privacy-policy" element={<Policy />} />
       <Route path="/user-dashboard" element={<UserDashboard />} />
+      <Route
+        path="/counsellor-dashboard"
+        element={
+          <ProtectedCounsellorRoute>
+            <CounsellorDashboard />
+          </ProtectedCounsellorRoute>
+        }
+      />
     </Routes>
   );
 }

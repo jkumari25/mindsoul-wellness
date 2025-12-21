@@ -1,4 +1,5 @@
 import { FaDiscord, FaYoutube, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -66,7 +67,7 @@ export default function Footer() {
 
           <FooterLinks
             title="Legal"
-            links={["Privacy Policy", "Care & Safety Policy"]}
+            links={[{ label: "Privacy Policy", href: "/privacy-policy" }]}
           />
         </div>
 
@@ -90,10 +91,17 @@ function FooterLinks({ title, links }) {
   return (
     <div className="md:col-span-1">
       <h4 className="text-gray-200 font-xl mb-3">{title}</h4>
+
       <ul className="space-y-2 text-md text-gray-400">
         {links.map((link, i) => (
-          <li key={i} className="hover:text-white cursor-pointer duration-150">
-            {link}
+          <li key={i} className="duration-150">
+            {typeof link === "string" ? (
+              <span className="hover:text-white cursor-pointer">{link}</span>
+            ) : (
+              <Link to={link.href} className="hover:text-white cursor-pointer">
+                {link.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

@@ -263,6 +263,7 @@ export default function OtpPage({ onClose, phone }) {
 
       if (res.data?.role) {
         localStorage.setItem("role", res.data.role);
+        localStorage.setItem("isCounsellorLoggedIn", "true");
       }
 
       // ⭐ Close modal first

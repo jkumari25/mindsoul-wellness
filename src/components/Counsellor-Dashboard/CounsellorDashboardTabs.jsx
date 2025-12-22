@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CounsellorAppointments from "./CounsellorAppointement";
+import CounsellorWeeklySchedule from "./CounsellorWeeklySchedule";
 
 const TABS = {
   INFO: "info",
   APPOINTMENTS: "appointments",
-  COUNSELLORS: "counsellors",
+  WEEKLY_SCHEDULE: "weekly_schedule",
 };
 
 export default function CounsellorDashboardTabs() {
@@ -33,9 +34,6 @@ export default function CounsellorDashboardTabs() {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    if (tab === TABS.COUNSELLORS) {
-      window.location.href = "/counsellors";
-    }
   };
 
   return (
@@ -45,7 +43,7 @@ export default function CounsellorDashboardTabs() {
         {[
           { key: TABS.INFO, label: "My Info" },
           { key: TABS.APPOINTMENTS, label: "Appointments" },
-          { key: TABS.COUNSELLORS, label: "Counsellors" },
+          { key: TABS.WEEKLY_SCHEDULE, label: "Weekly Schedule" },
         ].map((tab) => (
           <button
             key={tab.key}
@@ -114,7 +112,6 @@ export default function CounsellorDashboardTabs() {
                 ₹ {counsellorData.sessionPrice}
               </Section>
 
-              {/* ✅ FIXED: ul is no longer inside <p> */}
               <Section title="Working Days & Hours">
                 <ul className="space-y-1 text-sm text-gray-600">
                   {counsellorData.workingDays.map((day, idx) => {
@@ -142,6 +139,12 @@ export default function CounsellorDashboardTabs() {
             <CounsellorAppointments />
           </div>
         )}
+
+        {activeTab === TABS.WEEKLY_SCHEDULE && (
+          <div className="bg-white rounded-xl shadow p-10">
+            <CounsellorWeeklySchedule />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -156,7 +159,6 @@ function Section({ title, children }) {
   return (
     <div>
       <h3 className="font-semibold text-gray-700 mb-1">{title}</h3>
-
       {isBlockElement ? (
         <div className="text-gray-600 text-sm leading-relaxed">{children}</div>
       ) : (

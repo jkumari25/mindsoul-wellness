@@ -62,7 +62,7 @@ export default function CounsellorDashboardTabs() {
         ))}
       </div>
 
-      {/* TAB CONTENT (only ONE renders) */}
+      {/* TAB CONTENT */}
       <div className="mt-8">
         {activeTab === TABS.INFO && counsellorData && (
           <div className="bg-white rounded-2xl shadow-md p-6 grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6">
@@ -114,8 +114,9 @@ export default function CounsellorDashboardTabs() {
                 ₹ {counsellorData.sessionPrice}
               </Section>
 
+              {/* ✅ FIXED: ul is no longer inside <p> */}
               <Section title="Working Days & Hours">
-                <ul className="space-y-1 text-sm">
+                <ul className="space-y-1 text-sm text-gray-600">
                   {counsellorData.workingDays.map((day, idx) => {
                     const h = counsellorData.workingHours;
                     return (
@@ -149,10 +150,18 @@ export default function CounsellorDashboardTabs() {
 /* ---------- Reusable Components ---------- */
 
 function Section({ title, children }) {
+  const isBlockElement =
+    typeof children !== "string" && typeof children !== "number";
+
   return (
     <div>
       <h3 className="font-semibold text-gray-700 mb-1">{title}</h3>
-      <p className="text-gray-600 text-sm leading-relaxed">{children}</p>
+
+      {isBlockElement ? (
+        <div className="text-gray-600 text-sm leading-relaxed">{children}</div>
+      ) : (
+        <p className="text-gray-600 text-sm leading-relaxed">{children}</p>
+      )}
     </div>
   );
 }

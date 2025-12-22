@@ -9,39 +9,38 @@ export default function CounsellorAppointments() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!token) return;
-
     const fetchAppointments = async () => {
       try {
         const res = await axios.get(
-          "https://mindsoul-backend-772700176760.asia-south1.run.app/api/users/appointments",
+          "https://mindsoul-backend-772700176760.asia-south1.run.app/api/counsellor/counsellor-appointments",
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            withCredentials: true, // ✅ REQUIRED
           }
         );
 
-        setAppointments(res.data.data || []);
+        setAppointments(res.data?.data || []);
       } catch (error) {
-        console.error("Failed to fetch appointments", error);
+        console.error(
+          "Failed to fetch appointments",
+          error.response?.data || error
+        );
       } finally {
         setLoading(false);
       }
     };
 
     fetchAppointments();
-  }, [token]);
+  }, []);
 
-  // 🔹 Helper: get appointment start datetime
+  // 🔹 Convert date + timeSlot to Date object safely
   const getAppointmentDateTime = (appointment) => {
     if (!appointment.date || !appointment.timeSlot) return new Date(0);
 
-    const startTime = appointment.timeSlot.split("-")[0]; // "14:00"
-    return new Date(`${appointment.date}T${startTime}`);
+    const startTime = appointment.timeSlot.split("-")[0].trim();
+    return new Date(`${appointment.date} ${startTime}`);
   };
 
-  // 🔹 Sort appointments (upcoming first, expired last)
+  // 🔹 Sort: upcoming first, past last
   const sortedAppointments = useMemo(() => {
     const now = new Date();
 
@@ -72,12 +71,13 @@ export default function CounsellorAppointments() {
       {sortedAppointments.map((item) => (
         <CounsellorAppointmentCard
           key={item.id}
-          name={item.counsellorName}
+          name={item.studentName}
           subtitle="Counselling Session"
           date={item.date}
           timeSlot={item.timeSlot}
-          meetingLink={item.meetingLink}
+          meetingLink={item.startUrl}
           status={item.status}
+          studentEmail={item.studentEmail}
         />
       ))}
     </div>

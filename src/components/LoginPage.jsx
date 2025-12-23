@@ -1164,12 +1164,12 @@ export default function LoginPage({
 
           {/* GOOGLE LOGIN */}
           <div className="flex flex-col items-center gap-3 text-[11px]">
-            <p className="text-lg">Or Login with Google</p>
+            {/* <p className="text-lg">Or Login with Google</p>
 
             <FaGoogle
               onClick={handleGoogleLogin}
               className="text-2xl cursor-pointer hover:scale-110 transition"
-            />
+            /> */}
 
             <p
               onClick={() => setRegisterOpen(true)}

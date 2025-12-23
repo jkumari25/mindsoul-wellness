@@ -48,7 +48,7 @@ export default function CounsellorDashboardTabs() {
           <button
             key={tab.key}
             onClick={() => handleTabClick(tab.key)}
-            className={`px-5 py-2 text-sm rounded-lg font-medium transition
+            className={`px-5 py-2 text-lg rounded-lg font-medium transition
               ${
                 activeTab === tab.key
                   ? "bg-white text-indigo-600 shadow"
@@ -74,14 +74,14 @@ export default function CounsellorDashboardTabs() {
               <h2 className="mt-4 text-xl font-semibold">
                 {counsellorData.firstName} {counsellorData.lastName}
               </h2>
-              <p className="text-gray-500 text-sm">{counsellorData.email}</p>
-              <p className="text-gray-500 text-sm mt-1">
+              <p className="text-gray-500 text-md">{counsellorData.email}</p>
+              <p className="text-gray-500 text-md mt-1">
                 📞 {counsellorData.phoneNumber}
               </p>
             </div>
 
             {/* RIGHT COLUMN */}
-            <div className="space-y-5">
+            <div className="space-y-5 text-lg">
               <Section title="Description">
                 {counsellorData.description}
               </Section>
@@ -113,7 +113,7 @@ export default function CounsellorDashboardTabs() {
               </Section>
 
               <Section title="Working Days & Hours">
-                <ul className="space-y-1 text-sm text-gray-600">
+                <ul className="space-y-1 text-md text-gray-600">
                   {counsellorData.workingDays.map((day, idx) => {
                     const h = counsellorData.workingHours;
                     return (
@@ -160,9 +160,9 @@ function Section({ title, children }) {
     <div>
       <h3 className="font-semibold text-gray-700 mb-1">{title}</h3>
       {isBlockElement ? (
-        <div className="text-gray-600 text-sm leading-relaxed">{children}</div>
+        <div className="text-gray-600 text-md leading-relaxed">{children}</div>
       ) : (
-        <p className="text-gray-600 text-sm leading-relaxed">{children}</p>
+        <p className="text-gray-600 text-md leading-relaxed">{children}</p>
       )}
     </div>
   );
@@ -176,7 +176,7 @@ function TagSection({ title, items, color }) {
         {items.map((item, idx) => (
           <span
             key={idx}
-            className={`bg-${color}-100 text-${color}-600 px-3 py-1 rounded-full text-xs`}
+            className={`bg-${color}-100 text-${color}-600 px-3 py-1 rounded-full text-md`}
           >
             {item}
           </span>

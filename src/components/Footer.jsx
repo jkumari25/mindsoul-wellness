@@ -22,9 +22,9 @@ export default function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <a href="/">
                 <img
-                  src="/logo_white.png"
+                  src="/logo-1.png"
                   alt="MindSoul Logo"
-                  className="h-[85px] w-[100px]"
+                  className="h-[130px] w-[200px]"
                 />
               </a>
             </div>

@@ -16,6 +16,7 @@ import ProtectedCounsellorRoute from "./routes/ProtectedCounsellorRoute.jsx";
 import UserDashboard from "./pages/UserDashboard.jsx";
 import Policy from "./pages/Policy.jsx";
 import CounsellorDashboard from "./pages/CounsellorDashboard.jsx";
+import CorporateWellness from "./pages/CorporateWellness.jsx";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           // </ProtectedRoute>
         }
       />
+      <Route path="/corporate-wellness" element={<CorporateWellness />} />
       <Route path="/booking" element={<BookingPage />} />
       <Route path="/privacy-policy" element={<Policy />} />
       <Route path="/user-dashboard" element={<UserDashboard />} />

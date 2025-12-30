@@ -154,10 +154,23 @@ export default function CounsellorWeeklySchedule() {
   if (loading) return <p>Loading schedule...</p>;
 
   return (
-    <div style={{ padding: "40px", maxWidth: "900px", margin: "auto" }}>
-      <h2 className="text-lg">Weekly Availability</h2>
+    <div style={{ maxWidth: "900px", margin: "auto" }} className="font-body">
+      <p className="text-md font-body">
+        <span className="text-red-600 font-bold text-lg">Important Note:</span>
+        <br /> To ensure your availability is visible to users, it is{" "}
+        <strong>
+          mandatory to update your weekly schedule every weekend.
+        </strong>{" "}
+        The schedule you set will be used to display your availability for the
+        upcoming week to users. If the weekly schedule is not updated, your next
+        week’s slots may not appear for booking.
+      </p>
+      <h2 className="text-lg mt-8">Weekly Availability</h2>
 
-      <div style={{ marginBottom: "16px", display: "flex", gap: "12px" }}>
+      <div
+        style={{ marginBottom: "16px", display: "flex", gap: "12px" }}
+        className="mt-2"
+      >
         <button onClick={() => toggleAll(true)} style={actionBtnStyle}>
           Select All
         </button>

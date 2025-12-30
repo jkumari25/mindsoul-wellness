@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import CounsellorAppointments from "./CounsellorAppointement";
 import CounsellorWeeklySchedule from "./CounsellorWeeklySchedule";
+import CounsellorTransactionsTab from "./CounsellorTransactionTab";
 
 const TABS = {
   INFO: "info",
   APPOINTMENTS: "appointments",
   WEEKLY_SCHEDULE: "weekly_schedule",
+  TRANSACTIONS: "transactions",
 };
 
 export default function CounsellorDashboardTabs() {
@@ -44,11 +46,12 @@ export default function CounsellorDashboardTabs() {
           { key: TABS.INFO, label: "My Info" },
           { key: TABS.APPOINTMENTS, label: "Appointments" },
           { key: TABS.WEEKLY_SCHEDULE, label: "Weekly Schedule" },
+          { key: TABS.TRANSACTIONS, label: "Transactions" },
         ].map((tab) => (
           <button
             key={tab.key}
             onClick={() => handleTabClick(tab.key)}
-            className={`px-5 py-2 text-lg rounded-lg font-medium transition
+            className={`px-5 py-2 text-md rounded-lg font-medium transition
               ${
                 activeTab === tab.key
                   ? "bg-white text-indigo-600 shadow"
@@ -143,6 +146,12 @@ export default function CounsellorDashboardTabs() {
         {activeTab === TABS.WEEKLY_SCHEDULE && (
           <div className="bg-white rounded-xl shadow p-10">
             <CounsellorWeeklySchedule />
+          </div>
+        )}
+
+        {activeTab === TABS.TRANSACTIONS && (
+          <div className="bg-white rounded-xl shadow p-10">
+            <CounsellorTransactionsTab />
           </div>
         )}
       </div>

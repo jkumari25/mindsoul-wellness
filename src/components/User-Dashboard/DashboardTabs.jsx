@@ -49,7 +49,7 @@ import { useNavigate } from "react-router-dom";
 export default function DashboardTabs({ activeTab, setActiveTab }) {
   const navigate = useNavigate();
 
-  const tabs = ["My Info", "Appointments", "Counsellors"];
+  const tabs = ["My Info", "Appointments", "Counsellors", "Transactions"];
 
   const handleTabClick = (tab) => {
     if (tab === "Counsellors") {

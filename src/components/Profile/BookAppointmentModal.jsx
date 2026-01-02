@@ -937,7 +937,7 @@ export default function BookAppointmentModal({
       Array.from(slotMap.values()).forEach((s) => {
         const hour = parseInt(s.startTime.split(":")[0], 10);
         if (hour < 12) grouped.morning.push(s);
-        else if (hour < 17) grouped.afternoon.push(s);
+        else if (hour < 16) grouped.afternoon.push(s);
         else grouped.evening.push(s);
       });
 

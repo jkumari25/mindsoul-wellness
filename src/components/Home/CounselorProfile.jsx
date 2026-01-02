@@ -125,9 +125,21 @@ export default function CounselorProfile() {
                   <div className="flex items-center gap-1">
                     <Calendar size={16} />{" "}
                     {counsellor.experience
-                      ? counsellor.experience.toLowerCase().includes("year")
-                        ? counsellor.experience
-                        : `${counsellor.experience} years`
+                      ? // ? counsellor.experience.toLowerCase().includes("year")
+                        //   ? counsellor.experience
+                        //   : `${counsellor.experience}+ Years`
+                        // : "Experience N/A"}
+                        (() => {
+                          const exp = counsellor.experience.toString();
+
+                          // If already contains "year"
+                          if (/year/i.test(exp)) {
+                            return exp.replace(/\s*\+?\s*year(s)?/i, "+ Years");
+                          }
+
+                          // If only a number
+                          return `${exp}+ Years`;
+                        })()
                       : "Experience N/A"}
                   </div>
                 )}

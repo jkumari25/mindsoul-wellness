@@ -90,7 +90,19 @@ export default function CounsellorDashboardTabs() {
               </Section>
 
               <Section title="Experience">
-                {counsellorData.experience} years
+                {counsellorData.experience
+                  ? (() => {
+                      const exp = counsellorData.experience.toString();
+
+                      // If already contains "year"
+                      if (/year/i.test(exp)) {
+                        return exp.replace(/\s*\+?\s*year(s)?/i, "+ Years");
+                      }
+
+                      // If only a number
+                      return `${exp}+ Years`;
+                    })()
+                  : "Experience N/A"}
               </Section>
 
               <TagSection

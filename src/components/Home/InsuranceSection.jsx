@@ -1,7 +1,7 @@
 export default function InsuranceSection() {
   return (
     <section className=" pt-12 pb-18 px-6">
-      <div className="max-w-[85%] mx-auto bg-[#C3B0D9] rounded-xl shadow-sm p-8 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div className="max-w-[85%] mx-auto bg-accent rounded-xl shadow-sm p-8 flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Left Text Content */}
         <div className="max-w-lg">
           <p className="uppercase text-lg tracking-wide text-gray-600 font-semibold font-body">

@@ -62,8 +62,8 @@ export default function Navbar() {
     <>
       {/* NAVBAR */}
       <nav
-        className="fixed top-0 left-0 w-full shadow-md z-50"
-        style={{ backgroundColor: accent }}
+        className="fixed top-0 left-0 w-full shadow-md z-50 bg-primary"
+        // style={{ backgroundColor: accent }}
       >
         <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
           <a href="/">
@@ -101,8 +101,8 @@ export default function Navbar() {
             {!isUserLoggedIn ? (
               <button
                 onClick={() => setUserLoginOpen(true)}
-                className="px-5 py-2 rounded-full font-semibold"
-                style={{ backgroundColor: primary, color: textDark }}
+                className="px-5 py-2 rounded-full font-semibold bg-accent text-textDark"
+                // style={{ backgroundColor: primary, color: textDark }}
               >
                 User Login
               </button>
@@ -163,7 +163,7 @@ export default function Navbar() {
             ) : (
               <button
                 onClick={() => setLoginOpen(true)}
-                className="bg-[#c5b4e3] text-black px-5 py-2 rounded-full font-semibold"
+                className="bg-accent text-textDark px-5 py-2 rounded-full font-semibold"
               >
                 Counsellor Login
               </button>

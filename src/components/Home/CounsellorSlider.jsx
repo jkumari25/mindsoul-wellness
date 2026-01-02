@@ -459,10 +459,7 @@ export default function CounsellorSlider() {
   };
 
   return (
-    <div
-      id="counsellor-section"
-      className="max-w-7xl mx-auto px-5 py-12 bg-[#FAF9F6]"
-    >
+    <div id="counsellor-section" className="max-w-7xl mx-auto px-5 py-12 ">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-5xl font-semibold text-gray-900 font-heading">
           Counsellors
@@ -490,7 +487,7 @@ export default function CounsellorSlider() {
           <SwiperSlide key={c.counsellorId}>
             <div
               onClick={() => openProfile(c)}
-              className="cursor-pointer shadow-lg rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition pt-10 pb-10"
+              className="cursor-pointer shadow-lg rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition pt-10 pb-10 bg-accent"
             >
               {/* <LazyLoadImage
                 src={c.imageUrl || "https://via.placeholder.com/300"}

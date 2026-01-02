@@ -70,7 +70,7 @@ export default function CounsellorProfileHeader() {
 
             {/* DETAILS */}
             <div className="pt-20">
-              <h2 className="text-2xl font-semibold text-gray-800">
+              <h2 className="text-2xl font-semibold text-gray-800 capitalize">
                 {fullName || "Complete your profile"}
               </h2>
               <p className="text-gray-500">{counsellorEmail}</p>
@@ -79,7 +79,7 @@ export default function CounsellorProfileHeader() {
 
           {/* EDIT */}
           <a href="/counsellor/profile">
-            <button className="mt-20 inline-flex items-center gap-2 border border-indigo-500 text-indigo-600 px-5 py-2 rounded-lg hover:bg-indigo-50">
+            <button className="mt-20 inline-flex items-center gap-2 border border-accent text-textDark px-5 py-2 rounded-lg hover:bg-indigo-50 text-lg">
               <Pencil size={16} />
               Edit Profile
             </button>

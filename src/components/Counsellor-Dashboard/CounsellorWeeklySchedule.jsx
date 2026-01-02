@@ -154,7 +154,7 @@ export default function CounsellorWeeklySchedule() {
   if (loading) return <p>Loading schedule...</p>;
 
   return (
-    <div style={{ maxWidth: "900px", margin: "auto" }} className="font-body">
+    <div style={{ maxWidth: "1100px", margin: "auto" }} className="font-body">
       <p className="text-md font-body">
         <span className="text-red-600 font-bold text-lg">Important Note:</span>
         <br /> To ensure your availability is visible to users, it is{" "}
@@ -216,7 +216,7 @@ export default function CounsellorWeeklySchedule() {
         style={{
           marginTop: "30px",
           padding: "12px 24px",
-          background: "#6a5acd",
+          background: "#778DA9",
           color: "white",
           border: "none",
           borderRadius: "8px",

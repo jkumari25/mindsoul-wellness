@@ -28,7 +28,7 @@ const data = [
 export default function WhyMindsoul() {
   return (
     <section className="py-16 px-6 sm:px-12 md:px-20 lg:px-32">
-      <h4 className="text-[#6B4EFF] font-semibold tracking-wider text-sm uppercase mb-2 font-body">
+      <h4 className="text-primary font-semibold tracking-wider text-sm uppercase mb-2 font-body">
         Why MindSoul
       </h4>
       <h2 className="text-[#1E1B4B] text-3xl sm:text-4xl md:text-5xl font-bold mb-10 leading-tight font-heading">

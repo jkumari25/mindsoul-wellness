@@ -149,13 +149,13 @@ export default function CounselorProfile() {
             </h3>
 
             <div className="p-4 border-2 border-primary rounded-xl text-center bg-purple-50 font-body text-lg w-[20%]">
-              <p className="font-semibold text-purple-700">Intro Session</p>
+              <p className="font-semibold text-textDark">Intro Session</p>
               <p className="text-gray-700 mt-1">₹{counsellor.sessionPrice}</p>
             </div>
 
             <button
               onClick={handleBookAppointment}
-              className="mt-6 w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition text-lg cursor-pointer"
+              className="mt-6 w-full bg-primary hover:bg-accent hover:text-textDark text-white py-3 rounded-lg font-semibold transition text-lg cursor-pointer"
             >
               Book Appointment
             </button>
@@ -265,7 +265,7 @@ export default function CounselorProfile() {
 
           <button
             onClick={handleBookAppointment}
-            className="mt-4 w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg text-xl cursor-pointer"
+            className="mt-4 w-full bg-primary hover:bg-accent hover:text-textDark text-white py-3 rounded-lg text-xl cursor-pointer"
           >
             Book Free Session
           </button>

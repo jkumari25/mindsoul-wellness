@@ -93,17 +93,33 @@ body {
   --font-heading: "DM Serif Display", serif;
   --font-body: "Open Sans", sans-serif;
 
-  --color-primary: #C5B4E3;
+  /* --color-primary: #C5B4E3;
   --color-accent: #7a3cff;
   --color-textDark: #1a1a1a;
-  --color-light: #ffffff;
+  --color-light: #ffffff; */
+
+  --color-primary: #778DA9;
+  --color-accent: #C7D7E6;
+  --color-textDark: #2B3A55;
+  --color-light: #F6F5F3;
 }
+
+/* colors: {
+  dustyBlue: "#778DA9",
+  cloudBlue: "#C7D7E6",
+  slateNavy: "#2B3A55",
+  pearlWhite: "#F6F5F3",
+} */
 
 /* Global Defaults */
 body {
   font-family: var(--font-body);
   color: var(--color-textDark);
   background-color: var(--color-light);
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
 }
 
 @keyframes fadeIn {

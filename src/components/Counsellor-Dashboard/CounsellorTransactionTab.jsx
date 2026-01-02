@@ -61,10 +61,10 @@ export default function CounsellorTransactionsTab() {
           <button
             key={filter}
             onClick={() => setActiveFilter(filter)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition
+            className={`px-4 py-2 rounded-sm text-md font-medium transition font-body
               ${
                 activeFilter === filter
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-primary text-white"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
           >

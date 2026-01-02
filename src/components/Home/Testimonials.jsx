@@ -83,7 +83,7 @@ export default function Testimonials() {
             >
               {testimonials.map((item, index) => (
                 <SwiperSlide key={index}>
-                  <div className="bg-[#C5B4E3] rounded-xl shadow-sm p-8 h-[450px] flex flex-col justify-between font-body">
+                  <div className="bg-accent rounded-xl shadow-sm p-8 h-[450px] flex flex-col justify-between font-body">
                     <div>
                       <div
                         className={`w-6 h-6 ${item.color} rounded-t-full mb-4`}

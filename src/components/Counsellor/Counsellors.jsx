@@ -138,7 +138,7 @@ export default function Counsellors() {
         <div className="bg-white p-4 rounded-xl shadow-sm h-fit sticky top-4">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-semibold">Filters</h2>
-            <span className="text-xs bg-indigo-600 text-white px-2 py-1 rounded-full">
+            <span className="text-xs bg-primary text-white px-2 py-1 rounded-full">
               {filterCount}
             </span>
           </div>
@@ -179,7 +179,7 @@ export default function Counsellors() {
 
           <button
             onClick={clearAllFilters}
-            className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg"
+            className="w-full mt-4 bg-primary text-light py-2 rounded-lg"
           >
             Clear All Filters
           </button>
@@ -188,8 +188,8 @@ export default function Counsellors() {
         {/* COUNSELLORS / NO DATA UI */}
         <div className="md:col-span-3">
           {counsellors.length === 0 ? (
-            <div className="w-full h-[300px] flex flex-col items-center justify-center bg-white rounded-xl shadow">
-              <p className="text-xl font-semibold text-gray-600">
+            <div className="w-full h-[300px] flex flex-col items-center justify-center bg-light rounded-xl shadow">
+              <p className="text-2xl font-semibold text-textDark">
                 No counsellors found
               </p>
               <p className="text-gray-500 mt-2">
@@ -197,7 +197,7 @@ export default function Counsellors() {
               </p>
               <button
                 onClick={clearAllFilters}
-                className="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-lg"
+                className="mt-4 px-6 py-2 bg-primary text-light rounded-lg"
               >
                 Clear Filters
               </button>

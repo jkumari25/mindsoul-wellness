@@ -23,22 +23,22 @@ export default function Breadcrumb() {
       </section>
 
       {/* Story Section */}
-      <section className="bg-gradient-to-r from-[#7A3CFF] to-[#C5B4E3] text-white py-16  flex flex-col md:flex-row items-center ">
+      <section className="gradient-bg text-white py-16  flex flex-col md:flex-row items-center ">
         {/* Left Text */}
         <div className="md:w-1/2 space-y-6 px-28">
-          <h4 className="text-[#F2C94C] text-lg uppercase font-medium font-heading">
+          <h4 className="text-light text-lg uppercase font-medium font-heading">
             Our Story
           </h4>
-          <h2 className="text-5xl font-semibold leading-snug">
-            Created by a family, for <em>all families</em>
+          <h2 className="text-6xl font-semibold leading-snug font-heading">
+            Created by a family, for all families
           </h2>
-          <p className="text-lg leading-relaxed text-gray-200">
+          <p className="text-lg leading-relaxed text-black font-body">
             Founded by a passionate team of therapists and caregivers, MindSoul
             Wellness provides families with comprehensive emotional and mental
             health care. Our mission is to ensure every family has access to the
             tools and experts needed for a healthy mind and heart.
           </p>
-          <p className="text-lg leading-relaxed text-gray-300">
+          <p className="text-lg leading-relaxed text-black font-body">
             With years of combined experience in child psychology and emotional
             care, our founders built MindSoul to connect families with
             empathetic professionals who understand what truly matters —
@@ -57,16 +57,16 @@ export default function Breadcrumb() {
       </section>
 
       {/* Awards Section */}
-      <section className="bg-gradient-to-r from-[#7A3CFF] to-[#C5B4E3] text-white py-10 flex flex-wrap justify-center gap-10 border-t border-[#b8a0ee]">
+      <section className=" gradient-bg  text-black py-10 flex flex-wrap justify-center gap-10 border-t border-accent">
         {[
           "Best Family Therapy",
           "Best Online Counseling",
           "Best Care for Kids",
           "Best Parent Support",
         ].map((award, i) => (
-          <div key={i} className="text-center space-y-2">
-            <p className="text-xl uppercase tracking-wider">{award}</p>
-            <p className="text-gray-300 text-md">
+          <div key={i} className="text-center space-y-2 font-body">
+            <p className="text-xl uppercase ">{award}</p>
+            <p className="text-textDark text-lg">
               Recognized by Wellness Awards
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function Breadcrumb() {
           ].map((item, i) => (
             <div
               key={i}
-              className="flex flex-col md:flex-row border-b border-gray-200 py-4"
+              className="flex flex-col md:flex-row border-b border-gray-200 py-4 font-body"
             >
               <div className="md:w-1/3 font-medium text-[#0A1E33] text-lg">
                 {item.title}
@@ -115,21 +115,23 @@ export default function Breadcrumb() {
       </section>
 
       {/* CTA Boxes */}
-      <section className="grid md:grid-cols-2">
-        <div className="bg-[#F7F4EC] p-10 text-center">
-          <h4 className="uppercase  text-gray-500 text-lg">For Families</h4>
-          <h3 className="text-2xl font-medium mt-2 mb-4 font-heading">
+      <section className="grid md:grid-cols-2 ">
+        <div className="bg-primary p-10 text-center">
+          <h4 className="uppercase  text-light text-lg font-body">
+            For Families
+          </h4>
+          <h3 className="text-2xl font-medium mt-2 mb-4 font-heading text-light">
             Want to learn more?
           </h3>
-          <p className="text-gray-600 mb-6 text-lg">
+          <p className="text-light mb-6 text-lg">
             Discover how MindSoul can help your family thrive emotionally.
           </p>
-          <button className="border border-gray-700 px-5 py-2 rounded-md hover:bg-gray-800 hover:text-white transition text-lg">
+          <button className="border border-light px-5 py-2 rounded-md hover:bg-gray-800 hover:text-white transition text-lg">
             Contact us
           </button>
         </div>
 
-        <div className="bg-[#F1F2F6] p-10 text-center">
+        <div className="bg-accent p-10 text-center">
           <h4 className="uppercase text-lg text-gray-500">For Partners</h4>
           <h3 className="text-2xl font-medium mt-2 mb-4 font-heading">
             Partner with us

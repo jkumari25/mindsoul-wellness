@@ -39,7 +39,7 @@ export default function CounsellorDashboardTabs() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto mt-10 px-4">
+    <div className="max-w-7xl mx-auto mt-10 px-4">
       {/* Tabs */}
       <div className="flex gap-2 bg-gray-100 p-1 rounded-xl w-fit">
         {[
@@ -54,7 +54,7 @@ export default function CounsellorDashboardTabs() {
             className={`px-5 py-2 text-md rounded-lg font-medium transition
               ${
                 activeTab === tab.key
-                  ? "bg-white text-indigo-600 shadow"
+                  ? "bg-white text-textDark shadow"
                   : "text-gray-500 hover:text-indigo-600"
               }`}
           >

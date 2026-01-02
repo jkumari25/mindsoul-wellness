@@ -35,13 +35,13 @@ export default function ProfileHeader() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between -mt-16">
             <div className="flex items-center gap-6">
               {/* PROFILE AVATAR */}
-              <div className="w-32 h-32 rounded-full bg-blue-50 flex items-center justify-center text-4xl font-semibold text-blue-700 border-4 border-white shadow">
+              <div className="w-32 h-32 rounded-full bg-blue-50 flex items-center justify-center text-4xl font-semibold text-textDark border-4 border-white shadow">
                 {initials}
               </div>
 
               {/* USER DETAILS */}
               <div>
-                <h2 className="text-2xl font-semibold text-gray-800 pt-20">
+                <h2 className="text-2xl font-semibold text-gray-800 pt-20 capitalize">
                   {user.name}
                 </h2>
                 <p className="text-gray-500">{user.email}</p>
@@ -51,7 +51,7 @@ export default function ProfileHeader() {
             {/* EDIT PROFILE BUTTON */}
             <button
               onClick={() => setIsProfileModalOpen(true)}
-              className="mt-20 inline-flex items-center gap-2 border border-indigo-500 text-indigo-600 px-5 py-2 rounded-lg hover:bg-indigo-50 transition"
+              className="mt-20 inline-flex items-center gap-2 border border-primary text-textDark px-5 py-2 rounded-lg hover:bg-indigo-50 transition text-lg"
             >
               <Pencil size={16} />
               Edit Profile

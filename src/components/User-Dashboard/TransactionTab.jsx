@@ -69,10 +69,10 @@ export default function TransactionsTab() {
           <button
             key={filter}
             onClick={() => setActiveFilter(filter)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition
+            className={`px-4 py-2 rounded-md text-lg font-medium transition
               ${
                 activeFilter === filter
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-textDark text-white"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
           >
@@ -99,7 +99,7 @@ export default function TransactionsTab() {
                 className="bg-white rounded-2xl shadow-sm border p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
               >
                 {/* Left */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 text-body">
                   <div
                     className={`w-12 h-12 flex items-center justify-center rounded-full
                       ${
@@ -114,11 +114,11 @@ export default function TransactionsTab() {
                   </div>
 
                   <div>
-                    <h4 className="font-semibold text-gray-800">
+                    <h4 className="font-semibold text-gray-800 text-lg">
                       Session Payment
                     </h4>
 
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 ">
                       Counsellor: {txn.counsellorName}
                     </p>
 

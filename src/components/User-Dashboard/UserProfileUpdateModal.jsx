@@ -109,10 +109,10 @@ export default function UserProfileUpdateModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
-      <div className="bg-white w-full max-w-lg rounded-2xl shadow-xl relative">
+      <div className="bg-light w-full max-w-lg rounded-2xl shadow-xl relative">
         {/* HEADER */}
-        <div className="flex justify-between items-center p-5 border-b">
-          <h2 className="text-lg font-semibold">Update Profile</h2>
+        <div className="flex justify-between items-center p-5 ">
+          <h2 className="text-2xl font-semibold font-body">Update Profile</h2>
           <button onClick={onClose}>
             <X size={22} />
           </button>
@@ -131,29 +131,29 @@ export default function UserProfileUpdateModal({ isOpen, onClose }) {
                 <p className="mb-3 text-green-600 text-center">{success}</p>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4 font-body">
                 {/* AGE */}
                 <div>
-                  <label className="text-sm font-medium">Age *</label>
+                  <label className="text-md font-medium">Age *</label>
                   <input
                     type="number"
                     name="age"
                     value={formData.age}
                     onChange={handleChange}
                     required
-                    className="w-full mt-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+                    className="w-full mt-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-accent"
                   />
                 </div>
 
                 {/* GENDER */}
                 <div>
-                  <label className="text-sm font-medium">Gender *</label>
+                  <label className="text-md font-medium">Gender *</label>
                   <select
                     name="gender"
                     value={formData.gender}
                     onChange={handleChange}
                     required
-                    className="w-full mt-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+                    className="w-full mt-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-accent"
                   >
                     <option value="">Select</option>
                     <option value="male">Male</option>
@@ -164,20 +164,20 @@ export default function UserProfileUpdateModal({ isOpen, onClose }) {
 
                 {/* PHONE */}
                 <div>
-                  <label className="text-sm font-medium">Phone *</label>
+                  <label className="text-md font-medium">Phone *</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full mt-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+                    className="w-full mt-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-accent"
                   />
                 </div>
 
                 {/* MEDICATIONS */}
                 <div>
-                  <label className="text-sm font-medium">
+                  <label className="text-md font-medium">
                     Medications (comma separated)
                   </label>
                   <textarea
@@ -185,13 +185,13 @@ export default function UserProfileUpdateModal({ isOpen, onClose }) {
                     value={formData.medications}
                     onChange={handleChange}
                     rows={2}
-                    className="w-full mt-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+                    className="w-full mt-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-accent"
                   />
                 </div>
 
                 {/* MEDICAL HISTORY */}
                 <div>
-                  <label className="text-sm font-medium">
+                  <label className="text-md font-medium">
                     Medical History (comma separated)
                   </label>
                   <textarea
@@ -199,7 +199,7 @@ export default function UserProfileUpdateModal({ isOpen, onClose }) {
                     value={formData.medicalHistory}
                     onChange={handleChange}
                     rows={2}
-                    className="w-full mt-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+                    className="w-full mt-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-accent"
                   />
                 </div>
 
@@ -207,7 +207,7 @@ export default function UserProfileUpdateModal({ isOpen, onClose }) {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition disabled:opacity-60"
+                  className="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-accent transition disabled:opacity-60 text-lg"
                 >
                   {loading ? "Updating..." : "Update Profile"}
                 </button>

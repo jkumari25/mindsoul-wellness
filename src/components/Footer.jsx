@@ -10,7 +10,7 @@ export default function Footer() {
           <p className="text-2xl font-medium">
             Supporting minds. Nurturing hearts. Empowering futures.
           </p>
-          <a href="#" className="text-[#7a3cff] hover:text-[#beb0dd] text-md ">
+          <a href="#" className="text-light hover:text-[#beb0dd] text-md ">
             Learn about our care approach
           </a>
         </div>

@@ -440,13 +440,13 @@ export default function CounselorLogin({
             {/* Continue Button */}
             <button
               type="submit"
-              className="w-full mt-6 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-medium transition font-body"
+              className="w-full mt-6 bg-primary hover:bg-accent hover:text-textDark text-white py-3 rounded-lg font-medium transition font-body"
             >
               Send OTP
             </button>
           </form>
 
-          <p className="text-xs text-gray-500 text-center mt-4 font-body">
+          <p className="text-sm text-gray-500 text-center mt-4 font-body">
             By continuing, you agree to MindSoul’s{" "}
             <a href="#" className="text-indigo-600 underline">
               Terms

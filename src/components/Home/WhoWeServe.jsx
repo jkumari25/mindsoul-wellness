@@ -183,7 +183,7 @@ export default function WhoWeServe() {
       {/* ======= Curved Caramel Background ======= */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Light caramel main background */}
-        <div className="absolute top-0 left-0 w-full h-[80%] bg-gradient-to-r from-[#C5B4E3] to-[#7A3CFF]"></div>
+        <div className="absolute top-0 left-0 w-full h-[80%] gradient-bg "></div>
 
         {/* Caramel curved SVG shape */}
         {/* <svg
@@ -204,7 +204,7 @@ export default function WhoWeServe() {
         <p className="text-sm font-semibold text-gray-800 font-body">
           WHO WE SERVE
         </p>
-        <h2 className="text-5xl  font-semibold text-textDark mt-2 font-heading">
+        <h2 className="text-5xl  font-semibold text-black mt-2 font-heading">
           For Everyone — Individuals, Families & Organizations
         </h2>
         <p className="text-lg text-gray-800 mt-4 max-w-5xl font-body">
@@ -253,7 +253,7 @@ export default function WhoWeServe() {
         >
           {familyData.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-[#e5e0f1] rounded-xl overflow-hidden shadow hover:shadow-md transition">
+              <div className="bg-accent rounded-xl overflow-hidden shadow hover:shadow-md transition">
                 <img
                   src={item.img}
                   alt={item.title}

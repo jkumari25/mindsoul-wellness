@@ -1091,8 +1091,8 @@ export default function LoginPage({
       <div className="relative bg-transparent shadow-2xl w-[90%] md:w-[850px] h-auto md:h-[500px] rounded-2xl overflow-hidden flex flex-col md:flex-row text-white">
         {/* LEFT SECTION */}
         <div
-          className="hidden md:flex flex-col justify-between w-[55%] p-10 rounded-tl-2xl rounded-bl-2xl"
-          style={{ backgroundColor: accent }}
+          className="hidden md:flex flex-col justify-between w-[55%] p-10 rounded-tl-2xl rounded-bl-2xl bg-primary"
+          // style={{ backgroundColor: accent }}
         >
           <div className="flex items-center gap-3 font-medium cursor-pointer font-serif">
             <FaHeart className="text-2xl" />
@@ -1156,14 +1156,14 @@ export default function LoginPage({
             <button
               type="submit"
               disabled={loading}
-              className="w-[285px] h-[45px] bg-[#5E40F0] hover:bg-[#4621FF] rounded-md transition"
+              className="w-[285px] h-[45px] bg-primary hover:bg-light hover:text-textDark rounded-md transition"
             >
               {loading ? "Logging in..." : "Continue"}
             </button>
           </form>
 
           {/* GOOGLE LOGIN */}
-          <div className="flex flex-col items-center gap-3 text-[11px]">
+          <div className="flex flex-col items-center gap-3">
             {/* <p className="text-lg">Or Login with Google</p>
 
             <FaGoogle
@@ -1173,9 +1173,10 @@ export default function LoginPage({
 
             <p
               onClick={() => setRegisterOpen(true)}
-              className="text-[#4A62FF] hover:underline cursor-pointer mt-2"
+              className="text-light hover:underline cursor-pointer mt-2 text-md"
             >
-              Don’t have an account? Sign Up
+              Don’t have an account?{" "}
+              <span className="hover:text-indigo-500">Sign Up</span>
             </p>
 
             <Registration

@@ -1,97 +1,3 @@
-// import React, { useState } from "react";
-
-// export default function HowItWorks() {
-//   const [activeImage, setActiveImage] = useState("img1");
-
-//   return (
-//     <section className="bg-[#FAF9F6] py-20 px-4 md:px-16 lg:px-24 relative overflow-hidden">
-//       {/* === Heading Section === */}
-//       <div className="text-center max-w-3xl mx-auto mb-16">
-//         <p className="text-sm font-semibold tracking-widest text-[#0B2B38] uppercase">
-//           How it works
-//         </p>
-//         <h2 className="text-3xl md:text-5xl font-semibold text-[#0B2B38] mt-2 leading-snug">
-//           What to expect when you start care with Mindsoul
-//         </h2>
-//         <p className="text-gray-700 mt-4">
-//           Get access to the highest-quality care, immediately.
-//         </p>
-//         <button className="mt-6 px-6 py-3 bg-[#0B2B38] text-white font-medium rounded-md hover:bg-[#143E52] transition">
-//           Get support now
-//         </button>
-//       </div>
-
-//       {/* === Content Section === */}
-//       <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-12 md:gap-20 max-w-6xl mx-auto">
-//         {/* === Left Text Steps === */}
-//         <div className="w-full md:w-1/2 space-y-10">
-//           {/* Step 1 */}
-//           <div
-//             className="group cursor-pointer"
-//             onMouseEnter={() => setActiveImage("img1")}
-//           >
-//             <div className="flex items-start gap-4">
-//               <div className="w-8 h-8 flex items-center justify-center rounded-full border border-[#0B2B38] text-[#0B2B38] font-semibold">
-//                 1
-//               </div>
-//               <div>
-//                 <h3 className="text-xl md:text-2xl font-semibold text-[#0B2B38] group-hover:text-[#1F536E] transition">
-//                   Tell us what’s going on
-//                 </h3>
-//                 <p className="text-gray-700 mt-2 text-base">
-//                   Help us understand your needs by answering questions about
-//                   your family.
-//                 </p>
-//               </div>
-//             </div>
-//             <hr className="mt-6 border-gray-300" />
-//           </div>
-
-//           {/* Step 2 */}
-//           <div
-//             className="group cursor-pointer"
-//             onMouseEnter={() => setActiveImage("img2")}
-//           >
-//             <div className="flex items-start gap-4">
-//               <div className="w-8 h-8 flex items-center justify-center rounded-full border border-[#0B2B38] text-[#0B2B38] font-semibold">
-//                 2
-//               </div>
-//               <div>
-//                 <h3 className="text-xl md:text-2xl font-semibold text-[#0B2B38] group-hover:text-[#1F536E] transition">
-//                   Begin care immediately
-//                 </h3>
-//                 <p className="text-gray-700 mt-2 text-base">
-//                   Book a 30-min kickoff call within 24 hours of requesting an
-//                   appointment. Get matched with the best mental health
-//                   clinicians.
-//                 </p>
-//               </div>
-//             </div>
-//             <hr className="mt-6 border-gray-300" />
-//           </div>
-//         </div>
-
-//         {/* === Right Image Area === */}
-//         <div className="w-full md:w-1/2 flex justify-center">
-//           {activeImage === "img1" ? (
-//             <img
-//               src="/images/howitworks-1.png" // 🟢 replace with your image path
-//               alt="Step 1"
-//               className="rounded-xl shadow-lg w-[90%] md:w-[500px] h-auto transition-all duration-500"
-//             />
-//           ) : (
-//             <img
-//               src="/images/howitworks-2.png" // 🟢 replace with your image path
-//               alt="Step 2"
-//               className="rounded-xl shadow-lg w-[90%] md:w-[500px] h-auto transition-all duration-500"
-//             />
-//           )}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
 import React, { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -113,7 +19,7 @@ export default function HowItWorks() {
           MindSoul provides compassionate, expert mental health care designed
           especially for children. Get access to the right support, right away.
         </p>
-        <a href="/contacts">
+        <a href="/counsellors">
           <button className="mt-6 px-6 py-3 bg-[#0B2B38] text-white font-medium rounded-md hover:bg-[#143E52] transition font-body cursor-pointer">
             Get support now
           </button>

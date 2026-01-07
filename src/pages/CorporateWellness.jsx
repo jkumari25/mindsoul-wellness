@@ -25,7 +25,7 @@ export default function CorporateWellness() {
   return (
     <div className="text-gray-800 overflow-hidden mt-30">
       {/* HERO */}
-      <section className="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white">
+      <section className="relative bg-gradient-to-br from-primary via-accent to-[#5d799d] text-white">
         <div className="absolute inset-0 bg-black/20" />
 
         <motion.div
@@ -37,7 +37,7 @@ export default function CorporateWellness() {
         >
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
             Corporate Wellness &
-            <span className="block text-pink-200">
+            <span className="block text-textDark">
               Human Development Training
             </span>
           </h1>
@@ -46,14 +46,14 @@ export default function CorporateWellness() {
             Building emotionally intelligent, resilient & high-performing teams
           </p>
 
-          <motion.a
+          {/* <motion.a
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             href="#contact"
-            className="inline-block mt-10 bg-white text-indigo-700 px-8 py-4 rounded-full font-semibold shadow-xl"
+            className="inline-block mt-10 bg-white text-textDark px-8 py-4 rounded-full font-semibold shadow-xl"
           >
             Explore Programs
-          </motion.a>
+          </motion.a> */}
         </motion.div>
       </section>
 
@@ -126,7 +126,7 @@ export default function CorporateWellness() {
       </section> */}
 
       {/* FRAMEWORK */}
-      <section className="py-24 px-6 bg-gradient-to-r from-[#7A3CFF] to-[#C5B4E3] text-white">
+      <section className="py-24 px-6 bg-gradient-to-r from-primary to-accent text-white">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -136,7 +136,7 @@ export default function CorporateWellness() {
         >
           <motion.h2
             variants={fadeUp}
-            className="text-3xl md:text-6xl font-bold text-center mb-16 font-heading"
+            className="text-3xl md:text-6xl font-bold text-center mb-16 font-heading text-textDark"
           >
             Our Training Framework
           </motion.h2>
@@ -168,11 +168,11 @@ export default function CorporateWellness() {
                 whileHover={{ scale: 1.05 }}
                 className="bg-white rounded-3xl p-8 shadow-xl"
               >
-                <item.icon className="text-indigo-600 mb-4" size={36} />
+                <item.icon className="text-primary mb-4" size={36} />
                 <h3 className="text-xl font-semibold mb-1 font-body text-gray-800">
                   {item.title}
                 </h3>
-                <p className="text-indigo-600 font-md mb-2 font-body">
+                <p className="text-black font-md mb-2 font-body">
                   {item.focus}
                 </p>
                 <p className="text-gray-600 font-body">{item.outcome}</p>
@@ -211,7 +211,7 @@ export default function CorporateWellness() {
                 whileHover={{ y: -8 }}
                 className="bg-white rounded-2xl p-6 shadow-lg text-center"
               >
-                <Palette className="mx-auto mb-4 text-indigo-600" />
+                <Palette className="mx-auto mb-4 text-primary" />
                 <h4 className="font-semibold text-lg font-body">{module}</h4>
               </motion.div>
             ))}
@@ -224,7 +224,7 @@ export default function CorporateWellness() {
       {/* CTA */}
       <section
         id="contact"
-        className="py-24 px-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+        className="py-24 px-6 bg-gradient-to-r from-primary to-accent text-white"
       >
         <motion.div
           initial="hidden"
@@ -234,10 +234,10 @@ export default function CorporateWellness() {
           className="max-w-4xl mx-auto text-center"
         >
           <HeartHandshake className="mx-auto mb-6" size={40} />
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 font-heading">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 font-heading text-textDark">
             Let’s Build Emotionally Intelligent Teams
           </h2>
-          <p className="mb-8 text-white/90 text-lg">
+          <p className="mb-8 text-black text-lg">
             📧 rutambara123@gmail.com | thepillowtalkswithrs@gmail.com <br />
             📞 +91 8698668886
           </p>
@@ -245,7 +245,7 @@ export default function CorporateWellness() {
           <motion.a
             whileHover={{ scale: 1.08 }}
             href="mailto:rutambara123@gmail.com"
-            className="inline-block bg-white text-indigo-700 px-10 py-4 rounded-full font-semibold shadow-xl text-lg"
+            className="inline-block bg-white text-textDark px-10 py-4 rounded-full font-semibold shadow-xl text-lg"
           >
             Start the Conversation
           </motion.a>

@@ -268,7 +268,7 @@ export default function CounselorProfile() {
       </div>
 
       {/* RIGHT SIDEBAR */}
-      <div className="w-full lg:w-80 space-y-6 font-body">
+      {/* <div className="w-full lg:w-80 space-y-6 font-body">
         <div className="bg-white shadow-sm border-2 border-primary rounded-2xl p-6">
           <h3 className="font-semibold text-gray-900 text-lg">
             Free Child Assessment
@@ -282,7 +282,7 @@ export default function CounselorProfile() {
             Book Free Session
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* 🔵 MODALS */}
       <LoginPage

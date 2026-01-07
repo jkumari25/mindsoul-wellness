@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div className="relative min-h-screen  bg-[#FAF9F6]">
       <HeroSection />
-      <InsuranceSection />
+      {/* <InsuranceSection /> */}
       <WhoWeServe />
       <CounsellorSlider />
       <Testimonials />

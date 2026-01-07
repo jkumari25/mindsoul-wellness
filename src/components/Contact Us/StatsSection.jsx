@@ -20,7 +20,7 @@ export default function StatsSection() {
             key={i}
             className="bg-gray-50 rounded-2xl p-10 shadow-sm hover:shadow-xl transition"
           >
-            <h3 className="text-4xl font-bold text-accent font-body">
+            <h3 className="text-4xl font-bold text-textDark font-body">
               {s.number}
             </h3>
             <p className="text-gray-700 mt-2 max-w-[80%] mx-auto font-body text-lg">

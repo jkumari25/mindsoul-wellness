@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { BrowserRouter } from "react-router-dom";
+// import "antd/dist/reset.css";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>

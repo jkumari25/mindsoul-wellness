@@ -13,11 +13,11 @@ const faqs = [
     answer:
       "Costs vary depending on the type and duration of service. We offer transparent pricing and flexible payment options to make care accessible.",
   },
-  {
-    question: "Do you accept insurance?",
-    answer:
-      "Yes, we accept several major insurance providers and offer assistance with insurance claims for others.",
-  },
+  // {
+  //   question: "Do you accept insurance?",
+  //   answer:
+  //     "Yes, we accept several major insurance providers and offer assistance with insurance claims for others.",
+  // },
   {
     question: "How do I schedule an appointment?",
     answer:

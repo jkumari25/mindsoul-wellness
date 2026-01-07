@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AppointmentConfirmationModal from "../Profile/AppointmentConfirmationModal";
+import { Link } from "react-router-dom";
 
 export default function Breadcrumb() {
   const [open, setOpen] = useState(false);
@@ -126,9 +127,11 @@ export default function Breadcrumb() {
           <p className="text-light mb-6 text-lg">
             Discover how MindSoul can help your family thrive emotionally.
           </p>
-          <button className="border border-light px-5 py-2 rounded-md hover:bg-gray-800 hover:text-white transition text-lg">
-            Contact us
-          </button>
+          <a href="/contacts">
+            <button className="border border-light px-5 py-2 rounded-md hover:bg-gray-800 hover:text-white transition text-lg">
+              Contact us
+            </button>
+          </a>
         </div>
 
         <div className="bg-accent p-10 text-center">
@@ -139,9 +142,11 @@ export default function Breadcrumb() {
           <p className="text-gray-600 mb-6 text-lg">
             Get in touch about partnership opportunities with MindSoul.
           </p>
-          <button className="border border-gray-700 px-5 py-2 rounded-md hover:bg-gray-800 hover:text-white transition text-lg">
-            Contact us
-          </button>
+          <a href="/contacts">
+            <button className="border border-gray-700 px-5 py-2 rounded-md hover:bg-gray-800 hover:text-white transition text-lg">
+              Contact us
+            </button>
+          </a>
         </div>
       </section>
     </div>

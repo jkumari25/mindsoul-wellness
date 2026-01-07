@@ -176,7 +176,7 @@ export default function QuoteForm() {
           disabled={loading}
           className="w-full mt-6 bg-primary hover:bg-primary text-white hover:text-black font-semibold py-3 rounded-xl transition text-lg cursor-pointer"
         >
-          {loading ? "Submitting..." : "Schedule your quote"}
+          {loading ? "Submitting..." : "Submit"}
         </button>
 
         {message && (

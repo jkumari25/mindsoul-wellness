@@ -36,20 +36,27 @@ export default function OurExpertise() {
             Nurturing Minds. Supporting Families. Healing Together.
           </h1>
 
-          <p className="text-lg text-black leading-relaxed mb-4 font-body">
-            At MindSoul Wellness, we specialize in supporting children and teens
-            who are experiencing emotional, behavioral, or developmental
-            challenges. Our approach is warm, nurturing, and rooted in clinical
-            research — helping young minds grow stronger and families feel
-            understood and supported.
+          <p className="text-lg text-black leading-relaxed font-body">
+            At MindSoul Wellness, we specialize in providing compassionate
+            mental health support for children, adolescents, and adults who are
+            navigating emotional, behavioral, and psychological challenges.
+            Whether it’s early developmental concerns or adult mental health
+            struggles, our care is rooted in empathy, trust, and evidence-based
+            practices.
           </p>
 
           <p className="text-lg text-black leading-relaxed font-body">
-            Our team of child psychologists, developmental experts, and mental
-            health therapists work collaboratively to create personalized care
-            plans. We focus on early intervention, emotional regulation, and
-            building healthy relationships — ensuring that every child feels
-            seen, heard, and valued.
+            We work extensively with children and teens facing emotional or
+            developmental difficulties, while also supporting adults dealing
+            with stress, anxiety, depression, OCD, trauma, and other
+            psychological concerns that impact daily life and relationships.
+            <br />
+            Our multidisciplinary team of psychologists, therapists, and mental
+            health professionals collaborates closely to create personalized
+            care plans. Through early intervention, emotional regulation
+            strategies, and therapeutic guidance, we help individuals and
+            families build resilience, restore balance, and move toward lasting
+            emotional well-being.
           </p>
         </motion.div>
 

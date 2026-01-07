@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Profile from "./pages/Profile.jsx";
 import CounselorProfile from "./components/Home/CounselorProfile.jsx";
-import CounsellorSlider from "./components/Home/CounsellorSlider.jsx";
 import AppointmentForm from "./components/Appointments/AppointmentForm.jsx";
 import Breadcrumb from "./components/About/Breadcrumb.jsx";
 import Contacts from "./pages/Contacts.jsx";
@@ -17,6 +16,8 @@ import UserDashboard from "./pages/UserDashboard.jsx";
 import Policy from "./pages/Policy.jsx";
 import CounsellorDashboard from "./pages/CounsellorDashboard.jsx";
 import CorporateWellness from "./pages/CorporateWellness.jsx";
+import SchoolWorkshop from "./pages/SchoolWorkshop.jsx";
+import CounsellorLoginRoute from "./pages/CounsellorLoginRoute.jsx";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           </ProtectedCounsellorRoute>
         }
       />
+      <Route path="/counsellor-login" element={<CounsellorLoginRoute />} />
       <Route path="/otp" element={<OtpPage />} />
       <Route
         path="/counsellors"
@@ -45,6 +47,7 @@ function App() {
         }
       />
       <Route path="/corporate-wellness" element={<CorporateWellness />} />
+      <Route path="/school-workshop" element={<SchoolWorkshop />} />
       <Route path="/booking" element={<BookingPage />} />
       <Route path="/privacy-policy" element={<Policy />} />
       <Route path="/user-dashboard" element={<UserDashboard />} />

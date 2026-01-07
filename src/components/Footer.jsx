@@ -1,4 +1,4 @@
-import { FaDiscord, FaYoutube, FaTwitter } from "react-icons/fa";
+import { FaDiscord, FaYoutube, FaTwitter, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -10,9 +10,9 @@ export default function Footer() {
           <p className="text-2xl font-medium">
             Supporting minds. Nurturing hearts. Empowering futures.
           </p>
-          <a href="#" className="text-light hover:text-[#beb0dd] text-md ">
+          <p className="text-light hover:text-[#beb0dd] text-md ">
             Learn about our care approach
-          </a>
+          </p>
         </div>
 
         {/* Footer Links */}
@@ -39,10 +39,15 @@ export default function Footer() {
             <h4 className="text-gray-200 font-xl mb-3">Programs</h4>
 
             <ul className="space-y-2 text-md text-gray-400">
-              <p>Child Therapy</p>
-              <p>Behavioral Support</p>
+              <p>
+                <a href="/corporate-wellness">Corporate Wellness</a>
+              </p>
+              <p>
+                <a href="/school-workshop">School Workshop</a>
+              </p>
+              {/* <p>Behavioral Support</p>
               <p>Parent Guidance</p>
-              <p>Emotional Wellness Sessions</p>
+              <p>Emotional Wellness Sessions</p> */}
             </ul>
           </div>
 
@@ -59,21 +64,27 @@ export default function Footer() {
               <p>
                 <a href="/counsellors">Counsellors</a>
               </p>
-              <p>
-                <a href="/corporate-wellness">Corporate Wellness</a>
-              </p>
+
               <p>
                 <a href="/contact">Contact Us</a>
+              </p>
+              <p>
+                <a href="/privacy-policy">Privacy Policy</a>
               </p>
             </ul>
           </div>
 
           <div className="md:col-span-1">
-            <h4 className="text-gray-200 font-xl mb-3">Legal</h4>
+            <h4 className="text-gray-200 font-xl mb-3">Contacts</h4>
 
             <ul className="space-y-2 text-md text-gray-400">
               <p>
-                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="mailto: rutambara123@gmail.com">
+                  Mail us: rutambara123@gmail.com
+                </a>
+              </p>
+              <p>
+                <a href="tel: +918698668886">Call us: +91 8698668886</a>
               </p>
             </ul>
           </div>
@@ -85,9 +96,11 @@ export default function Footer() {
 
           <div className="flex items-center gap-4">
             <span className="mr-2">Connect with us:</span>
-            <FaTwitter className="cursor-pointer hover:text-white duration-150" />
-            <FaDiscord className="cursor-pointer hover:text-white duration-150" />
-            <FaYoutube className="cursor-pointer hover:text-white duration-150" />
+            <a href="https://www.instagram.com/themindsoul.in?igsh=MTA3MG9vdzJjZ3R3eA==">
+              <FaInstagram className="cursor-pointer hover:text-white duration-150" />
+            </a>
+            {/* <FaDiscord className="cursor-pointer hover:text-white duration-150" />
+            <FaYoutube className="cursor-pointer hover:text-white duration-150" /> */}
           </div>
         </div>
       </div>

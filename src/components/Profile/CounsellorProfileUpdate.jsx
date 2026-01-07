@@ -190,6 +190,11 @@ export default function CounsellorProfileUpdate() {
 
   return (
     <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8 mt-36 mb-24">
+      <a href="/counsellor-dashboard">
+        <button className="bg-primary px-6 py-3 mb-12 text-light rounded-lg text-xl cursor-pointer">
+          Go To Dashboard
+        </button>
+      </a>
       <h2 className="text-4xl font-bold text-gray-800 mb-6 font-heading">
         Update Counsellor Profile
       </h2>
@@ -447,7 +452,7 @@ export default function CounsellorProfileUpdate() {
       {/* Submit Button */}
       <button
         onClick={handleSubmit}
-        className="mt-8 bg-primary text-white px-8 py-3 rounded-xl font-semibold"
+        className="mt-8 bg-primary text-white px-8 py-3 rounded-xl font-semibold cursor-pointer"
       >
         Save Changes
       </button>

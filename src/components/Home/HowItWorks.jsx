@@ -20,7 +20,7 @@ export default function HowItWorks() {
           especially for children. Get access to the right support, right away.
         </p>
         <a href="/counsellors">
-          <button className="mt-6 px-6 py-3 bg-[#0B2B38] text-white font-medium rounded-md hover:bg-[#143E52] transition font-body cursor-pointer">
+          <button className="mt-6 px-6 py-3 bg-accent text-textDark  rounded-md hover:bg-primary hover:text-light transition font-body cursor-pointer text-lg font-semibold">
             Get support now
           </button>
         </a>

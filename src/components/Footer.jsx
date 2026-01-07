@@ -36,7 +36,7 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-1">
-            <h4 className="text-gray-200 font-xl mb-3">Programs</h4>
+            <h4 className="text-gray-200 font-xl mb-3">Workshop</h4>
 
             <ul className="space-y-2 text-md text-gray-400">
               <p>
@@ -84,7 +84,7 @@ export default function Footer() {
                 </a>
               </p>
               <p>
-                <a href="tel: +918698668886">Call us: +91 8698668886</a>
+                <a href="tel: +918698668886">Call us: +91 8468814543</a>
               </p>
             </ul>
           </div>

@@ -768,7 +768,7 @@ export default function BookAppointmentModal({
         {["morning", "afternoon", "evening"].map((period) => (
           <div key={period} className="px-6 mt-4">
             <p className="font-medium capitalize">{period} Slots</p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2 ">
               {slots[period].map((slot) => (
                 <SlotCard key={slot.startTime} slot={slot} />
               ))}
@@ -781,7 +781,7 @@ export default function BookAppointmentModal({
           <button
             onClick={handlePaymentAndBooking}
             disabled={!selectedSlot || processingPayment}
-            className={`w-full py-3 rounded-lg text-white ${
+            className={`w-full py-3 rounded-lg text-white cursor-pointer ${
               selectedSlot ? "bg-primary" : "bg-gray-300"
             }`}
           >

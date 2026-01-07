@@ -42,7 +42,7 @@ export default function HeroSection() {
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
             <button
               onClick={scrollToCounsellor}
-              className="bg-[#06283D] text-white px-6 py-3 rounded-md hover:bg-[#021c2a] transition font-body cursor-pointer"
+              className="bg-accent text-textDark px-6 py-3 rounded-md hover:bg-primary hover:text-light transition font-body cursor-pointer text-lg font-semibold "
             >
               Book a Session
             </button>

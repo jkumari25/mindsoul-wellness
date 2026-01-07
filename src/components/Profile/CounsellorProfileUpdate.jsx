@@ -190,11 +190,11 @@ export default function CounsellorProfileUpdate() {
 
   return (
     <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8 mt-36 mb-24">
-      <a href="/counsellor-dashboard">
+      {/* <a href="/counsellor-dashboard">
         <button className="bg-primary px-6 py-3 mb-12 text-light rounded-lg text-xl cursor-pointer">
           Go To Dashboard
         </button>
-      </a>
+      </a> */}
       <h2 className="text-4xl font-bold text-gray-800 mb-6 font-heading">
         Update Counsellor Profile
       </h2>

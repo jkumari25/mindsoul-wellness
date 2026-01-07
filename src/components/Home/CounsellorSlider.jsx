@@ -465,7 +465,7 @@ export default function CounsellorSlider() {
           Counsellors
         </h2>
         <a href="/counsellors">
-          <button className="flex items-center gap-1 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-100 font-body transition">
+          <button className="flex items-center gap-1 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-100 font-body transition cursor-pointer">
             See All <ArrowUpRight size={18} />
           </button>
         </a>
@@ -486,7 +486,7 @@ export default function CounsellorSlider() {
         {counsellors.map((c) => (
           <SwiperSlide key={c.counsellorId}>
             <div
-              onClick={() => openProfile(c)}
+              // onClick={() => openProfile(c)}
               className="cursor-pointer shadow-lg rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition pt-10 pb-10 bg-accent"
             >
               {/* <LazyLoadImage
@@ -512,18 +512,18 @@ export default function CounsellorSlider() {
                   {c.firstName} {c.lastName}
                 </h3>
 
-                <p className="text-gray-600 text-sm mt-1">
+                <p className="text-textDark text-md mt-1">
                   {c.languages?.join(" | ") || "Languages not specified"}
                 </p>
 
-                <p className="text-gray-500 text-sm">
+                <p className="text-textDark text-md">
                   {c.location || "Location not provided"}
                 </p>
 
-                <div className="flex items-center gap-3 text-sm text-gray-700 mt-3">
-                  <span className="flex items-center gap-1 text-yellow-500">
+                <div className="flex items-center gap-3 text-sm text-textDark mt-3">
+                  {/* <span className="flex items-center gap-1 text-yellow-500">
                     <Star size={16} /> {c.rating || "4.5"}
-                  </span>
+                  </span> */}
 
                   <span className="flex items-center gap-1">
                     <Briefcase size={16} />
@@ -533,6 +533,13 @@ export default function CounsellorSlider() {
                         : `${c.experience} years`
                       : "Experience N/A"}
                   </span>
+
+                  <button
+                    onClick={() => openProfile(c)}
+                    className="bg-primary px-4 py-2 text-light text-md text-body rounded-sm cursor-pointer"
+                  >
+                    Learn More
+                  </button>
                 </div>
               </div>
             </div>

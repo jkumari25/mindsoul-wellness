@@ -128,7 +128,7 @@ export default function Breadcrumb() {
             Discover how MindSoul can help your family thrive emotionally.
           </p>
           <a href="/contacts">
-            <button className="border border-light px-5 py-2 rounded-md hover:bg-gray-800 hover:text-white transition text-lg">
+            <button className="border border-light px-5 py-2 rounded-md hover:bg-gray-800 hover:text-white transition text-lg cursor-pointer">
               Contact us
             </button>
           </a>
@@ -143,7 +143,7 @@ export default function Breadcrumb() {
             Get in touch about partnership opportunities with MindSoul.
           </p>
           <a href="/contacts">
-            <button className="border border-gray-700 px-5 py-2 rounded-md hover:bg-gray-800 hover:text-white transition text-lg">
+            <button className="border border-gray-700 px-5 py-2 rounded-md hover:bg-gray-800 hover:text-white transition text-lg cursor-pointer">
               Contact us
             </button>
           </a>

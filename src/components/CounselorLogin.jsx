@@ -257,7 +257,7 @@ export default function CounselorLogin({ isOpen, onClose, onOtpOpen }) {
               disabled={loading}
               className={`w-full mt-6 py-3 rounded-lg font-medium transition ${
                 loading
-                  ? "bg-gray-400 cursor-not-allowed"
+                  ? "bg-accent cursor-not-allowed"
                   : "bg-primary hover:bg-accent text-white"
               }`}
             >

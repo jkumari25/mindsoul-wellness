@@ -9,6 +9,13 @@ const galleryImages = [
   "/gallery/gallery-4.jpeg",
   "/gallery/gallery-5.jpeg",
   "/gallery/gallery-6.jpeg",
+  "/gallery/gallery-7.jpeg",
+  "/gallery/gallery-8.jpeg",
+  "/gallery/gallery-9.jpeg",
+  "/gallery/gallery-11.jpeg",
+  "/gallery/gallery-12.jpeg",
+  "/gallery/gallery-13.jpeg",
+  "/gallery/gallery-14.jpeg",
 ];
 
 export function ProgramGallery() {

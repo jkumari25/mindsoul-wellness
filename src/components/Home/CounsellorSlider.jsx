@@ -435,7 +435,7 @@ export default function CounsellorSlider() {
     console.log("🟡 Fetching counsellors...");
 
     fetch(
-      "https://mindsoul-backend-772700176760.asia-south1.run.app/api/counsellor/list"
+      "https://mindsoul-backend-772700176760.asia-south1.run.app/api/counsellor/list",
     )
       .then((res) => {
         console.log("🟢 API status:", res.status);
@@ -461,7 +461,7 @@ export default function CounsellorSlider() {
   return (
     <div id="counsellor-section" className="max-w-7xl mx-auto px-5 py-12 ">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-5xl font-semibold text-gray-900 font-heading">
+        <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 font-heading">
           Counsellors
         </h2>
         <a href="/counsellors">

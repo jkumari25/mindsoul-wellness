@@ -14,7 +14,7 @@ export default function HeroSection() {
       <div className="max-w-[90%] mx-auto flex flex-col md:flex-row items-center justify-between pt-24 pb-14 gap-10">
         {/* Left Content */}
         <div className="w-full md:w-1/2 text-center md:text-left">
-          <h1 className="text-6xl  font-semibold  leading-snug  text-[#0B2B38] italic font-serif ">
+          <h1 className="text-4xl lg:text-6xl  font-semibold  leading-snug  text-[#0B2B38] italic font-serif ">
             Emotional Wellness for{" "}
             <span className="italic font-serif">People & Workplaces</span>
           </h1>

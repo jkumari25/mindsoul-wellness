@@ -26,7 +26,7 @@ export default function Breadcrumb() {
       {/* Story Section */}
       <section className="gradient-bg text-white py-16  flex flex-col md:flex-row items-center ">
         {/* Left Text */}
-        <div className="md:w-1/2 space-y-6 px-28">
+        <div className="md:w-1/2 space-y-6 px-8 lg:px-28">
           <h4 className="text-light text-lg uppercase font-medium font-heading">
             Our Story
           </h4>

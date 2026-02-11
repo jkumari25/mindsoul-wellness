@@ -32,7 +32,7 @@ export default function OurExpertise() {
             Our Expertise
           </p>
 
-          <h1 className="text-6xl font-semibold leading-tight mb-6 font-heading text-black">
+          <h1 className="text-4xl lg:text-6xl font-semibold leading-tight mb-6 font-heading text-black">
             Nurturing Minds. Supporting Families. Healing Together.
           </h1>
 

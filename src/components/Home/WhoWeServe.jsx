@@ -106,7 +106,7 @@ export default function WhoWeServe() {
         <p className="text-sm font-semibold text-gray-800 font-body">
           WHO WE SERVE
         </p>
-        <h2 className="text-5xl  font-semibold text-black mt-2 font-heading">
+        <h2 className="text-4xl lg:text-5xl  font-semibold text-black mt-2 font-heading">
           For Everyone — Individuals, Families & Organizations
         </h2>
         <p className="text-lg text-gray-800 mt-4 max-w-5xl font-body">

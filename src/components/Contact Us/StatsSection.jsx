@@ -8,8 +8,8 @@ export default function StatsSection() {
   ];
 
   return (
-    <section className="py-20 bg-white px-6 lg:px-20 text-center">
-      <h2 className="text-5xl font-bold text-gray-800 font-heading line-clamp-2">
+    <section className="py-8 lg:py-20 bg-white px-6 lg:px-20 text-center">
+      <h2 className="text-3xl lg:text-5xl font-bold text-gray-800 font-heading line-clamp-2">
         Value means getting people back <br />
         to their lives faster
       </h2>

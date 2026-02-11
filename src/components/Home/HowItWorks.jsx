@@ -6,13 +6,13 @@ export default function HowItWorks() {
   const [activeImage, setActiveImage] = useState("img1");
 
   return (
-    <section className="bg-[#FAF9F6] py-20 px-4 md:px-16 lg:px-24 relative overflow-hidden">
+    <section className="bg-[#FAF9F6] lg:py-20 py-10 px-4 md:px-16 lg:px-24 relative overflow-hidden">
       {/* === Heading Section === */}
       <div className="text-center max-w-3xl mx-auto mb-16">
         <p className="text-sm font-semibold tracking-widest text-[#0B2B38] uppercase font-body">
           How it works
         </p>
-        <h2 className="text-5xl font-semibold text-[#0B2B38] mt-2 leading-snug font-heading">
+        <h2 className="text-4xl lg:text-5xl font-semibold text-[#0B2B38] mt-2 leading-snug font-heading">
           What to expect when you start care with MindSoul
         </h2>
         <p className="text-gray-700 mt-4 font-body">

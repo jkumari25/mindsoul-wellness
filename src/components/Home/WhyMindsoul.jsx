@@ -31,7 +31,7 @@ export default function WhyMindsoul() {
       <h4 className="text-primary font-semibold tracking-wider text-sm uppercase mb-2 font-body">
         Why MindSoul
       </h4>
-      <h2 className="text-[#1E1B4B] text-3xl sm:text-4xl md:text-5xl font-bold mb-10 leading-tight font-heading">
+      <h2 className="text-[#1E1B4B] text-4xl  font-bold mb-10 leading-tight font-heading">
         What makes MindSoul different
       </h2>
 

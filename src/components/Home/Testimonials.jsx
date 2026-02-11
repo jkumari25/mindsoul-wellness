@@ -47,7 +47,7 @@ export default function Testimonials() {
         <p className="text-xl font-semibold text-gray-700 text-center uppercase tracking-wide font-heading">
           TESTIMONIALS
         </p>
-        <h2 className="text-3xl md:text-5xl font-semibold text-[#0B2B38] text-center mt-2 font-heading">
+        <h2 className="text-4xl md:text-5xl font-semibold text-[#0B2B38] text-center mt-2 font-heading">
           Trusted by 25,000+ families
         </h2>
 

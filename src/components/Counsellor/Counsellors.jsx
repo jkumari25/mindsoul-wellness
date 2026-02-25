@@ -18,7 +18,6 @@ export default function Counsellors() {
     Tamil: false,
     Telugu: false,
     Punjabi: false,
-    French: false,
   });
 
   const [selectedExpertise, setSelectedExpertise] = useState({
@@ -47,7 +46,6 @@ export default function Counsellors() {
       Tamil: false,
       Telugu: false,
       Punjabi: false,
-      French: false,
     });
 
     setSelectedExpertise({
@@ -133,133 +131,6 @@ export default function Counsellors() {
   };
 
   // ---------------- UI ----------------
-  // return (
-  //   <div className="w-full bg-gray-50 mt-30 py-10">
-  //     <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 p-4">
-  //       {/* FILTER SIDEBAR */}
-  //       <div className="bg-white p-4 rounded-xl shadow-sm h-fit sticky top-4">
-  //         <div className="flex justify-between items-center">
-  //           <h2 className="text-2xl font-semibold">Filters</h2>
-  //           <span className="text-xs bg-primary text-white px-2 py-1 rounded-full">
-  //             {filterCount}
-  //           </span>
-  //         </div>
-
-  //         {/* Expertise */}
-  //         <div className="mt-4">
-  //           <label className="font-semibold flex justify-between">
-  //             Expertise <ChevronDown size={18} />
-  //           </label>
-  //           {Object.keys(selectedExpertise).map((exp) => (
-  //             <label key={exp} className="flex gap-2 mt-2">
-  //               <input
-  //                 type="checkbox"
-  //                 checked={selectedExpertise[exp]}
-  //                 onChange={() => toggleExpertise(exp)}
-  //               />
-  //               {exp}
-  //             </label>
-  //           ))}
-  //         </div>
-
-  //         {/* Languages */}
-  //         <div className="mt-4">
-  //           <label className="font-semibold flex justify-between">
-  //             Languages <ChevronDown size={18} />
-  //           </label>
-  //           {Object.keys(selectedLang).map((lang) => (
-  //             <label key={lang} className="flex gap-2 mt-2">
-  //               <input
-  //                 type="checkbox"
-  //                 checked={selectedLang[lang]}
-  //                 onChange={() => toggleLang(lang)}
-  //               />
-  //               {lang}
-  //             </label>
-  //           ))}
-  //         </div>
-
-  //         <button
-  //           onClick={clearAllFilters}
-  //           className="w-full mt-4 bg-primary text-light py-2 rounded-lg"
-  //         >
-  //           Clear All Filters
-  //         </button>
-  //       </div>
-
-  //       {/* COUNSELLORS / NO DATA UI */}
-  //       <div className="md:col-span-3">
-  //         {counsellors.length === 0 ? (
-  //           <div className="w-full h-[300px] flex flex-col items-center justify-center bg-light rounded-xl shadow">
-  //             <p className="text-2xl font-semibold text-textDark">
-  //               No counsellors found
-  //             </p>
-  //             <p className="text-gray-500 mt-2">
-  //               Try adjusting or clearing the filters
-  //             </p>
-  //             <button
-  //               onClick={clearAllFilters}
-  //               className="mt-4 px-6 py-2 bg-primary text-light rounded-lg"
-  //             >
-  //               Clear Filters
-  //             </button>
-  //           </div>
-  //         ) : (
-  //           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  //             {counsellors.map((c) => (
-  //               <div
-  //                 key={c.counsellorId}
-  //                 onClick={() => openProfile(c)}
-  //                 className="bg-white rounded-xl shadow hover:shadow-lg cursor-pointer"
-  //               >
-  //                 <img
-  //                   src={c.imageUrl}
-  //                   alt={c.firstName}
-  //                   className="h-52 w-full object-cover"
-  //                   onError={(e) => (e.target.src = "/fallback.jpg")}
-  //                 />
-
-  //                 <div className="p-4">
-  //                   <div className="flex items-center gap-1">
-  //                     <Star size={16} className="text-yellow-500" />
-  //                     <span>{c.rating || "4.0"}</span>
-  //                   </div>
-
-  //                   <h3 className="text-xl font-semibold">
-  //                     {c.firstName} {c.lastName}
-  //                   </h3>
-
-  //                   <div className="flex items-center gap-1 text-green-600">
-  //                     <CheckCircle size={16} /> Verified
-  //                   </div>
-
-  //                   <div className="flex items-center gap-1 mt-1">
-  //                     <Briefcase size={16} />
-  //                     {c.experience || "Experience N/A"}
-  //                   </div>
-
-  //                   <p className="text-gray-600 mt-1">
-  //                     {c.languages
-  //                       ?.map(
-  //                         (l) =>
-  //                           l.trim().charAt(0).toUpperCase() +
-  //                           l.trim().slice(1).toLowerCase()
-  //                       )
-  //                       .join(" | ")}
-  //                   </p>
-
-  //                   <p className="mt-2 font-semibold">
-  //                     ₹{c.sessionPrice || "1500"}
-  //                   </p>
-  //                 </div>
-  //               </div>
-  //             ))}
-  //           </div>
-  //         )}
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
   return (
     <div className="w-full bg-gray-50 mt-30 py-10">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 p-4">

@@ -714,78 +714,197 @@ export default function BookAppointmentModal({
   }
 
   /* -------------------- UI -------------------- */
+  // return (
+  //   <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+  //     <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl relative">
+  //       <button onClick={onClose} className="absolute top-4 right-4 text-xl">
+  //         <FiX />
+  //       </button>
+
+  //       <div className="px-6 pt-6">
+  //         <h2 className="text-2xl font-semibold">Book Appointment</h2>
+  //       </div>
+
+  //       {/* Counsellor Info */}
+  //       <div className="px-6 mt-4 flex items-center gap-4">
+  //         {loading ? (
+  //           <p>Loading...</p>
+  //         ) : counsellor ? (
+  //           <>
+  //             <img
+  //               src={counsellor.imageUrl}
+  //               className="w-16 h-16 rounded-full object-cover"
+  //               alt=""
+  //             />
+  //             <div>
+  //               <h3 className="text-lg font-semibold">
+  //                 {counsellor.firstName} {counsellor.lastName}
+  //               </h3>
+  //               <p className="text-sm text-gray-500">
+  //                 {counsellor.experience} Experience
+  //               </p>
+  //             </div>
+  //           </>
+  //         ) : null}
+  //       </div>
+
+  //       {/* Days */}
+  //       <div className="px-6 mt-4 flex gap-3 overflow-x-auto">
+  //         {availableDays.map((day) => (
+  //           <button
+  //             key={day.fullDate}
+  //             onClick={() => setSelectedDay(day)}
+  //             className={`px-4 py-2 rounded-lg border ${
+  //               selectedDay?.fullDate === day.fullDate
+  //                 ? "bg-primary text-white"
+  //                 : ""
+  //             }`}
+  //           >
+  //             <div>{day.label}</div>
+  //             <div className="text-sm">{day.date}</div>
+  //           </button>
+  //         ))}
+  //       </div>
+
+  //       {/* Slots */}
+  //       {["morning", "afternoon", "evening"].map((period) => (
+  //         <div key={period} className="px-6 mt-4">
+  //           <p className="font-medium capitalize">{period} Slots</p>
+  //           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2 ">
+  //             {slots[period].map((slot) => (
+  //               <SlotCard key={slot.startTime} slot={slot} />
+  //             ))}
+  //           </div>
+  //         </div>
+  //       ))}
+
+  //       {/* Book */}
+  //       <div className="px-6 py-4">
+  //         <button
+  //           onClick={handlePaymentAndBooking}
+  //           disabled={!selectedSlot || processingPayment}
+  //           className={`w-full py-3 rounded-lg text-white cursor-pointer ${
+  //             selectedSlot ? "bg-primary" : "bg-gray-300"
+  //           }`}
+  //         >
+  //           {processingPayment ? "Processing..." : "Book & Pay Now"}
+  //         </button>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
+  /* -------------------- UI -------------------- */
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-xl">
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-end sm:items-center justify-center">
+      {/* Modal Container */}
+      <div
+        className="
+      bg-white w-full 
+      h-[95vh] sm:h-auto
+      sm:max-w-2xl 
+      rounded-t-3xl sm:rounded-2xl 
+      shadow-xl 
+      relative 
+      flex flex-col
+    "
+      >
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-xl z-10"
+        >
           <FiX />
         </button>
 
-        <div className="px-6 pt-6">
-          <h2 className="text-2xl font-semibold">Book Appointment</h2>
-        </div>
+        {/* Scrollable Content */}
+        <div className="overflow-y-auto flex-1 pb-4">
+          {/* Header */}
+          <div className="px-4 sm:px-6 pt-6">
+            <h2 className="text-xl sm:text-2xl font-semibold">
+              Book Appointment
+            </h2>
+          </div>
 
-        {/* Counsellor Info */}
-        <div className="px-6 mt-4 flex items-center gap-4">
-          {loading ? (
-            <p>Loading...</p>
-          ) : counsellor ? (
-            <>
-              <img
-                src={counsellor.imageUrl}
-                className="w-16 h-16 rounded-full object-cover"
-                alt=""
-              />
-              <div>
-                <h3 className="text-lg font-semibold">
-                  {counsellor.firstName} {counsellor.lastName}
-                </h3>
-                <p className="text-sm text-gray-500">
-                  {counsellor.experience} Experience
-                </p>
+          {/* Counsellor Info */}
+          <div className="px-4 sm:px-6 mt-4 flex items-center gap-3 sm:gap-4">
+            {loading ? (
+              <p>Loading...</p>
+            ) : counsellor ? (
+              <>
+                <img
+                  src={counsellor.imageUrl}
+                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover"
+                  alt=""
+                />
+                <div>
+                  <h3 className="text-base sm:text-lg font-semibold leading-tight">
+                    {counsellor.firstName} {counsellor.lastName}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-500">
+                    {counsellor.experience} Experience
+                  </p>
+                </div>
+              </>
+            ) : null}
+          </div>
+
+          {/* Days */}
+          <div className="px-4 sm:px-6 mt-4 flex gap-2 sm:gap-3 overflow-x-auto pb-2">
+            {availableDays.map((day) => (
+              <button
+                key={day.fullDate}
+                onClick={() => setSelectedDay(day)}
+                className={`
+                min-w-[80px]
+                px-3 sm:px-4 py-2 
+                rounded-lg border text-sm
+                ${
+                  selectedDay?.fullDate === day.fullDate
+                    ? "bg-primary text-white"
+                    : "bg-white"
+                }
+              `}
+              >
+                <div>{day.label}</div>
+                <div className="text-xs sm:text-sm">{day.date}</div>
+              </button>
+            ))}
+          </div>
+
+          {/* Slots */}
+          {["morning", "afternoon", "evening"].map((period) => (
+            <div key={period} className="px-4 sm:px-6 mt-4">
+              <p className="font-medium capitalize text-sm sm:text-base">
+                {period} Slots
+              </p>
+
+              <div
+                className="
+              grid 
+              grid-cols-2 
+              sm:grid-cols-3 
+              md:grid-cols-4 
+              gap-2 sm:gap-3 
+              mt-2
+            "
+              >
+                {slots[period].map((slot) => (
+                  <SlotCard key={slot.startTime} slot={slot} />
+                ))}
               </div>
-            </>
-          ) : null}
-        </div>
-
-        {/* Days */}
-        <div className="px-6 mt-4 flex gap-3 overflow-x-auto">
-          {availableDays.map((day) => (
-            <button
-              key={day.fullDate}
-              onClick={() => setSelectedDay(day)}
-              className={`px-4 py-2 rounded-lg border ${
-                selectedDay?.fullDate === day.fullDate
-                  ? "bg-primary text-white"
-                  : ""
-              }`}
-            >
-              <div>{day.label}</div>
-              <div className="text-sm">{day.date}</div>
-            </button>
+            </div>
           ))}
         </div>
 
-        {/* Slots */}
-        {["morning", "afternoon", "evening"].map((period) => (
-          <div key={period} className="px-6 mt-4">
-            <p className="font-medium capitalize">{period} Slots</p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2 ">
-              {slots[period].map((slot) => (
-                <SlotCard key={slot.startTime} slot={slot} />
-              ))}
-            </div>
-          </div>
-        ))}
-
-        {/* Book */}
-        <div className="px-6 py-4">
+        {/* Sticky Book Button */}
+        <div className="px-4 sm:px-6 py-3 border-t bg-white">
           <button
             onClick={handlePaymentAndBooking}
             disabled={!selectedSlot || processingPayment}
-            className={`w-full py-3 rounded-lg text-white cursor-pointer ${
-              selectedSlot ? "bg-primary" : "bg-gray-300"
-            }`}
+            className={`
+            w-full py-3 rounded-lg text-white text-sm sm:text-base
+            ${selectedSlot ? "bg-primary" : "bg-gray-300"}
+          `}
           >
             {processingPayment ? "Processing..." : "Book & Pay Now"}
           </button>

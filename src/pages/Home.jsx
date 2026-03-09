@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import CounsellorSlider from "../components/Home/CounsellorSlider";
 import FaqSection from "../components/Home/FaqSection";
 import HeroSection from "../components/Home/HeroSection";
@@ -10,6 +11,15 @@ import WhyMindsoul from "../components/Home/WhyMindsoul";
 const Home = () => {
   return (
     <div className="relative min-h-screen  bg-[#FAF9F6]">
+      <Helmet>
+        <title>
+          Online Counselling & Therapy in India | Best Psychologist Online
+        </title>
+        <meta
+          name="description"
+          content="Get confidential online counselling with experienced psychologists in India. Therapy for anxiety, stress, relationships, and emotional wellbeing. Book your session today."
+        />
+      </Helmet>
       <HeroSection />
       <WhoWeServe />
       <CounsellorSlider />

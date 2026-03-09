@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Star, CheckCircle, ChevronDown, Briefcase } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 export default function Counsellors() {
   const [allCounsellors, setAllCounsellors] = useState([]);
@@ -133,6 +134,15 @@ export default function Counsellors() {
   // ---------------- UI ----------------
   return (
     <div className="w-full bg-gray-50 mt-30 py-10">
+      <Helmet>
+        <title>
+          Best Online Psychologists in India | Book Counselling Session
+        </title>
+        <meta
+          name="description"
+          content="Connect with certified online psychologists for anxiety counselling, stress management therapy, and relationship counselling. Confidential therapy sessions online."
+        />
+      </Helmet>
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 p-4">
         {/* MOBILE FILTER BUTTON */}
         <div className="md:hidden flex justify-between items-center mb-4">

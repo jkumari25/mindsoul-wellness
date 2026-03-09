@@ -1,8 +1,17 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 
 export default function Policy() {
   return (
     <section className="bg-[#f9f8ff] min-h-screen py-16 px-4 mt-30">
+      <Helmet>
+        <title>Privacy Policy | The Mind Soul Online Counselling</title>
+
+        <meta
+          name="description"
+          content="Read The Mind Soul privacy policy to understand how we collect, use, and protect your personal information when using our online counselling services."
+        />
+      </Helmet>
       <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-md p-6 md:p-10">
         {/* PAGE HEADER */}
         <header className="mb-10 text-center">

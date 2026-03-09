@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 
 const SectionTitle = ({ title, subtitle }) => (
   <div className="text-center mb-12">
@@ -28,6 +29,15 @@ const WorkshopCard = ({ title, items }) => (
 export default function SchoolWorkshop() {
   return (
     <div className="bg-gray-50 mt-30">
+      <Helmet>
+        <title>
+          School Mental Health Workshops | Student Counselling Programs
+        </title>
+        <meta
+          name="description"
+          content="Interactive school workshops focused on mental health awareness, stress management techniques, and emotional wellbeing for students and educators."
+        />
+      </Helmet>
       {/* HERO */}
       <section className="bg-gradient-to-r from-primary to-blue-100 py-24">
         <div className="max-w-7xl mx-auto px-6 text-center">

@@ -8,6 +8,7 @@ import {
   Palette,
 } from "lucide-react";
 import { ProgramGallery } from "../components/Corporate-Wellness/ProgramGallery";
+import { Helmet } from "react-helmet-async";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 60 },
@@ -24,6 +25,15 @@ const stagger = {
 export default function CorporateWellness() {
   return (
     <div className="text-gray-800 overflow-hidden mt-30">
+      <Helmet>
+        <title>
+          Corporate Mental Wellness Programs | Stress Management Therapy
+        </title>
+        <meta
+          name="description"
+          content="Improve workplace wellbeing with corporate mental health counselling, stress management therapy, and employee wellness programs by expert psychologists."
+        />
+      </Helmet>
       {/* HERO */}
       <section className="relative bg-gradient-to-br from-primary via-accent to-[#5d799d] text-white">
         <div className="absolute inset-0 bg-black/20" />

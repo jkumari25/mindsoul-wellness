@@ -914,7 +914,7 @@
 //   );
 // }
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FiX } from "react-icons/fi";
 import AppointmentConfirmationModal from "./AppointmentConfirmationModal";
 
@@ -941,6 +941,8 @@ export default function BookAppointmentModal({
   const [isBooked, setIsBooked] = useState(false);
   const [appointmentData, setAppointmentData] = useState(null);
   const [showFinalLoader, setShowFinalLoader] = useState(false);
+  const clickLockRef = useRef(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
 
@@ -992,6 +994,63 @@ export default function BookAppointmentModal({
   }, [isOpen, counsellorId]);
 
   /* -------------------- Load Slots -------------------- */
+  // const loadSlotsForDate = async (date) => {
+  //   try {
+  //     setLoadingSlots(true);
+  //     setSelectedSlot(null);
+
+  //     await fetch(
+  //       `${BASE_URL}/timeslots/counsellor/${counsellorId}/refresh?date=${date}`,
+  //       { method: "POST", credentials: "include" },
+  //     );
+
+  //     const resAvail = await fetch(
+  //       `${BASE_URL}/timeslots/counsellor/${counsellorId}/slots?date=${date}`,
+  //       { credentials: "include" },
+  //     );
+  //     const availData = await resAvail.json();
+
+  //     const resBooked = await fetch(
+  //       `${BASE_URL}/timeslots/counsellor/${counsellorId}/booked?date=${date}`,
+  //       { credentials: "include" },
+  //     );
+  //     const bookedData = await resBooked.json();
+
+  //     const slotMap = new Map();
+
+  //     ["morning", "afternoon", "evening"].forEach((period) => {
+  //       (availData.slots?.[period] || []).forEach((s) => {
+  //         slotMap.set(s.startTime, { ...s, isBooked: false });
+  //       });
+  //     });
+
+  //     // ✅ FIX: merge instead of overwrite
+  //     (bookedData.bookedSlots || []).forEach((s) => {
+  //       slotMap.set(s.startTime, {
+  //         ...(slotMap.get(s.startTime) || {}),
+  //         ...s,
+  //         isBooked: true,
+  //       });
+  //     });
+
+  //     const grouped = { morning: [], afternoon: [], evening: [] };
+
+  //     Array.from(slotMap.values()).forEach((s) => {
+  //       const hour = parseInt(s.startTime.split(":")[0], 10);
+  //       if (hour < 12) grouped.morning.push(s);
+  //       else if (hour < 16) grouped.afternoon.push(s);
+  //       else grouped.evening.push(s);
+  //     });
+
+  //     setSlots(grouped);
+  //   } catch (err) {
+  //     console.error("Load slots error:", err);
+  //     setSlots({ morning: [], afternoon: [], evening: [] });
+  //   } finally {
+  //     setLoadingSlots(false);
+  //   }
+  // };
+
   const loadSlotsForDate = async (date) => {
     try {
       setLoadingSlots(true);
@@ -1022,7 +1081,7 @@ export default function BookAppointmentModal({
         });
       });
 
-      // ✅ FIX: merge instead of overwrite
+      // merge booked
       (bookedData.bookedSlots || []).forEach((s) => {
         slotMap.set(s.startTime, {
           ...(slotMap.get(s.startTime) || {}),
@@ -1033,7 +1092,17 @@ export default function BookAppointmentModal({
 
       const grouped = { morning: [], afternoon: [], evening: [] };
 
-      Array.from(slotMap.values()).forEach((s) => {
+      // ✅ FIX: sort first
+      const allSlots = Array.from(slotMap.values());
+
+      allSlots.sort((a, b) => {
+        const [ah, am] = a.startTime.split(":").map(Number);
+        const [bh, bm] = b.startTime.split(":").map(Number);
+        return ah * 60 + am - (bh * 60 + bm);
+      });
+
+      // ✅ then group
+      allSlots.forEach((s) => {
         const hour = parseInt(s.startTime.split(":")[0], 10);
         if (hour < 12) grouped.morning.push(s);
         else if (hour < 16) grouped.afternoon.push(s);
@@ -1064,13 +1133,117 @@ export default function BookAppointmentModal({
     });
 
   /* -------------------- Book + Payment -------------------- */
+  // const handlePaymentAndBooking = async () => {
+  //   if (!selectedSlot || !selectedDay) return;
+
+  //   try {
+  //     setProcessingPayment(true);
+  //     const token = localStorage.getItem("token");
+  //     if (!token) return alert("Please login again");
+
+  //     const res = await fetch(`${BASE_URL}/appointment`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({
+  //         counsellorId,
+  //         date: selectedDay.fullDate,
+  //         timeSlot: `${selectedSlot.startTime}-${selectedSlot.endTime}`,
+  //       }),
+  //     });
+
+  //     const data = await res.json();
+  //     if (!res.ok || !data.success)
+  //       throw new Error(data.message || "Booking failed");
+
+  //     const appointment = data.appointment;
+
+  //     const orderRes = await fetch(`${BASE_URL}/payment/create-order`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({ appointmentId: appointment.appointmentId }),
+  //     });
+
+  //     const orderData = await orderRes.json();
+  //     if (!orderRes.ok || !orderData.success)
+  //       throw new Error("Failed to create Razorpay order");
+
+  //     const loaded = await loadRazorpayScript();
+  //     if (!loaded) throw new Error("Razorpay SDK failed to load");
+
+  //     new window.Razorpay({
+  //       key: razorpayKey,
+  //       amount: orderData.order.amount,
+  //       currency: "INR",
+  //       name: "MindSoul Counselling",
+  //       description: "Counselling Session",
+  //       order_id: orderData.order.id,
+
+  //       handler: async (response) => {
+  //         setShowFinalLoader(true);
+
+  //         const verifyRes = await fetch(`${BASE_URL}/payment/verify-payment`, {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //           body: JSON.stringify({
+  //             appointmentId: appointment.appointmentId,
+  //             razorpay_payment_id: response.razorpay_payment_id,
+  //             razorpay_order_id: response.razorpay_order_id,
+  //             razorpay_signature: response.razorpay_signature,
+  //           }),
+  //         });
+
+  //         const verifyData = await verifyRes.json();
+  //         if (!verifyRes.ok || !verifyData.success)
+  //           throw new Error("Payment verification failed");
+
+  //         setAppointmentData(verifyData.appointment || appointment);
+  //         setIsBooked(true);
+  //         setShowFinalLoader(false);
+  //       },
+
+  //       // ✅ MAIN FIX: refresh page on cancel
+  //       modal: {
+  //         ondismiss: () => {
+  //           window.location.reload();
+  //         },
+  //       },
+
+  //       theme: { color: "#778DA9" },
+  //     }).open();
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert(err.message || "Something went wrong");
+  //     setShowFinalLoader(false);
+  //   } finally {
+  //     setProcessingPayment(false);
+  //   }
+  // };
+
   const handlePaymentAndBooking = async () => {
     if (!selectedSlot || !selectedDay) return;
 
+    // ✅ HARD LOCK (prevents rapid clicks instantly)
+    if (clickLockRef.current) return;
+    clickLockRef.current = true;
+
     try {
+      setErrorMsg("");
       setProcessingPayment(true);
+
       const token = localStorage.getItem("token");
-      if (!token) return alert("Please login again");
+      if (!token) {
+        clickLockRef.current = false;
+        return alert("Please login again");
+      }
 
       const res = await fetch(`${BASE_URL}/appointment`, {
         method: "POST",
@@ -1084,6 +1257,12 @@ export default function BookAppointmentModal({
           timeSlot: `${selectedSlot.startTime}-${selectedSlot.endTime}`,
         }),
       });
+
+      // ✅ HANDLE 429
+      if (res.status === 429) {
+        setErrorMsg("Too many requests. Please wait a few seconds.");
+        throw new Error("Too many requests");
+      }
 
       const data = await res.json();
       if (!res.ok || !data.success)
@@ -1099,6 +1278,12 @@ export default function BookAppointmentModal({
         },
         body: JSON.stringify({ appointmentId: appointment.appointmentId }),
       });
+
+      // ✅ HANDLE 429 AGAIN
+      if (orderRes.status === 429) {
+        setErrorMsg("Too many requests. Please wait before retrying.");
+        throw new Error("Too many requests");
+      }
 
       const orderData = await orderRes.json();
       if (!orderRes.ok || !orderData.success)
@@ -1141,7 +1326,6 @@ export default function BookAppointmentModal({
           setShowFinalLoader(false);
         },
 
-        // ✅ MAIN FIX: refresh page on cancel
         modal: {
           ondismiss: () => {
             window.location.reload();
@@ -1152,10 +1336,19 @@ export default function BookAppointmentModal({
       }).open();
     } catch (err) {
       console.error(err);
-      alert(err.message || "Something went wrong");
+
+      if (!errorMsg) {
+        setErrorMsg(err.message || "Something went wrong");
+      }
+
       setShowFinalLoader(false);
     } finally {
       setProcessingPayment(false);
+
+      // ✅ release lock AFTER delay (prevents spam retry)
+      setTimeout(() => {
+        clickLockRef.current = false;
+      }, 2000);
     }
   };
 
@@ -1291,9 +1484,23 @@ export default function BookAppointmentModal({
         </div>
 
         <div className="px-4 sm:px-6 py-3 border-t">
-          <button
+          {errorMsg && (
+            <p className="text-red-500 text-sm text-center mb-2">{errorMsg}</p>
+          )}
+          {/* <button
             onClick={handlePaymentAndBooking}
             disabled={!selectedSlot || processingPayment}
+            className={`w-full py-3 rounded-lg text-white ${
+              selectedSlot ? "bg-primary" : "bg-gray-300"
+            }`}
+          >
+            {processingPayment ? "Processing..." : "Book & Pay Now"}
+          </button> */}
+          <button
+            onClick={handlePaymentAndBooking}
+            disabled={
+              !selectedSlot || processingPayment || clickLockRef.current
+            }
             className={`w-full py-3 rounded-lg text-white ${
               selectedSlot ? "bg-primary" : "bg-gray-300"
             }`}

@@ -240,7 +240,7 @@ export default function Counsellors() {
                   <img
                     src={c.imageUrl}
                     alt={c.firstName}
-                    className="h-52 w-full object-cover"
+                    className="h-92 w-full object-cover"
                     onError={(e) => (e.target.src = "/fallback.jpg")}
                   />
 

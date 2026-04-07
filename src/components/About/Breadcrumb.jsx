@@ -74,6 +74,86 @@ export default function Breadcrumb() {
         ))}
       </section>
 
+      <section className="w-full bg-gray-50 py-12 md:py-16 px-4 md:px-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div className="flex flex-col md:flex-row items-center">
+              {/* Image Section */}
+              <div className="w-full md:w-1/3">
+                <img
+                  src="/chief-operation.jpeg" // replace with actual image
+                  alt="Profile"
+                  className="w-full h-[350px] md:h-full object-cover rounded-br-4xl rounded-tr-4xl"
+                />
+              </div>
+
+              {/* Content Section */}
+              <div className="w-full md:w-2/3 p-6 md:p-10">
+                {/* Name */}
+                {/* <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+                  Your Name
+                </h2> */}
+
+                {/* Designation */}
+                <p className="text-[#344556] font-semibold mb-4 text-3xl">
+                  Chief Operations Strategy Officer
+                </p>
+
+                {/* Divider */}
+                <div className="w-16 h-1 bg-[#344556] mb-6 rounded"></div>
+
+                {/* Description */}
+                <p className="text-gray-600 text-lg leading-relaxed mb-4">
+                  A forward-thinking operations and talent strategist, I
+                  specialize in building and scaling organizations at the pace
+                  of innovation. With over seven years of global experience, I
+                  partner with leadership teams to transform ambitious visions
+                  into executable growth strategies—aligning people, processes,
+                  and performance to drive sustainable scale.
+                </p>
+
+                <p className="text-gray-600 text-lg leading-relaxed mb-4">
+                  My work spans North America, the U.K., and APAC, where I have
+                  led high-impact talent and workforce initiatives across
+                  healthcare, SaaS, fintech, and financial services. I bring a
+                  deep understanding of how to build from zero to
+                  scale—designing agile hiring systems, strengthening employer
+                  brands, and embedding operational rigor into fast-growing
+                  environments.
+                </p>
+
+                <p className="text-gray-600 text-lg leading-relaxed mb-4">
+                  I have a strong track record in healthcare talent strategy,
+                  enabling organizations to scale critical clinical and
+                  non-clinical teams across complex care ecosystems. From
+                  frontline healthcare professionals to specialized program
+                  leadership, I have consistently delivered talent solutions
+                  that balance speed, quality, and long-term organizational
+                  resilience.
+                </p>
+
+                <p className="text-gray-600 text-lg leading-relaxed mb-4">
+                  Beyond hiring, I focus on building the infrastructure for
+                  growth—developing scalable frameworks, driving
+                  cross-functional alignment, and creating high-performance
+                  cultures. I am passionate about enabling organizations to not
+                  only grow fast, but grow right.
+                </p>
+
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  I hold a Postgraduate Certificate in Human Resource Management
+                  from George Brown College, Toronto, and a Bachelor of Commerce
+                  in Financial Markets from the University of Mumbai. I am
+                  driven by the belief that great organizations are built
+                  through intentional strategy, empowered people, and
+                  disciplined execution.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Values Section */}
       <section className=" py-16 px-6 md:px-20 w-[95%] mx-auto">
         <h4 className="text-lg uppercase tracking-widest text-gray-500 mb-3 font-heading">

@@ -90,9 +90,9 @@ export default function Breadcrumb() {
               {/* Content Section */}
               <div className="w-full md:w-2/3 p-6 md:p-10">
                 {/* Name */}
-                {/* <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-                  Your Name
-                </h2> */}
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+                  Pallavi Kothari
+                </h2>
 
                 {/* Designation */}
                 <p className="text-[#344556] font-semibold mb-4 text-3xl">

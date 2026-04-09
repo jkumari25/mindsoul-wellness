@@ -499,7 +499,7 @@ export default function CounsellorSlider() {
               <img
                 src={c?.imageUrl}
                 alt={c.firstName}
-                className="w-full h-52 object-cover"
+                className="w-full h-62 object-fit"
                 referrerPolicy="no-referrer"
                 crossOrigin="anonymous"
                 onError={(e) => {

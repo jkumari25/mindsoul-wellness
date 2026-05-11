@@ -52,7 +52,7 @@ export default function Breadcrumb() {
           <img
             src="/counselors/rutambara-1.jpg"
             alt="Founders"
-            className="rounded-lg w-full max-w-md object-cover shadow-lg"
+            className="rounded-lg w-[90%] max-w-md object-cover shadow-lg"
           />
         </div>
       </section>
@@ -79,11 +79,19 @@ export default function Breadcrumb() {
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
             <div className="flex flex-col md:flex-row items-center">
               {/* Image Section */}
-              <div className="w-full md:w-1/3">
+              {/* <div className="w-full md:w-1/3">
                 <img
                   src="/chief-operation.jpeg" // replace with actual image
                   alt="Profile"
-                  className="w-full h-[350px] md:h-full object-cover rounded-br-4xl rounded-tr-4xl"
+                  className="w-full h-[350px] sm:h-[450px] md:h-full object-cover rounded-br-4xl rounded-tr-4xl"
+                />
+              </div> */}
+
+              <div className="w-full md:w-1/3">
+                <img
+                  src="/chief-operation.jpeg"
+                  alt="Profile"
+                  className="w-full h-auto sm:h-[350px] md:h-full object-cover rounded-2xl md:rounded-tr-4xl md:rounded-br-4xl"
                 />
               </div>
 
@@ -110,16 +118,6 @@ export default function Breadcrumb() {
                   partner with leadership teams to transform ambitious visions
                   into executable growth strategies—aligning people, processes,
                   and performance to drive sustainable scale.
-                </p>
-
-                <p className="text-gray-600 text-lg leading-relaxed mb-4">
-                  My work spans North America, the U.K., and APAC, where I have
-                  led high-impact talent and workforce initiatives across
-                  healthcare, SaaS, fintech, and financial services. I bring a
-                  deep understanding of how to build from zero to
-                  scale—designing agile hiring systems, strengthening employer
-                  brands, and embedding operational rigor into fast-growing
-                  environments.
                 </p>
 
                 <p className="text-gray-600 text-lg leading-relaxed mb-4">

@@ -88,12 +88,12 @@ export default function CorporateWellness() {
               {
                 img: "/counselors/1.png",
                 name: "Rutambara Dhotre",
-                desc: "UNESCO Certified Arts Therapist, Clinical Counsellor & Psychologist with 5+ years experience",
+                desc: "Arts Therapist, Clinical Counsellor & Psychologist with 5+ years experience",
               },
               {
                 img: "/counselors/2.png",
                 name: "Ridhi Sachdeva",
-                desc: "Psychologist & Therapist with 3+ years across corporates, hospitals & academia",
+                desc: "UNESCO Certified Psychologist & Therapist with 3+ years across corporates, hospitals & academia",
               },
             ].map((person, i) => (
               <motion.div

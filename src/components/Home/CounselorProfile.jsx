@@ -82,7 +82,7 @@ export default function CounselorProfile() {
             <img
               src={counsellor.imageUrl}
               alt={counsellor.firstName}
-              className="w-36 h-36 object-cover rounded-xl shadow"
+              className="w-46 h-56 object-fit rounded-xl shadow"
               referrerPolicy="no-referrer"
               crossOrigin="anonymous"
               onError={(e) => (e.target.src = "/fallback.jpg")}

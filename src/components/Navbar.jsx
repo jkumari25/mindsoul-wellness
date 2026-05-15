@@ -914,7 +914,7 @@ export default function Navbar() {
         localStorage.getItem("role") === "counsellor";
 
       setIsCounsellorLoggedIn((prev) =>
-        prev !== isLoggedIn ? isLoggedIn : prev
+        prev !== isLoggedIn ? isLoggedIn : prev,
       );
     }, 300);
 
@@ -1128,12 +1128,34 @@ export default function Navbar() {
             Workshop <ChevronDown size={18} />
           </button>
 
-          {mobileWorkshopOpen && (
+          {/* {mobileWorkshopOpen && (
             <div className="ml-4 flex flex-col space-y-3">
               <button onClick={() => navigate("/corporate-wellness")}>
                 Corporate Wellness
               </button>
               <button onClick={() => navigate("/school-workshop")}>
+                School Workshop
+              </button>
+            </div>
+          )} */}
+
+          {mobileWorkshopOpen && (
+            <div className="ml-4 flex flex-col space-y-3">
+              <button
+                onClick={() => {
+                  navigate("/corporate-wellness");
+                  setIsOpen(false);
+                }}
+              >
+                Corporate Wellness
+              </button>
+
+              <button
+                onClick={() => {
+                  navigate("/school-workshop");
+                  setIsOpen(false);
+                }}
+              >
                 School Workshop
               </button>
             </div>
@@ -1155,16 +1177,30 @@ export default function Navbar() {
             </button>
           ) : (
             <>
+              {/*             
               <button
                 onClick={() =>
                   navigate(
-                    isCounsellor ? "/counsellor-dashboard" : "/user-dashboard"
+                    isCounsellor ? "/counsellor-dashboard" : "/user-dashboard",
                   )
                 }
                 className="px-6 py-2 rounded-full bg-white text-textDark"
               >
                 Dashboard
+              </button> */}
+
+              <button
+                onClick={() => {
+                  navigate(
+                    isCounsellor ? "/counsellor-dashboard" : "/user-dashboard",
+                  );
+                  setIsOpen(false);
+                }}
+                className="px-6 py-2 rounded-full bg-white text-textDark"
+              >
+                Dashboard
               </button>
+
               <button
                 onClick={handleLogout}
                 className="px-6 py-2 rounded-full bg-red-500 text-white"

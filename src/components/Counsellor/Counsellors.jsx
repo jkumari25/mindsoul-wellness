@@ -237,10 +237,17 @@ export default function Counsellors() {
                   onClick={() => openProfile(c)}
                   className="bg-white rounded-xl shadow hover:shadow-lg cursor-pointer"
                 >
-                  <img
+                  {/* <img
                     src={c.imageUrl}
                     alt={c.firstName}
                     className="h-92 w-full object-cover"
+                    onError={(e) => (e.target.src = "/fallback.jpg")}
+                  /> */}
+
+                  <img
+                    src={c.imageUrl}
+                    alt={c.firstName}
+                    className="h-auto md:h-92 w-full object-cover"
                     onError={(e) => (e.target.src = "/fallback.jpg")}
                   />
 

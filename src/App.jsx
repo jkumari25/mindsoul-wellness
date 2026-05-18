@@ -17,6 +17,7 @@ import CorporateWellness from "./pages/CorporateWellness.jsx";
 import SchoolWorkshop from "./pages/SchoolWorkshop.jsx";
 import CounsellorLoginRoute from "./pages/CounsellorLoginRoute.jsx";
 import AboutUs from "./components/About/AboutUs.jsx";
+import SuperAdminPage from "./pages/SuperAdminPage.jsx";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
       <Route path="/school-workshop" element={<SchoolWorkshop />} />
       <Route path="/booking" element={<BookingPage />} />
       <Route path="/privacy-policy" element={<Policy />} />
+      <Route path="/super-admin" element={<SuperAdminPage />} />
       <Route
         path="/user-dashboard"
         element={
